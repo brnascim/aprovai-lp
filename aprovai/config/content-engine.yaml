@@ -1,0 +1,29 @@
+# Aprovaí — config do motor de conteúdo orgânico (Instagram)
+handle:            "@aprovai"              # PROPOSTA — confirmar disponibilidade
+nicho:             "Empregabilidade — ajudo profissionais a passar pela triagem automática (ATS) e conseguir mais entrevistas."
+idioma_saida:      "pt-BR"
+fuso_horario:      "America/Sao_Paulo"
+pilares:
+  - "Bastidores do ATS — como o robô lê e descarta currículos"
+  - "Erros de currículo que te derrubam (e o conserto de cada um)"
+  - "Currículo e LinkedIn que passam — antes/depois e prática"
+  - "Entrevista e negociação salarial"
+  - "Recolocação com a cabeça no lugar — encorajamento honesto, sem fórmula mágica"
+tom:               "próximo, direto, sem jargão — encoraja sem prometer emprego"
+pessoa:            "1ª pessoa do singular"
+nao_fazer:
+  - "prometer emprego ou renda garantida"
+  - "inventar números, prints ou depoimentos"
+  - "usar termo técnico sem explicar"
+  - "tom alarmista ou que humilhe quem está desempregado"
+paleta:            ["#0A0D12", "#FF7A1A", "#34D399"]   # base / acento / confiança (neutros: #EEF1F6, #98A2B2)
+fontes:            ["Título: Space Grotesk", "Corpo: Inter"]
+brand_kit_canva:   ""                      # opcional
+posts_por_semana:  4
+formatos:          ["carrossel", "reels", "post único", "story"]
+melhores_horarios: ["ter 12h", "qui 18h", "sáb 10h"]   # provisório — refinar com analytics
+email_aprovacao:   "PREENCHER@dominio"     # e-mail real do dono
+canal_aprovacao:   "Gmail"
+drive_pasta_raiz:  "Instagram-Salvos"
+assuntos:          ["ATS e triagem", "Currículo e LinkedIn", "Entrevista e processo seletivo", "Outros"]
+limite_confianca:  0.70

@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(winget install OpenJS.NodeJS.LTS --silent --accept-source-agreements)",
+      "Bash(bash install.sh)",
+      "Bash(curl -s -X GET https://n8n.mentoriaaprovai.com.br/api/v1/projects -H 'X-N8N-API-KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4OWFlZTNjOS00NTk3LTRjZmEtOTkzYi1hY2IxNTY2NzZmODIiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwianRpIjoiYzY2Y2EzZTEtODVkMi00M2M5LWI5OTctMGVlNDE5ZjYyZTFkIiwiaWF0IjoxNzgxOTY5OTg2fQ.Hdp3V7AULPZtbv7ryOIXik4TwN4V_KTC0PA6WiyQkTQ' -H 'Content-Type: application/json')",
+      "Bash(curl -v https://n8n.mentoriaaprovai.com.br/api/v1/projects -H 'X-N8N-API-KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4OWFlZTNjOS00NTk3LTRjZmEtOTkzYi1hY2IxNTY2NzZmODIiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwianRpIjoiYzY2Y2EzZTEtODVkMi00M2M5LWI5OTctMGVlNDE5ZjYyZTFkIiwiaWF0IjoxNzgxOTY5OTg2fQ.Hdp3V7AULPZtbv7ryOIXik4TwN4V_KTC0PA6WiyQkTQ')",
+      "Bash(curl -s https://n8n.mentoriaaprovai.com.br/api/v1/workflows -H 'X-N8N-API-KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4OWFlZTNjOS00NTk3LTRjZmEtOTkzYi1hY2IxNTY2NzZmODIiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwianRpIjoiYzY2Y2EzZTEtODVkMi00M2M5LWI5OTctMGVlNDE5ZjYyZTFkIiwiaWF0IjoxNzgxOTY5OTg2fQ.Hdp3V7AULPZtbv7ryOIXik4TwN4V_KTC0PA6WiyQkTQ')",
+      "Bash(curl -s -X POST https://n8n.mentoriaaprovai.com.br/api/v1/data-tables -H 'X-N8N-API-KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4OWFlZTNjOS00NTk3LTRjZmEtOTkzYi1hY2IxNTY2NzZmODIiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwianRpIjoiYzY2Y2EzZTEtODVkMi00M2M5LWI5OTctMGVlNDE5ZjYyZTFkIiwiaWF0IjoxNzgxOTY5OTg2fQ.Hdp3V7AULPZtbv7ryOIXik4TwN4V_KTC0PA6WiyQkTQ' -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(curl -s -X PATCH https://n8n.mentoriaaprovai.com.br/api/v1/workflows/lf5tQEsgZD8AJ0Q8 -H 'X-N8N-API-KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4OWFlZTNjOS00NTk3LTRjZmEtOTkzYi1hY2IxNTY2NzZmODIiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwianRpIjoiYzY2Y2EzZTEtODVkMi00M2M5LWI5OTctMGVlNDE5ZjYyZTFkIiwiaWF0IjoxNzgxOTY5OTg2fQ.Hdp3V7AULPZtbv7ryOIXik4TwN4V_KTC0PA6WiyQkTQ' -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(curl -s -X PUT https://n8n.mentoriaaprovai.com.br/api/v1/workflows/lf5tQEsgZD8AJ0Q8 -H 'X-N8N-API-KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4OWFlZTNjOS00NTk3LTRjZmEtOTkzYi1hY2IxNTY2NzZmODIiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwianRpIjoiYzY2Y2EzZTEtODVkMi00M2M5LWI5OTctMGVlNDE5ZjYyZTFkIiwiaWF0IjoxNzgxOTY5OTg2fQ.Hdp3V7AULPZtbv7ryOIXik4TwN4V_KTC0PA6WiyQkTQ' -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(git add *)",
+      "Bash(git init *)",
+      "Bash(git config *)",
+      "Bash(git commit -m 'Sessão n8n: Data Table + workflow integration + caveman skill *)"
+    ]
+  }
+}

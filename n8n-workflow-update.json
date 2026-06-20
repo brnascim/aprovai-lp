@@ -1,0 +1,156 @@
+{
+  "name": "Aprovai - Entrega Pos-Pagamento",
+  "description": "Webhook de pagamento Stripe → validação → gerar token → guardar na Data Table → enviar e-mail",
+  "nodes": [
+    {
+      "id": "webhook-node",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [-400, -100],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "stripe-aprovai",
+        "options": {}
+      }
+    },
+    {
+      "id": "validate-signature-node",
+      "name": "Validar Assinatura Stripe",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-150, -100],
+      "parameters": {
+        "jsCode": "const crypto = require('crypto');\nconst sig = $json.headers['stripe-signature'];\nconst secret = process.env.STRIPE_WEBHOOK_SECRET || '';\nconst body = $json.rawBody || '';\n\nif (!sig || !secret || !body) {\n  throw new Error('Missing signature, secret, or body');\n}\n\nconst expected = crypto\n  .createHmac('sha256', secret)\n  .update(body)\n  .digest('hex');\n\nif (sig !== `t=${expected}`) {\n  throw new Error('Invalid signature');\n}\n\nreturn [{ json: { valid: true, body: $json.body } }];"
+      }
+    },
+    {
+      "id": "if-checkout-completed-node",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [100, -100],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "278a6c5b-c9a6-4f20-966a-6edbb3423b06",
+              "leftValue": "{{ $json.body.type }}",
+              "rightValue": "checkout.session.completed",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "gerar-token-node",
+      "name": "Gerar Token",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [350, -200],
+      "parameters": {
+        "jsCode": "const crypto = require('crypto');\nconst session = $json.body.data.object;\n\nconst token = crypto.randomUUID();\nconst email = (session.customer_details && session.customer_details.email) || session.customer_email || '';\nconst nome = (session.customer_details && session.customer_details.name) || '';\nconst valorPago = session.amount_total ? session.amount_total / 100 : null;\nconst sessionId = session.id;\n\nreturn [{\n  json: {\n    token,\n    email,\n    nome,\n    valorPago,\n    sessionId,\n    criadoEm: new Date().toISOString(),\n    usado: false\n  }\n}];"
+      }
+    },
+    {
+      "id": "insert-row-node",
+      "name": "Insert row",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [550, -200],
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "KgsVZRLRNB3WINee"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "token": "={{ $json.token }}",
+            "email": "={{ $json.email }}",
+            "nome": "={{ $json.nome }}",
+            "valorPago": "={{ $json.valorPago }}",
+            "sessionId": "={{ $json.sessionId }}",
+            "criadoEm": "={{ $json.criadoEm }}",
+            "usado": "={{ $json.usado }}"
+          },
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "send-email-node",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [750, -200],
+      "parameters": {
+        "toEmail": "={{ $json.email }}",
+        "subject": "Seu acesso ao Aprovaí — Motor Anti-ATS",
+        "htmlBody": "<h2>Bem-vindo ao Aprovaí!</h2>\n<p>Seu acesso está pronto. Use este link:\n<a href=\"https://mentoriaaprovai.com.br/assistant?token={{ $json.token }}\">Acessar Assistente</a>\n</p>\n<p>Token: <code>{{ $json.token }}</code></p>\n<p>Este link é válido por 30 dias.</p>",
+        "credentialsId": "{{ env.SMTP_CREDENTIAL_ID }}"
+      }
+    },
+    {
+      "id": "respond-webhook-success-node",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [950, -200],
+      "parameters": {
+        "responseCode": 200,
+        "responseBody": "{{ json({ status: 'success' }) }}"
+      }
+    },
+    {
+      "id": "respond-webhook-false-node",
+      "name": "Respond to Webhook (Event não reconhecido)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [350, 0],
+      "parameters": {
+        "responseCode": 200,
+        "responseBody": "{{ json({ status: 'ignored' }) }}"
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{"node": "Validar Assinatura Stripe", "type": "main", "index": 0}]]
+    },
+    "Validar Assinatura Stripe": {
+      "main": [[{"node": "If", "type": "main", "index": 0}]]
+    },
+    "If": {
+      "main": [
+        [{"node": "Gerar Token", "type": "main", "index": 0}],
+        [{"node": "Respond to Webhook (Event não reconhecido)", "type": "main", "index": 0}]
+      ]
+    },
+    "Gerar Token": {
+      "main": [[{"node": "Insert row", "type": "main", "index": 0}]]
+    },
+    "Insert row": {
+      "main": [[{"node": "Send Email", "type": "main", "index": 0}]]
+    },
+    "Send Email": {
+      "main": [[{"node": "Respond to Webhook", "type": "main", "index": 0}]]
+    }
+  }
+}
