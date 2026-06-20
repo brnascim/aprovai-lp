@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacidade — Aprovaí</title>
+<meta name="description" content="Política de Privacidade do Aprovaí. Como protegemos seus dados." />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config={theme:{extend:{
+    colors:{bg:'#0A0D12',surface:'#13171E',surface2:'#1A1F29',line:'rgba(255,255,255,0.08)',ink:'#EEF1F6',muted:'#98A2B2',accent:'#FF7A1A',accent2:'#FFB02E',trust:'#34D399',danger:'#F87171'}
+  }}};
+</script>
+<style>
+  html{scroll-behavior:smooth}body{background:#0A0D12;color:#EEF1F6;font-family:Inter,sans-serif}
+</style>
+</head>
+<body class="pb-24">
+
+<header class="sticky top-0 z-40 backdrop-blur bg-bg/80 border-b border-line">
+  <div class="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
+    <a href="/index.html" class="flex items-center gap-2 font-bold text-lg">Aprovaí</a>
+  </div>
+</header>
+
+<main class="max-w-3xl mx-auto px-5 py-16 md:py-20">
+  <h1 class="text-3xl font-bold mb-8">Política de Privacidade</h1>
+
+  <div class="space-y-6 text-muted">
+    <section>
+      <h2 class="text-xl font-semibold text-ink mb-3">1. Coleta de Dados</h2>
+      <p>Ao usar o Aprovaí, coletamos:</p>
+      <ul class="list-disc list-inside mt-2 space-y-1">
+        <li>E-mail para acesso e entrega</li>
+        <li>Experiência profissional fornecida por você</li>
+        <li>Descrição de vagas que você cola</li>
+        <li>Dados de pagamento (processados via Stripe)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold text-ink mb-3">2. Como Usamos Seus Dados</h2>
+      <ul class="list-disc list-inside space-y-1">
+        <li>Gerar currículos otimizados com sua IA</li>
+        <li>Enviar acesso e suporte por e-mail</li>
+        <li>Melhorar o Motor Anti-ATS</li>
+        <li>Cumprir obrigações legais</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold text-ink mb-3">3. Segurança</h2>
+      <p>Seus dados são armazenados em servidores criptografados e protegidos por HTTPS. Não vendemos dados a terceiros.</p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold text-ink mb-3">4. LGPD e Seus Direitos</h2>
+      <p>Você tem direito a acessar, corrigir ou deletar seus dados. Entre em contato em contato@mentoriaaprovai.com.br.</p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold text-ink mb-3">5. Alterações</h2>
+      <p>Podemos atualizar esta política. Mudanças significativas serão comunicadas por e-mail.</p>
+    </section>
+  </div>
+
+  <p class="text-sm text-muted mt-10">Última atualização: 20 de junho de 2026</p>
+</main>
+
+<footer class="border-t border-line mt-10">
+  <div class="max-w-6xl mx-auto px-5 py-10 text-sm text-muted text-center">
+    <p>© <span id="ano"></span> Aprovaí. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('ano').textContent=new Date().getFullYear();
+</script>
+
+</body>
+</html>

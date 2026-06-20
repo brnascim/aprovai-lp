@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Política de Reembolso — Aprovaí</title>
+<meta name="description" content="Política de Reembolso do Aprovaí. Garantia de 30 dias com risco zero." />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config={theme:{extend:{
+    colors:{bg:'#0A0D12',surface:'#13171E',surface2:'#1A1F29',line:'rgba(255,255,255,0.08)',ink:'#EEF1F6',muted:'#98A2B2',accent:'#FF7A1A',accent2:'#FFB02E',trust:'#34D399',danger:'#F87171'}
+  }}};
+</script>
+<style>
+  html{scroll-behavior:smooth}body{background:#0A0D12;color:#EEF1F6;font-family:Inter,sans-serif}
+</style>
+</head>
+<body class="pb-24">
+
+<header class="sticky top-0 z-40 backdrop-blur bg-bg/80 border-b border-line">
+  <div class="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
+    <a href="/index.html" class="flex items-center gap-2 font-bold text-lg">Aprovaí</a>
+  </div>
+</header>
+
+<main class="max-w-3xl mx-auto px-5 py-16 md:py-20">
+  <h1 class="text-3xl font-bold mb-8">Garantia de Reembolso</h1>
+
+  <div class="space-y-6 text-muted">
+    <section class="bg-surface/40 border border-line rounded-xl p-6">
+      <h2 class="text-xl font-semibold text-trust mb-3">✓ Garantia Tripla — Risco Zero</h2>
+      <p>Oferecemos três camadas de proteção para sua compra:</p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold text-ink mb-3">1. Garantia Incondicional de 7 Dias</h2>
+      <p>Se mudar de ideia nos primeiros 7 dias, devolvemos 100% sem perguntas. Você fica com os 10 bônus mesmo assim.</p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold text-ink mb-3">2. Garantia de Resultado de 30 Dias</h2>
+      <p>Se após 30 dias você não estiver sendo chamado para mais entrevistas do que antes, devolvemos 100%. Bônus são seus para sempre.</p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold text-ink mb-3">3. Como Solicitar Reembolso</h2>
+      <ul class="list-disc list-inside space-y-2 mt-3">
+        <li>Envie um e-mail para <strong>reembolso@mentoriaaprovai.com.br</strong></li>
+        <li>Inclua seu pedido de compra</li>
+        <li>Para garantia de resultado: descreva brevemente sua experiência</li>
+        <li>Processamos em até 5 dias úteis</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold text-ink mb-3">4. O Que Você Recebe</h2>
+      <ul class="list-disc list-inside space-y-1">
+        <li>Reembolso 100% em sua conta (PIX ou cartão credora)</li>
+        <li>Os 10 bônus permanecem com você</li>
+        <li>Nenhuma pergunta ou justificativa obrigatória</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold text-ink mb-3">5. Exceções Raras</h2>
+      <p>Não processamos reembolsos se a compra for claramente fraudulenta ou se o acesso for solicitado após 30 dias sem aviso prévio.</p>
+    </section>
+
+    <section class="bg-surface/40 border border-accent/20 rounded-xl p-6 mt-8">
+      <p class="text-sm"><strong class="text-accent">Perguntas?</strong> Envie um e-mail para contato@mentoriaaprovai.com.br e responderemos em até 24 horas.</p>
+    </section>
+  </div>
+
+  <p class="text-sm text-muted mt-10">Última atualização: 20 de junho de 2026</p>
+</main>
+
+<footer class="border-t border-line mt-10">
+  <div class="max-w-6xl mx-auto px-5 py-10 text-sm text-muted text-center">
+    <p>© <span id="ano"></span> Aprovaí. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('ano').textContent=new Date().getFullYear();
+</script>
+
+</body>
+</html>
