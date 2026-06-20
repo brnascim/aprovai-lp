@@ -19,7 +19,8 @@
       "Bash(curl -s -X POST https://n8n.mentoriaaprovai.com.br/api/v1/workflows/lf5tQEsgZD8AJ0Q8/activate -H 'X-N8N-API-KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4OWFlZTNjOS00NTk3LTRjZmEtOTkzYi1hY2IxNTY2NzZmODIiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwianRpIjoiYzY2Y2EzZTEtODVkMi00M2M5LWI5OTctMGVlNDE5ZjYyZTFkIiwiaWF0IjoxNzgxOTY5OTg2fQ.Hdp3V7AULPZtbv7ryOIXik4TwN4V_KTC0PA6WiyQkTQ')",
       "Skill(update-config)",
       "Skill(update-config:*)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "mcp__Claude_in_Chrome__browser_batch"
     ]
   }
 }
