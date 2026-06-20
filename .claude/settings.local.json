@@ -12,7 +12,14 @@
       "Bash(git add *)",
       "Bash(git init *)",
       "Bash(git config *)",
-      "Bash(git commit -m 'Sessão n8n: Data Table + workflow integration + caveman skill *)"
+      "Bash(git commit -m 'Sessão n8n: Data Table + workflow integration + caveman skill *)",
+      "Bash(openssl s_client -connect n8n.mentoriaaprovai.com.br:443 -servername n8n.mentoriaaprovai.com.br)",
+      "Bash(curl -I https://n8n.mentoriaaprovai.com.br/api/v1/workflows)",
+      "Bash(curl -X POST https://n8n.mentoriaaprovai.com.br/webhook/stripe-aprovai -H 'Content-Type: application/json' -d '{\"test\": \"test\"}' -v)",
+      "Bash(curl -s -X POST https://n8n.mentoriaaprovai.com.br/api/v1/workflows/lf5tQEsgZD8AJ0Q8/activate -H 'X-N8N-API-KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4OWFlZTNjOS00NTk3LTRjZmEtOTkzYi1hY2IxNTY2NzZmODIiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwianRpIjoiYzY2Y2EzZTEtODVkMi00M2M5LWI5OTctMGVlNDE5ZjYyZTFkIiwiaWF0IjoxNzgxOTY5OTg2fQ.Hdp3V7AULPZtbv7ryOIXik4TwN4V_KTC0PA6WiyQkTQ')",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
