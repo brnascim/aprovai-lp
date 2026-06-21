@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aprovaí — Acesso liberado! 🎉</title>
+<meta name="robots" content="noindex, nofollow" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config={theme:{extend:{
+    colors:{bg:'#0A0D12',surface:'#13171E',surface2:'#1A1F29',line:'rgba(255,255,255,0.08)',ink:'#EEF1F6',muted:'#98A2B2',accent:'#FF7A1A',accent2:'#FFB02E',trust:'#34D399',danger:'#F87171'},
+    fontFamily:{display:['"Space Grotesk"','sans-serif'],body:['Inter','sans-serif']},
+  }}};
+</script>
+<style>
+  html{scroll-behavior:smooth}
+  body{background:#0A0D12;color:#EEF1F6;font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+  .font-display{font-family:"Space Grotesk",sans-serif}
+  .grad-accent{background:linear-gradient(135deg,#FF7A1A,#FFB02E)}
+  .grad-trust{background:linear-gradient(135deg,#34D399,#059669)}
+  .text-accent-grad{background:linear-gradient(135deg,#FF8A2A,#FFC04E);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .card{background:linear-gradient(180deg,#14181F,#11151C);border:1px solid rgba(255,255,255,0.08)}
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none}}
+  /* Checkmark animation */
+  @keyframes pop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+  .check-anim{animation:pop .5s cubic-bezier(.175,.885,.32,1.275) .2s both}
+  /* Confetti-style dots */
+  @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(5deg)}}
+  .float{animation:float 3s ease-in-out infinite}
+</style>
+</head>
+<body class="font-body min-h-screen flex flex-col">
+
+<!-- TOP: trust bar -->
+<div class="grad-trust text-white text-center py-2.5 px-5 text-sm font-semibold">
+  Compra confirmada com segurança — acesso ativado!
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="flex-1 flex flex-col items-center justify-center px-5 py-14 text-center max-w-2xl mx-auto w-full">
+
+  <!-- Ícone de confirmação animado -->
+  <div class="check-anim inline-flex h-24 w-24 rounded-full items-center justify-center mb-6" style="background:linear-gradient(135deg,#34D399,#059669);box-shadow:0 0 0 12px rgba(52,211,153,.1),0 0 0 24px rgba(52,211,153,.05)">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+
+  <!-- Headline -->
+  <h1 class="font-display font-bold text-3xl sm:text-4xl mb-4 leading-tight">
+    Parabéns! Seu acesso está <span class="text-accent-grad">ativado</span>
+  </h1>
+  <p class="text-muted text-lg mb-10 max-w-md mx-auto">
+    Você receberá um e-mail em instantes com o link de acesso ao Motor Anti-ATS e todos os seus bônus.
+  </p>
+
+  <!-- Card: próximos passos -->
+  <div class="reveal card rounded-2xl p-6 w-full text-left mb-6">
+    <h2 class="font-display font-semibold text-base mb-4 text-ink">Seus próximos passos:</h2>
+    <ol class="space-y-4">
+      <li class="flex items-start gap-3">
+        <span class="inline-flex h-7 w-7 shrink-0 rounded-full items-center justify-center font-display font-bold text-sm text-bg mt-0.5" style="background:linear-gradient(135deg,#FF7A1A,#FFB02E)">1</span>
+        <div>
+          <p class="font-semibold text-sm">Verifique sua caixa de entrada</p>
+          <p class="text-muted text-xs mt-0.5">O e-mail de acesso chega em até 5 minutos. Verifique também o spam se não aparecer.</p>
+        </div>
+      </li>
+      <li class="flex items-start gap-3">
+        <span class="inline-flex h-7 w-7 shrink-0 rounded-full items-center justify-center font-display font-bold text-sm text-bg mt-0.5" style="background:linear-gradient(135deg,#FF7A1A,#FFB02E)">2</span>
+        <div>
+          <p class="font-semibold text-sm">Acesse o Motor Anti-ATS</p>
+          <p class="text-muted text-xs mt-0.5">Cole o texto da vaga e o texto do seu currículo no Motor. Em 2 minutos você terá a versão otimizada.</p>
+        </div>
+      </li>
+      <li class="flex items-start gap-3">
+        <span class="inline-flex h-7 w-7 shrink-0 rounded-full items-center justify-center font-display font-bold text-sm text-bg mt-0.5" style="background:linear-gradient(135deg,#FF7A1A,#FFB02E)">3</span>
+        <div>
+          <p class="font-semibold text-sm">Aplique para a primeira vaga hoje</p>
+          <p class="text-muted text-xs mt-0.5">Não espere o dia perfeito. Use o Motor agora mesmo e aumente suas chances de retorno em horas.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- Card: dúvidas -->
+  <div class="reveal card rounded-2xl p-5 w-full text-left mb-8" style="border-color:rgba(255,122,26,.15)">
+    <div class="flex items-start gap-3">
+      <svg class="text-accent shrink-0 mt-0.5" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <div>
+        <p class="font-semibold text-sm mb-1">Problemas com o acesso?</p>
+        <p class="text-muted text-xs">Não encontrou o e-mail? Entre em contato: <a href="mailto:contato@mentoriaaprovai.com.br" class="text-accent hover:underline">contato@mentoriaaprovai.com.br</a><br>Respondemos em até 24 horas úteis.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botão principal (quando tiver a plataforma de acesso) -->
+  <!-- TODO: substituir href pelo link real da plataforma de membros -->
+  <a href="#" class="reveal inline-flex items-center gap-2 grad-trust text-white font-bold px-7 py-3.5 rounded-xl text-base hover:brightness-110 cursor-pointer mb-4" style="box-shadow:0 8px 24px -8px rgba(52,211,153,.45)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+    Acessar o Motor Anti-ATS agora
+  </a>
+  <p class="text-xs text-muted">O link de acesso também foi enviado para seu e-mail.</p>
+
+</main>
+
+<!-- FOOTER MINIMAL -->
+<footer class="border-t border-line mt-auto">
+  <div class="max-w-5xl mx-auto px-5 py-6 text-xs text-muted flex flex-col sm:flex-row gap-3 justify-between items-center text-center">
+    <a href="index.html" class="flex items-center gap-1.5 font-display font-semibold text-ink/50 hover:text-ink/80">
+      <span class="inline-flex h-5 w-5 items-center justify-center rounded grad-accent text-bg" style="font-size:8px">✓</span>
+      Aprovaí
+    </a>
+    <nav class="flex gap-5"><a href="privacidade.html" class="hover:text-ink">Privacidade</a><a href="termos.html" class="hover:text-ink">Termos</a><a href="reembolso.html" class="hover:text-ink">Reembolso</a></nav>
+    <p>© <span id="ano"></span> Aprovaí. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('ano').textContent = new Date().getFullYear();
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(reduce || !('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return;}
+    var io = new IntersectionObserver(en=>{en.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.1});
+    els.forEach(e=>io.observe(e));
+  })();
+</script>
+</body>
+</html>

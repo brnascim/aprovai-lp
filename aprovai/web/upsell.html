@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aprovaí — Espere! Sua compra ainda não está concluída</title>
+<meta name="robots" content="noindex, nofollow" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config={theme:{extend:{
+    colors:{bg:'#0A0D12',surface:'#13171E',surface2:'#1A1F29',line:'rgba(255,255,255,0.08)',ink:'#EEF1F6',muted:'#98A2B2',accent:'#FF7A1A',accent2:'#FFB02E',trust:'#34D399',danger:'#F87171'},
+    fontFamily:{display:['"Space Grotesk"','sans-serif'],body:['Inter','sans-serif']},
+  }}};
+</script>
+<style>
+  html{scroll-behavior:smooth}
+  body{background:#0A0D12;color:#EEF1F6;font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+  .font-display{font-family:"Space Grotesk",sans-serif}
+  .grad-accent{background:linear-gradient(135deg,#FF7A1A,#FFB02E)}
+  .grad-trust{background:linear-gradient(135deg,#34D399,#059669)}
+  .text-accent-grad{background:linear-gradient(135deg,#FF8A2A,#FFC04E);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .glow{box-shadow:0 0 0 1px rgba(255,122,26,.25),0 22px 70px -24px rgba(255,122,26,.5)}
+  .card{background:linear-gradient(180deg,#14181F,#11151C);border:1px solid rgba(255,255,255,0.08)}
+  .card-trust{border-color:rgba(52,211,153,.3)}
+  .btn-yes{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#34D399,#059669);color:#fff;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.1rem;padding:.9rem 2.5rem;border-radius:.875rem;text-decoration:none;transition:all .2s ease;box-shadow:0 8px 24px -8px rgba(52,211,153,.5)}
+  .btn-yes:hover{filter:brightness(1.1);transform:translateY(-1px)}
+  .btn-no{display:block;text-align:center;color:rgba(152,162,178,.6);font-size:.8rem;text-decoration:underline;margin-top:.75rem;cursor:pointer}
+  .btn-no:hover{color:#98A2B2}
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none}}
+  /* progress steps */
+  .step{display:flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;padding:.5rem .9rem;border-radius:6px;font-family:"Space Grotesk",sans-serif;letter-spacing:.03em}
+  .step-done{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.25);color:#34D399}
+  .step-active{background:rgba(255,122,26,.12);border:1px solid rgba(255,122,26,.4);color:#FF7A1A}
+  .step-next{background:rgba(152,162,178,.06);border:1px solid rgba(152,162,178,.15);color:#98A2B2}
+  /* countdown */
+  .count-digit{font-family:"Space Grotesk",sans-serif;font-size:2.5rem;font-weight:700;color:#EEF1F6;line-height:1}
+  .count-label{font-size:.65rem;color:#98A2B2;text-transform:uppercase;letter-spacing:.1em}
+  /* item card */
+  .item-card{background:linear-gradient(180deg,#14181F,#11151C);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:1.25rem}
+  .item-value{font-family:"Space Grotesk",sans-serif;font-size:.75rem;font-weight:700;color:#FF7A1A;background:rgba(255,122,26,.08);padding:.2rem .5rem;border-radius:4px}
+</style>
+</head>
+<body class="font-body">
+
+<!-- ALERT BAR — do Modelo 07 -->
+<div class="grad-accent text-bg text-center py-4 px-5">
+  <p class="font-display font-bold text-base sm:text-lg tracking-tight">ESPERE! SUA COMPRA AINDA NÃO ESTÁ CONCLUÍDA...</p>
+  <p class="text-sm mt-0.5 opacity-80">Não aperte "voltar", não recarregue e nem feche esta página</p>
+</div>
+
+<!-- PROGRESS STEPS — do Modelo 07 -->
+<div class="border-b border-line bg-surface/50">
+  <div class="max-w-3xl mx-auto px-5 py-4 flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
+    <div class="step step-done">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      PASSO 1: Motor Anti-ATS
+    </div>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(152,162,178,.3)" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+    <div class="step step-active">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      PASSO 2: MELHORE SEU PEDIDO
+    </div>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(152,162,178,.3)" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+    <div class="step step-next">
+      PASSO 3: ACESSO COMPLETO
+    </div>
+  </div>
+</div>
+
+<!-- CONTEÚDO PRINCIPAL -->
+<section class="max-w-3xl mx-auto px-5 py-12">
+
+  <!-- Intro — do Modelo 07 -->
+  <p class="reveal text-center text-muted mb-8 max-w-xl mx-auto leading-relaxed">
+    Você só verá esta página <strong class="text-ink">uma única vez</strong>; portanto, leia todas as palavras
+    <span class="text-accent font-semibold">(e assista ao vídeo)</span> com muita atenção.
+    <strong class="text-ink">É realmente muito importante...</strong>
+  </p>
+
+  <!-- Offer headline — do Modelo 07 -->
+  <h1 class="reveal font-display font-bold text-2xl sm:text-3xl md:text-4xl text-center mb-8 leading-tight">
+    VEJA ESSA OFERTA ESPECIAL<br>
+    <span class="text-accent-grad">QUE PREPAREI PARA VOCÊ!</span>
+  </h1>
+
+  <!-- Vídeo placeholder — substituir pelo embed real quando disponível -->
+  <div class="reveal card rounded-2xl overflow-hidden mb-6" style="aspect-ratio:16/9;border:1px solid rgba(255,122,26,.2)">
+    <div class="w-full h-full flex flex-col items-center justify-center text-center px-8" style="background:linear-gradient(135deg,#13171E,#1A1F29)">
+      <div class="inline-flex h-16 w-16 rounded-full grad-accent items-center justify-center mb-3" style="box-shadow:0 0 0 8px rgba(255,122,26,.1)">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" class="text-bg ml-1"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </div>
+      <p class="font-display font-semibold mb-1">Vídeo da oferta especial</p>
+      <p class="text-muted text-sm">Em breve — grave um vídeo curto (2-3 min) apresentando o Acelerador de Entrevistas.</p>
+    </div>
+  </div>
+
+  <!-- Descrição da oferta -->
+  <p class="reveal text-center text-muted mb-6 max-w-xl mx-auto">
+    Você quer o <strong class="text-ink">Acelerador de Entrevistas</strong> com <strong class="text-accent">70% de desconto</strong>?<br>
+    <span class="text-sm">(Você nunca verá esta oferta em nenhum outro lugar!)</span>
+  </p>
+
+  <!-- Produto: o que é e o que inclui -->
+  <div class="reveal card rounded-2xl p-6 mb-8" style="border-color:rgba(255,122,26,.2)">
+    <div class="flex items-start gap-4 mb-5">
+      <div class="h-11 w-11 shrink-0 rounded-xl grad-accent flex items-center justify-center text-bg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
+      <div>
+        <h2 class="font-display font-bold text-xl text-accent">Acelerador de Entrevistas</h2>
+        <p class="text-muted text-sm">O próximo passo depois de passar pelo robô: arrasar na entrevista e negociar melhor.</p>
+      </div>
+    </div>
+    <div class="space-y-3">
+      <div class="flex items-start gap-3">
+        <svg class="text-trust shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <div><p class="font-semibold text-sm">Workshop gravado: "Da triagem à proposta" <span class="text-muted">(120+ min)</span></p><p class="text-muted text-xs">Como se preparar, o que fazer durante e como se posicionar depois da entrevista.</p></div>
+      </div>
+      <div class="flex items-start gap-3">
+        <svg class="text-trust shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <div><p class="font-semibold text-sm">120 perguntas comentadas + variações por senioridade</p><p class="text-muted text-xs">Respostas-modelo prontas para adaptar — do estágio ao C-level.</p></div>
+      </div>
+      <div class="flex items-start gap-3">
+        <svg class="text-trust shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <div><p class="font-semibold text-sm">Simulador de banca em 7 etapas</p><p class="text-muted text-xs">Checklist completo para simular a entrevista e chegar sem travar.</p></div>
+      </div>
+      <div class="flex items-start gap-3">
+        <svg class="text-trust shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <div><p class="font-semibold text-sm">Script de negociação avançado — salário, bônus, benefícios e contraoferta</p><p class="text-muted text-xs">As 7 táticas do RH na negociação + argumentos linha a linha pra não perder dinheiro.</p></div>
+      </div>
+      <div class="flex items-start gap-3">
+        <svg class="text-trust shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <div><p class="font-semibold text-sm">Templates de e-mail pós-entrevista</p><p class="text-muted text-xs">Mensagens que reabrem processos parados e constroem relacionamento com o recrutador.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREÇO — do Modelo 06 + 07 -->
+  <div class="reveal text-center mb-6">
+    <p class="text-muted text-lg mb-1">Você obterá tudo isso...</p>
+    <p class="font-display text-2xl text-muted mb-1">De <s class="opacity-60">R$297,00</s> por apenas</p>
+    <div class="inline-block grad-accent px-8 py-3 rounded-xl mb-2">
+      <p class="font-display font-bold text-5xl text-bg leading-none">R$97</p>
+    </div>
+    <p class="text-muted text-sm">Adicionado ao seu pedido com 1 clique — sem digitar dados novamente.</p>
+  </div>
+
+  <!-- COUNTDOWN — do Modelo 06 -->
+  <div class="reveal text-center mb-8">
+    <p class="text-danger font-semibold text-sm uppercase tracking-wider mb-2">Esta oferta expira em:</p>
+    <div class="inline-flex items-center gap-4">
+      <div class="text-center"><span class="count-digit" id="cd-min">15</span><p class="count-label">Minutos</p></div>
+      <span class="count-digit opacity-40">:</span>
+      <div class="text-center"><span class="count-digit" id="cd-sec">00</span><p class="count-label">Segundos</p></div>
+    </div>
+  </div>
+
+  <!-- CTA SIM — do Modelo 07 -->
+  <div class="reveal text-center mb-10">
+    <!-- TROCAR href pelo link Stripe do produto Acelerador de Entrevistas (R$97) -->
+    <a href="#upsell-checkout" data-upsell-checkout class="btn-yes text-lg px-10 py-4 w-full sm:w-auto">
+      SIM, ADICIONE AO MEU PEDIDO! <span class="ml-2 font-normal opacity-80">(+R$97)</span>
+    </a>
+    <a href="obrigado.html" class="btn-no">Não, obrigado, já tenho tudo que preciso para as entrevistas</a>
+  </div>
+</section>
+
+<!-- SOMENTE HOJE — VOCÊ LEVARÁ (do Modelo 07 seção branca) -->
+<section class="border-t border-line bg-surface/40">
+  <div class="max-w-4xl mx-auto px-5 py-14">
+    <h2 class="reveal font-display font-bold text-2xl sm:text-3xl text-center mb-3">SOMENTE HOJE — VOCÊ LEVARÁ...</h2>
+    <p class="reveal text-muted text-center mb-10">Tudo isso por uma única vez, sem assinatura.</p>
+
+    <div class="grid sm:grid-cols-3 gap-4">
+      <!-- Item 1 -->
+      <div class="reveal item-card">
+        <div class="h-12 w-12 rounded-xl grad-accent flex items-center justify-center text-bg mb-4">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 10l-4 4l-4-4"/><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/></svg>
+        </div>
+        <div class="w-full h-1 rounded-full mb-3" style="background:linear-gradient(90deg,#FF7A1A,#FFB02E)"></div>
+        <h3 class="font-display font-bold text-base mb-2">Workshop "Da triagem à proposta"</h3>
+        <p class="text-muted text-xs leading-relaxed mb-3">Preparação completa para entrevistas do primeiro contato até a assinatura do contrato.</p>
+        <span class="item-value">Vale R$197</span>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="reveal item-card">
+        <div class="h-12 w-12 rounded-xl grad-accent flex items-center justify-center text-bg mb-4">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="w-full h-1 rounded-full mb-3" style="background:linear-gradient(90deg,#FF7A1A,#FFB02E)"></div>
+        <h3 class="font-display font-bold text-base mb-2">120 perguntas comentadas</h3>
+        <p class="text-muted text-xs leading-relaxed mb-3">Respostas-modelo com variações por senioridade para as perguntas mais temidas — sem decorar frases.</p>
+        <span class="item-value">Vale R$97</span>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="reveal item-card">
+        <div class="h-12 w-12 rounded-xl grad-accent flex items-center justify-center text-bg mb-4">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="w-full h-1 rounded-full mb-3" style="background:linear-gradient(90deg,#FF7A1A,#FFB02E)"></div>
+        <h3 class="font-display font-bold text-base mb-2">Script de negociação avançado</h3>
+        <p class="text-muted text-xs leading-relaxed mb-3">As 7 táticas do RH + contraargumentos prontos para salário, bônus, VR, VT e plano de saúde.</p>
+        <span class="item-value">Vale R$47</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEÇÃO ESCURA — VEJA TUDO QUE VOCÊ LEVA AGORA (do Modelo 07 seção preta) -->
+<section class="border-t border-line" style="background:#080B10">
+  <div class="max-w-3xl mx-auto px-5 py-14 text-center">
+    <h2 class="reveal font-display font-bold text-2xl sm:text-3xl mb-8">VEJA TUDO QUE VOCÊ LEVA AGORA</h2>
+
+    <div class="reveal card rounded-2xl p-6 mb-8 text-left" style="border-color:rgba(255,122,26,.2)">
+      <ul class="space-y-3">
+        <li class="flex items-center gap-3">
+          <svg class="text-trust shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span><strong class="text-ink">Motor Anti-ATS</strong> — <span class="text-muted text-sm">já comprado ✓</span></span>
+        </li>
+        <li class="flex items-center gap-3">
+          <svg class="text-trust shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Workshop "Da triagem à proposta" <span class="text-muted text-sm">(R$197)</span></span>
+        </li>
+        <li class="flex items-center gap-3">
+          <svg class="text-trust shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>120 perguntas comentadas + variações por senioridade <span class="text-muted text-sm">(R$97)</span></span>
+        </li>
+        <li class="flex items-center gap-3">
+          <svg class="text-trust shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Simulador de banca em 7 etapas <span class="text-muted text-sm">(R$47)</span></span>
+        </li>
+        <li class="flex items-center gap-3">
+          <svg class="text-trust shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Script de negociação avançado <span class="text-muted text-sm">(R$47)</span></span>
+        </li>
+        <li class="flex items-center gap-3">
+          <svg class="text-trust shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Templates de e-mail pós-entrevista <span class="text-muted text-sm">(R$27)</span></span>
+        </li>
+        <div class="border-t border-line pt-3 mt-1">
+          <div class="flex items-center justify-between">
+            <span class="text-muted text-sm">Valor total dos itens</span>
+            <span class="text-muted line-through">R$415</span>
+          </div>
+          <div class="flex items-center justify-between mt-1">
+            <span class="font-display font-bold text-trust">Seu investimento hoje</span>
+            <span class="font-display font-bold text-2xl text-accent">R$97</span>
+          </div>
+        </div>
+      </ul>
+    </div>
+
+    <a href="#upsell-checkout" data-upsell-checkout class="btn-yes text-lg px-10 py-4 w-full sm:w-auto">
+      SIM, ADICIONE AO MEU PEDIDO!
+    </a>
+    <a href="obrigado.html" class="btn-no">Não, obrigado, não quero adicionar ao meu pedido</a>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="border-t border-line bg-surface/40">
+  <div class="max-w-2xl mx-auto px-5 py-12">
+    <div class="reveal card card-trust rounded-2xl p-6 flex flex-col sm:flex-row gap-5 items-center" style="border-color:rgba(52,211,153,.3)">
+      <div class="shrink-0 mx-auto sm:mx-0">
+        <svg width="90" height="90" viewBox="0 0 120 120" aria-label="Garantia de 30 dias">
+          <defs><path id="cpU" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+          <circle cx="60" cy="60" r="56" fill="none" stroke="#34D399" stroke-width="1.5" opacity=".4"/>
+          <circle cx="60" cy="60" r="48" fill="none" stroke="#34D399" stroke-width="2"/>
+          <text font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="#34D399" letter-spacing="2">
+            <textPath href="#cpU" startOffset="0%">GARANTIA · RISCO ZERO · GARANTIA · RISCO ZERO ·</textPath>
+          </text>
+          <text x="60" y="55" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="26" font-weight="700" fill="#34D399">30</text>
+          <text x="60" y="72" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#34D399" letter-spacing="3">DIAS</text>
+        </svg>
+      </div>
+      <div>
+        <h3 class="font-display font-semibold text-lg mb-2 text-trust">Sua satisfação é garantida!</h3>
+        <p class="text-muted text-sm leading-relaxed">Você adquire agora o Acelerador de Entrevistas pela condição especial de <strong class="text-ink">R$97,00</strong> e tem <strong class="text-ink">7 dias incondicionais</strong> para avaliar. Se por qualquer motivo achar que não é para você, devolvo integralmente seu dinheiro. A decisão de começar é sua.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-line">
+  <div class="max-w-5xl mx-auto px-5 py-8 text-sm text-muted flex flex-col sm:flex-row gap-3 justify-between items-center text-center">
+    <a href="index.html" class="flex items-center gap-2 font-display font-semibold text-ink/70 hover:text-ink">
+      <span class="inline-flex h-6 w-6 items-center justify-center rounded-lg grad-accent text-bg text-xs" style="font-size:9px">✓</span>
+      Aprovaí
+    </a>
+    <nav class="flex gap-5"><a href="privacidade.html" class="hover:text-ink">Privacidade</a><a href="termos.html" class="hover:text-ink">Termos</a><a href="reembolso.html" class="hover:text-ink">Reembolso</a></nav>
+    <p>© <span id="ano"></span> Aprovaí</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('ano').textContent = new Date().getFullYear();
+
+  // Countdown de 15 minutos (do Modelo 06 — evergreen por sessão)
+  (function(){
+    var KEY = 'aprovai_upsell_expire';
+    var stored = sessionStorage.getItem(KEY);
+    var expire;
+    if(stored) {
+      expire = parseInt(stored, 10);
+    } else {
+      expire = Date.now() + 15 * 60 * 1000;
+      sessionStorage.setItem(KEY, expire);
+    }
+    function tick(){
+      var rem = Math.max(0, expire - Date.now());
+      var m = Math.floor(rem / 60000);
+      var s = Math.floor((rem % 60000) / 1000);
+      document.getElementById('cd-min').textContent = String(m).padStart(2,'0');
+      document.getElementById('cd-sec').textContent = String(s).padStart(2,'0');
+      if(rem > 0) setTimeout(tick, 1000);
+    }
+    tick();
+  })();
+
+  // Reveal
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(reduce || !('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return;}
+    var io = new IntersectionObserver(en=>{en.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.1});
+    els.forEach(e=>io.observe(e));
+  })();
+
+  // Upsell checkout — TROCAR pelo link Stripe do produto Acelerador de Entrevistas (R$97)
+  document.querySelectorAll('[data-upsell-checkout]').forEach(b=>b.addEventListener('click',function(e){
+    e.preventDefault();
+    // TODO: criar produto R$97 no Stripe e substituir a URL abaixo
+    alert('Configure o link Stripe do Acelerador de Entrevistas (R$97) aqui.');
+    // window.location.href = 'https://buy.stripe.com/SEU_LINK_UPSELL';
+  }));
+</script>
+</body>
+</html>

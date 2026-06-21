@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aprovaí — Veja como seu currículo passa pelo robô em 2 minutos</title>
+<meta name="description" content="Assista ao vídeo e descubra por que seu currículo está sendo descartado antes de qualquer humano ler." />
+<meta name="robots" content="noindex, nofollow" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config={theme:{extend:{
+    colors:{bg:'#0A0D12',surface:'#13171E',surface2:'#1A1F29',line:'rgba(255,255,255,0.08)',ink:'#EEF1F6',muted:'#98A2B2',accent:'#FF7A1A',accent2:'#FFB02E',trust:'#34D399',danger:'#F87171'},
+    fontFamily:{display:['"Space Grotesk"','sans-serif'],body:['Inter','sans-serif']},
+  }}};
+</script>
+<style>
+  html{scroll-behavior:smooth}
+  body{background:#0A0D12;color:#EEF1F6;font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+  .font-display{font-family:"Space Grotesk",sans-serif}
+  .grad-accent{background:linear-gradient(135deg,#FF7A1A,#FFB02E)}
+  .text-accent-grad{background:linear-gradient(135deg,#FF8A2A,#FFC04E);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .glow{box-shadow:0 0 0 1px rgba(255,122,26,.25),0 22px 70px -24px rgba(255,122,26,.5)}
+  .card{background:linear-gradient(180deg,#14181F,#11151C);border:1px solid rgba(255,255,255,0.08);box-shadow:0 1px 0 rgba(255,255,255,.03) inset,0 20px 40px -30px rgba(0,0,0,.8)}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}.reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none}}
+  a,button{transition:all .2s ease}
+  .depoimento-placeholder{background:linear-gradient(135deg,#13171E,#1A1F29);border:1px solid rgba(255,255,255,.07);border-radius:12px;aspect-ratio:4/5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+</style>
+</head>
+<body class="font-body pb-20 md:pb-0">
+
+<!-- ALERT BAR -->
+<div class="grad-accent text-bg text-center py-3 px-5 font-display font-semibold text-sm tracking-wide">
+  ATENÇÃO — assista ao vídeo completo antes de fechar esta página
+</div>
+
+<!-- HERO: logo + headline + vídeo + CTA -->
+<section class="max-w-4xl mx-auto px-5 py-12 text-center">
+  <!-- Logo compacta -->
+  <a href="index.html" class="inline-flex items-center gap-2 font-display font-bold text-xl tracking-tight mb-8 mx-auto">
+    <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl grad-accent text-bg shrink-0" style="box-shadow:0 0 0 1px rgba(255,122,26,.4),0 4px 14px rgba(255,122,26,.3)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </span>
+    <span>Aprova<span class="text-accent">í</span></span>
+  </a>
+
+  <!-- Headline adaptada do Modelo 08 -->
+  <h1 class="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-[1.08] mb-5 max-w-3xl mx-auto">
+    O método comprovado para fazer seu currículo <span class="text-accent-grad">passar pelo robô</span> e chegar ao recrutador
+  </h1>
+
+  <p class="text-muted text-lg mb-8 max-w-xl mx-auto">
+    Veja em menos de 3 minutos por que 90% dos currículos são descartados automaticamente — e como o Aprovaí muda isso para cada vaga que você aplica.
+  </p>
+
+  <!-- Vídeo placeholder — trocar src pelo embed real -->
+  <div class="reveal card rounded-2xl overflow-hidden mb-6 max-w-3xl mx-auto" style="aspect-ratio:16/9;border:1px solid rgba(255,122,26,.25)">
+    <div class="w-full h-full flex flex-col items-center justify-center text-center px-8" style="background:linear-gradient(135deg,#13171E,#1A1F29)">
+      <button onclick="document.getElementById('video-frame').style.display='block';this.parentElement.style.display='none'" class="inline-flex h-20 w-20 rounded-full grad-accent items-center justify-center mb-4 hover:brightness-110 cursor-pointer" style="box-shadow:0 0 0 8px rgba(255,122,26,.12),0 0 0 16px rgba(255,122,26,.06)">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="text-bg ml-1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+      <p class="font-display font-semibold text-lg mb-1">Assista ao vídeo completo</p>
+      <p class="text-muted text-sm">Em breve — publicado com os primeiros resultados reais.</p>
+    </div>
+    <!-- Quando tiver o link do vídeo, substitua o div acima por: -->
+    <!-- <iframe id="video-frame" class="w-full h-full" src="https://www.youtube.com/embed/SEU_ID_AQUI?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe> -->
+  </div>
+
+  <!-- Observação abaixo do vídeo (do Modelo 08) -->
+  <p class="text-sm text-ink/80 mb-8 max-w-xl mx-auto">
+    <strong class="text-accent">OBSERVAÇÃO:</strong> Este método faz você ser visto por recrutadores humanos — sem precisar saber nada de IA ou tecnologia. Você só cola dois textos.
+  </p>
+
+  <!-- CTA Principal -->
+  <a href="https://buy.stripe.com/cNibJ04fZ6IR1mt2Ui0oM00" class="reveal inline-flex items-center grad-accent text-bg font-bold px-8 py-4 rounded-xl text-lg hover:brightness-110 glow cursor-pointer mb-3">
+    QUERO GARANTIR MEU ACESSO — R$47
+  </a>
+  <p class="text-sm text-accent2 mb-2">Preço de lançamento — pode subir a qualquer momento.</p>
+
+  <!-- Trust signals -->
+  <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted mt-2">
+    <span class="flex items-center gap-1.5"><svg class="text-trust shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Compra segura</span>
+    <span class="flex items-center gap-1.5"><svg class="text-trust shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Acesso imediato</span>
+    <span class="flex items-center gap-1.5"><svg class="text-trust shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Garantia de 30 dias</span>
+    <span class="flex items-center gap-1.5"><svg class="text-trust shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> PIX e cartão</span>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS EM IMAGEM (Modelo 08 — seção "Veja o resultado de quem é aluna") -->
+<section class="border-t border-line bg-surface/40">
+  <div class="max-w-5xl mx-auto px-5 py-14">
+    <h2 class="reveal font-display font-bold text-2xl sm:text-3xl text-center mb-3">Veja o resultado de quem usou o Aprovaí:</h2>
+    <p class="reveal text-muted text-center mb-10">Depoimentos reais serão publicados conforme os primeiros usuários compartilham seus resultados.</p>
+    <!-- Grade de 6 placeholders (3+3), substituir por prints/screenshots reais -->
+    <div class="grid grid-cols-3 gap-3 md:gap-4 mb-4">
+      <div class="reveal depoimento-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(152,162,178,.3)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="text-xs text-muted/40">Depoimento em breve</span></div>
+      <div class="reveal depoimento-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(152,162,178,.3)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="text-xs text-muted/40">Depoimento em breve</span></div>
+      <div class="reveal depoimento-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(152,162,178,.3)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="text-xs text-muted/40">Depoimento em breve</span></div>
+    </div>
+    <div class="grid grid-cols-3 gap-3 md:gap-4">
+      <div class="reveal depoimento-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(152,162,178,.3)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="text-xs text-muted/40">Depoimento em breve</span></div>
+      <div class="reveal depoimento-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(152,162,178,.3)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="text-xs text-muted/40">Depoimento em breve</span></div>
+      <div class="reveal depoimento-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(152,162,178,.3)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="text-xs text-muted/40">Depoimento em breve</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS EM VÍDEO (Modelo 08 / Modelo 02 — seção de 4 vídeos 2x2) -->
+<section class="border-t border-line">
+  <div class="max-w-5xl mx-auto px-5 py-14">
+    <h2 class="reveal font-display font-bold text-2xl sm:text-3xl text-center mb-10">Profissionais que pararam de sumir no silêncio:</h2>
+    <div class="grid sm:grid-cols-2 gap-5">
+      <!-- Vídeo 1 -->
+      <div class="reveal card rounded-2xl overflow-hidden" style="aspect-ratio:16/9">
+        <div class="w-full h-full flex items-center justify-center" style="background:linear-gradient(135deg,#13171E,#1A1F29)">
+          <div class="text-center"><div class="inline-flex h-14 w-14 rounded-full grad-accent items-center justify-center mb-2"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="text-bg ml-1"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><p class="text-sm text-muted">Depoimento em vídeo</p></div>
+        </div>
+      </div>
+      <!-- Vídeo 2 -->
+      <div class="reveal card rounded-2xl overflow-hidden" style="aspect-ratio:16/9">
+        <div class="w-full h-full flex items-center justify-center" style="background:linear-gradient(135deg,#13171E,#1A1F29)">
+          <div class="text-center"><div class="inline-flex h-14 w-14 rounded-full grad-accent items-center justify-center mb-2"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="text-bg ml-1"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><p class="text-sm text-muted">Depoimento em vídeo</p></div>
+        </div>
+      </div>
+      <!-- Vídeo 3 -->
+      <div class="reveal card rounded-2xl overflow-hidden" style="aspect-ratio:16/9">
+        <div class="w-full h-full flex items-center justify-center" style="background:linear-gradient(135deg,#13171E,#1A1F29)">
+          <div class="text-center"><div class="inline-flex h-14 w-14 rounded-full grad-accent items-center justify-center mb-2"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="text-bg ml-1"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><p class="text-sm text-muted">Depoimento em vídeo</p></div>
+        </div>
+      </div>
+      <!-- Vídeo 4 -->
+      <div class="reveal card rounded-2xl overflow-hidden" style="aspect-ratio:16/9">
+        <div class="w-full h-full flex items-center justify-center" style="background:linear-gradient(135deg,#13171E,#1A1F29)">
+          <div class="text-center"><div class="inline-flex h-14 w-14 rounded-full grad-accent items-center justify-center mb-2"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="text-bg ml-1"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><p class="text-sm text-muted">Depoimento em vídeo</p></div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center text-xs text-muted mt-6">Depoimentos reais serão adicionados conforme chegarem os primeiros feedbacks.</p>
+  </div>
+</section>
+
+<!-- CTA INTERMEDIÁRIO (do Modelo 08) -->
+<section class="border-t border-line bg-surface/40">
+  <div class="max-w-2xl mx-auto px-5 py-14 text-center">
+    <a href="https://buy.stripe.com/cNibJ04fZ6IR1mt2Ui0oM00" class="reveal inline-flex items-center grad-accent text-bg font-bold px-8 py-4 rounded-xl text-lg hover:brightness-110 glow cursor-pointer mb-4">
+      QUERO GARANTIR MEU ACESSO — R$47
+    </a>
+
+    <!-- Garantia do Modelo 08 / Modelo 07 -->
+    <div class="reveal card rounded-2xl p-6 mt-8 flex flex-col sm:flex-row gap-5 items-center text-left">
+      <div class="shrink-0">
+        <svg width="90" height="90" viewBox="0 0 120 120" aria-label="Selo de garantia de 30 dias">
+          <defs><path id="cp2" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+          <circle cx="60" cy="60" r="56" fill="none" stroke="#34D399" stroke-width="1.5" opacity=".4"/>
+          <circle cx="60" cy="60" r="48" fill="none" stroke="#34D399" stroke-width="2"/>
+          <text font-family="Space Grotesk, sans-serif" font-size="9" font-weight="600" fill="#34D399" letter-spacing="2">
+            <textPath href="#cp2" startOffset="0%">GARANTIA · RISCO ZERO · GARANTIA · RISCO ZERO ·</textPath>
+          </text>
+          <text x="60" y="55" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="26" font-weight="700" fill="#34D399">30</text>
+          <text x="60" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#34D399" letter-spacing="3">DIAS</text>
+        </svg>
+      </div>
+      <div>
+        <h3 class="font-display font-semibold text-lg mb-2 text-trust">Sua satisfação é garantida</h3>
+        <p class="text-muted text-sm leading-relaxed">Você acessa o Motor Anti-ATS completo e tem <strong class="text-ink">7 dias incondicional</strong> + <strong class="text-ink">30 dias por resultado</strong>. Se não for chamado para mais entrevistas, devolvo 100% do seu dinheiro — e você fica com os 10 bônus.</p>
+      </div>
+    </div>
+    <p class="reveal text-xs text-muted mt-4">O Aprovaí otimiza seu currículo para a triagem automática. Não garantimos contratação — nenhuma ferramenta honesta garante.</p>
+  </div>
+</section>
+
+<!-- FOOTER MINIMAL -->
+<footer class="border-t border-line">
+  <div class="max-w-5xl mx-auto px-5 py-8 text-sm text-muted flex flex-col sm:flex-row gap-3 justify-between items-center text-center">
+    <p>© <span id="ano"></span> Aprovaí. Todos os direitos reservados.</p>
+    <nav class="flex gap-5"><a href="privacidade.html" class="hover:text-ink">Privacidade</a><a href="termos.html" class="hover:text-ink">Termos</a><a href="reembolso.html" class="hover:text-ink">Reembolso</a></nav>
+  </div>
+</footer>
+
+<!-- MOBILE STICKY BAR -->
+<div class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-bg/95 backdrop-blur border-t border-line px-4 py-3 flex items-center gap-3">
+  <div class="shrink-0"><p class="text-xs text-muted line-through leading-none">R$297</p><p class="font-display font-bold text-xl leading-none mt-0.5">R$47</p></div>
+  <a href="https://buy.stripe.com/cNibJ04fZ6IR1mt2Ui0oM00" class="flex-1 text-center grad-accent text-bg font-bold py-3 rounded-xl cursor-pointer text-sm">Garantir acesso agora</a>
+</div>
+
+<script>
+  document.getElementById('ano').textContent = new Date().getFullYear();
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(reduce || !('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return;}
+    var io = new IntersectionObserver(en=>{en.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.12});
+    els.forEach(e=>io.observe(e));
+  })();
+</script>
+</body>
+</html>
