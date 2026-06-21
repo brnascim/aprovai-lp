@@ -47,7 +47,12 @@
 
 <header class="sticky top-0 z-40 backdrop-blur bg-bg/80 border-b border-line">
   <div class="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
-    <a href="#topo" class="flex items-center gap-2 font-display font-bold text-lg"><span class="inline-flex h-7 w-7 items-center justify-center rounded-lg grad-accent text-bg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Aprova<span class="text-accent">í</span></a>
+    <a href="#topo" class="flex items-center gap-2.5 font-display font-bold text-lg tracking-tight">
+      <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl grad-accent text-bg shrink-0" style="box-shadow:0 0 0 1px rgba(255,122,26,.4),0 4px 14px rgba(255,122,26,.3)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      <span>Aprova<span class="text-accent">í</span></span>
+    </a>
     <a href="#oferta" class="hidden sm:inline-flex items-center grad-accent text-bg font-semibold text-sm px-4 py-2 rounded-lg hover:brightness-110 cursor-pointer">Quero passar pelo robô — R$47</a>
   </div>
 </header>
@@ -221,6 +226,110 @@
     </div>
   </section>
 
+  <!-- MULTI-DEVICE STRIP -->
+  <section class="border-t border-line">
+    <div class="max-w-4xl mx-auto px-5 py-12 md:py-16">
+      <p class="reveal text-center text-xs font-display uppercase tracking-widest text-muted mb-10">Funciona em qualquer dispositivo</p>
+      <div class="reveal flex items-center justify-center gap-4 md:gap-8" aria-hidden="true">
+
+        <!-- Mobile -->
+        <div class="flex flex-col items-center gap-3">
+          <div class="relative" style="width:52px">
+            <svg viewBox="0 0 52 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="50" height="86" rx="7" stroke="rgba(152,162,178,.35)" stroke-width="1.5" fill="#13171E"/>
+              <rect x="8" y="10" width="36" height="58" rx="2" fill="#1A1F29"/>
+              <rect x="18" y="12" width="16" height="2" rx="1" fill="rgba(152,162,178,.2)"/>
+              <!-- mini CV lines -->
+              <rect x="11" y="16" width="10" height="10" rx="2" fill="rgba(255,122,26,.15)"/>
+              <rect x="23" y="17" width="18" height="1.5" rx="1" fill="rgba(255,122,26,.5)"/>
+              <rect x="23" y="21" width="12" height="1.5" rx="1" fill="rgba(152,162,178,.3)"/>
+              <rect x="11" y="30" width="30" height="1.5" rx="1" fill="rgba(152,162,178,.2)"/>
+              <rect x="11" y="33" width="24" height="1.5" rx="1" fill="rgba(152,162,178,.15)"/>
+              <rect x="11" y="36" width="28" height="1.5" rx="1" fill="rgba(152,162,178,.15)"/>
+              <rect x="11" y="41" width="30" height="1.5" rx="1" fill="rgba(152,162,178,.2)"/>
+              <rect x="11" y="44" width="20" height="1.5" rx="1" fill="rgba(152,162,178,.15)"/>
+              <!-- approve tick -->
+              <circle cx="38" cy="59" r="6" fill="rgba(52,211,153,.15)" stroke="rgba(52,211,153,.6)" stroke-width="1"/>
+              <polyline points="35.5,59 37.5,61 40.5,56.5" stroke="#34D399" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- home pill -->
+              <rect x="18" y="73" width="16" height="3" rx="1.5" fill="rgba(152,162,178,.2)"/>
+            </svg>
+          </div>
+          <span class="text-xs text-muted">Mobile</span>
+        </div>
+
+        <!-- Connector left -->
+        <div class="flex items-center gap-1 mb-5">
+          <div class="h-px w-6 md:w-12" style="background:linear-gradient(90deg,transparent,rgba(255,122,26,.4))"></div>
+          <div class="h-1.5 w-1.5 rounded-full bg-accent/60"></div>
+        </div>
+
+        <!-- Desktop — maior, central -->
+        <div class="flex flex-col items-center gap-3">
+          <div class="relative" style="width:110px">
+            <svg viewBox="0 0 110 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- screen -->
+              <rect x="1" y="1" width="108" height="62" rx="5" stroke="rgba(255,122,26,.5)" stroke-width="1.5" fill="#13171E"/>
+              <rect x="7" y="7" width="96" height="50" rx="2" fill="#1A1F29"/>
+              <!-- header bar -->
+              <rect x="7" y="7" width="96" height="8" rx="2" fill="#0A0D12"/>
+              <circle cx="12" cy="11" r="1.5" fill="rgba(248,113,113,.5)"/>
+              <circle cx="17" cy="11" r="1.5" fill="rgba(255,176,46,.5)"/>
+              <circle cx="22" cy="11" r="1.5" fill="rgba(52,211,153,.5)"/>
+              <!-- content: CV columns -->
+              <rect x="10" y="18" width="22" height="22" rx="2" fill="rgba(255,122,26,.1)" stroke="rgba(255,122,26,.2)" stroke-width=".8"/>
+              <rect x="35" y="19" width="40" height="2" rx="1" fill="rgba(255,122,26,.6)"/>
+              <rect x="35" y="23" width="28" height="1.5" rx="1" fill="rgba(152,162,178,.3)"/>
+              <rect x="35" y="26.5" width="34" height="1.5" rx="1" fill="rgba(152,162,178,.25)"/>
+              <rect x="10" y="43" width="88" height="1.5" rx="1" fill="rgba(152,162,178,.2)"/>
+              <rect x="10" y="46.5" width="66" height="1.5" rx="1" fill="rgba(152,162,178,.15)"/>
+              <rect x="10" y="50" width="74" height="1.5" rx="1" fill="rgba(152,162,178,.15)"/>
+              <!-- approve badge -->
+              <rect x="78" y="18" width="26" height="12" rx="3" fill="rgba(52,211,153,.12)" stroke="rgba(52,211,153,.5)" stroke-width=".8"/>
+              <polyline points="81,24 83.5,26.5 87,21" stroke="#34D399" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="90" y="22" width="11" height="1.5" rx=".75" fill="rgba(52,211,153,.5)"/>
+              <!-- stand -->
+              <rect x="48" y="63" width="14" height="4" rx="1" fill="rgba(152,162,178,.15)"/>
+              <rect x="38" y="67" width="34" height="2.5" rx="1" fill="rgba(152,162,178,.2)"/>
+            </svg>
+          </div>
+          <span class="text-xs text-muted">Desktop</span>
+        </div>
+
+        <!-- Connector right -->
+        <div class="flex items-center gap-1 mb-5">
+          <div class="h-1.5 w-1.5 rounded-full bg-accent/60"></div>
+          <div class="h-px w-6 md:w-12" style="background:linear-gradient(90deg,rgba(255,122,26,.4),transparent)"></div>
+        </div>
+
+        <!-- Tablet -->
+        <div class="flex flex-col items-center gap-3">
+          <div class="relative" style="width:62px">
+            <svg viewBox="0 0 62 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="60" height="80" rx="6" stroke="rgba(152,162,178,.35)" stroke-width="1.5" fill="#13171E"/>
+              <rect x="7" y="8" width="48" height="60" rx="2" fill="#1A1F29"/>
+              <circle cx="31" cy="74" r="2.5" stroke="rgba(152,162,178,.3)" stroke-width="1" fill="none"/>
+              <!-- mini content -->
+              <rect x="10" y="12" width="42" height="5" rx="1.5" fill="rgba(255,122,26,.12)" stroke="rgba(255,122,26,.25)" stroke-width=".8"/>
+              <rect x="12" y="13.5" width="20" height="2" rx="1" fill="rgba(255,122,26,.4)"/>
+              <rect x="10" y="20" width="42" height="1.5" rx="1" fill="rgba(152,162,178,.2)"/>
+              <rect x="10" y="23" width="34" height="1.5" rx="1" fill="rgba(152,162,178,.15)"/>
+              <rect x="10" y="26" width="38" height="1.5" rx="1" fill="rgba(152,162,178,.15)"/>
+              <rect x="10" y="31" width="42" height="1.5" rx="1" fill="rgba(152,162,178,.2)"/>
+              <rect x="10" y="34" width="28" height="1.5" rx="1" fill="rgba(152,162,178,.15)"/>
+              <!-- tick -->
+              <circle cx="49" cy="56" r="5.5" fill="rgba(52,211,153,.12)" stroke="rgba(52,211,153,.5)" stroke-width=".8"/>
+              <polyline points="46.5,56 48.5,58 51.5,53.5" stroke="#34D399" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="text-xs text-muted">Tablet</span>
+        </div>
+
+      </div>
+      <p class="reveal text-center text-sm text-muted mt-10 max-w-sm mx-auto">Acesse pelo celular, tablet ou computador — sem instalar nada.</p>
+    </div>
+  </section>
+
   <!-- VEJA EM 30 SEGUNDOS -->
   <section class="border-t border-line">
     <div class="max-w-3xl mx-auto px-5 py-16 md:py-20 text-center">
@@ -299,7 +408,7 @@
         <div class="reveal card rounded-xl p-6 text-center"><div class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-trust/10 text-trust mb-3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div><p class="font-semibold mb-1">Sem letrinha miúda</p><p class="text-muted text-sm">Pagamento único de R$47. Nada escondido.</p></div>
       </div>
       <div class="reveal card rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row gap-6 items-center">
-        <img src="founder.jpg" alt="Bruno Nascimento, fundador do Aprovaí" class="shrink-0 h-24 w-24 rounded-full object-cover object-top" style="border:2px solid rgba(255,122,26,.3)">
+        <img src="founder.jpg" alt="Bruno Nascimento, fundador do Aprovaí" class="shrink-0 h-24 w-24 rounded-full object-cover object-top">
         <div><p class="font-serif italic text-lg text-ink/90 leading-relaxed mb-3">"Construí o Aprovaí porque cansei de ver gente competente sumir no silêncio por causa de um robô. Aqui não tem promessa de emprego mágico — tem uma ferramenta que coloca o seu currículo no formato que o robô lê. O resto é com você."</p><p class="font-semibold">Bruno Nascimento</p><p class="text-sm text-muted">Fundador do Aprovaí</p></div>
       </div>
       <!-- TROCAR: depoimentos REAIS aqui após o lançamento. Nunca fictícios. -->
