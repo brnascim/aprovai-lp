@@ -334,7 +334,7 @@
   })();
 
   // Upsell checkout — substituir UPSELL_STRIPE_LINK pelo link real do Stripe (R$97)
-  var UPSELL_STRIPE_LINK = ''; // TODO: cole aqui o link https://buy.stripe.com/...
+  var UPSELL_STRIPE_LINK = 'https://buy.stripe.com/14A3cueUD8QZ9SZfH40oM01';
   document.querySelectorAll('[data-upsell-checkout]').forEach(b=>b.addEventListener('click',function(e){
     e.preventDefault();
     if(UPSELL_STRIPE_LINK) {
