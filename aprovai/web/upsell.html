@@ -333,12 +333,15 @@
     els.forEach(e=>io.observe(e));
   })();
 
-  // Upsell checkout — TROCAR pelo link Stripe do produto Acelerador de Entrevistas (R$97)
+  // Upsell checkout — substituir UPSELL_STRIPE_LINK pelo link real do Stripe (R$97)
+  var UPSELL_STRIPE_LINK = ''; // TODO: cole aqui o link https://buy.stripe.com/...
   document.querySelectorAll('[data-upsell-checkout]').forEach(b=>b.addEventListener('click',function(e){
     e.preventDefault();
-    // TODO: criar produto R$97 no Stripe e substituir a URL abaixo
-    alert('Configure o link Stripe do Acelerador de Entrevistas (R$97) aqui.');
-    // window.location.href = 'https://buy.stripe.com/SEU_LINK_UPSELL';
+    if(UPSELL_STRIPE_LINK) {
+      window.location.href = UPSELL_STRIPE_LINK;
+    } else {
+      window.location.href = 'obrigado.html';
+    }
   }));
 </script>
 </body>
