@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aprovaí — Bem-vindo(a) à Comunidade!</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config={theme:{extend:{
+    colors:{bg:'#0A0D12',surface:'#13171E',surface2:'#1A1F29',line:'rgba(255,255,255,0.08)',ink:'#EEF1F6',muted:'#98A2B2',accent:'#FF7A1A',accent2:'#FFB02E',trust:'#34D399'},
+    fontFamily:{display:['"Space Grotesk"','sans-serif'],body:['Inter','sans-serif']},
+  }}};
+</script>
+<style>
+  body{background:#0A0D12;color:#EEF1F6;font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+  .grad-accent{background:linear-gradient(135deg,#FF7A1A,#FFB02E)}
+  .card{background:linear-gradient(180deg,#14181F,#11151C);border:1px solid rgba(255,255,255,0.08)}
+  .cta-btn{background:linear-gradient(135deg,#FF7A1A,#FFB02E);color:#0A0D12;font-weight:700;border-radius:12px;padding:16px 32px;font-size:18px;display:inline-flex;align-items:center;gap:10px;transition:filter .2s,transform .2s;text-decoration:none}
+  .cta-btn:hover{filter:brightness(1.1);transform:translateY(-2px)}
+  .check-item{display:flex;align-items:flex-start;gap:12px}
+  .check-circle{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:rgba(52,211,153,.15);display:flex;align-items:center;justify-content:center;margin-top:2px}
+  @keyframes pop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+  .pop{animation:pop .5s ease forwards}
+</style>
+</head>
+<body class="font-body min-h-screen">
+
+<div class="border-b" style="border-color:rgba(255,255,255,0.08)">
+  <div class="max-w-2xl mx-auto px-5 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 font-display font-bold text-lg">
+      <span class="inline-flex h-7 w-7 items-center justify-center rounded-lg grad-accent text-bg font-bold text-sm">✓</span>
+      Aprovaí
+    </a>
+    <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(52,211,153,.1);color:#34D399;border:1px solid rgba(52,211,153,.2)">ASSINATURA CONFIRMADA</span>
+  </div>
+</div>
+
+<main class="max-w-2xl mx-auto px-5 py-12">
+
+  <!-- ícone de confirmação -->
+  <div class="flex justify-center mb-6">
+    <div class="pop inline-flex h-20 w-20 rounded-3xl items-center justify-center grad-accent shadow-lg">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0A0D12" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    </div>
+  </div>
+
+  <h1 class="font-display font-bold text-3xl sm:text-4xl text-center mb-3">Bem-vindo(a) à Comunidade!</h1>
+  <p class="text-center text-muted text-lg mb-10 max-w-md mx-auto">Sua assinatura foi confirmada. Você vai receber vagas da sua área <strong class="text-ink">todos os dias</strong> direto no WhatsApp.</p>
+
+  <!-- CTA formulário -->
+  <div class="card rounded-2xl p-6 sm:p-8 mb-8 text-center">
+    <p class="font-display font-semibold text-lg mb-2">Último passo — 2 minutos</p>
+    <p class="text-muted text-sm mb-6">Preencha o formulário abaixo para entrar no grupo da sua área profissional e começar a receber as vagas hoje.</p>
+    <a href="https://n8n.mentoriaaprovai.com.br/form/comunidade-form" class="cta-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Entrar no grupo WhatsApp
+    </a>
+    <p class="text-xs text-muted mt-4">Você também receberá um e-mail com o link do formulário em instantes.</p>
+  </div>
+
+  <!-- O que você recebe -->
+  <div class="card rounded-2xl p-6 mb-6">
+    <p class="font-display font-semibold text-base mb-5">O que você recebe todo dia:</p>
+    <div class="space-y-4">
+      <div class="check-item">
+        <div class="check-circle">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold">Vagas da sua área — 2x por dia</p>
+          <p class="text-xs text-muted mt-0.5">Manhã e tarde, seg a sex. Só vagas abertas e relevantes.</p>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-circle">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold">Grupo exclusivo com profissionais da mesma área</p>
+          <p class="text-xs text-muted mt-0.5">Networking, dicas e suporte para recolocação.</p>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-circle">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold">Motor Anti-ATS com desconto exclusivo</p>
+          <p class="text-xs text-muted mt-0.5">Membros da comunidade têm acesso preferencial à ferramenta.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cancele quando quiser -->
+  <div class="rounded-xl p-4 flex items-start gap-3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06)">
+    <svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#98A2B2" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    <p class="text-xs text-muted">Assinatura recorrente R$19,90/mês. Cancele quando quiser por e-mail: <a href="mailto:contato@mentoriaaprovai.com.br" class="text-accent hover:underline">contato@mentoriaaprovai.com.br</a>. Sem multa, sem burocracia.</p>
+  </div>
+
+</main>
+
+<footer class="border-t mt-8" style="border-color:rgba(255,255,255,0.08)">
+  <div class="max-w-2xl mx-auto px-5 py-6 text-xs text-muted flex flex-col sm:flex-row gap-3 justify-between items-center text-center">
+    <a href="index.html" class="flex items-center gap-1.5 font-display font-semibold" style="color:rgba(238,241,246,.5)">
+      <span class="inline-flex h-5 w-5 items-center justify-center rounded grad-accent text-bg" style="font-size:8px">✓</span>
+      Aprovaí
+    </a>
+    <div class="flex gap-4">
+      <a href="privacidade.html" class="hover:text-ink">Privacidade</a>
+      <a href="termos.html" class="hover:text-ink">Termos</a>
+      <a href="reembolso.html" class="hover:text-ink">Reembolso</a>
+    </div>
+    <p>© <span id="ano"></span> Aprovaí.</p>
+  </div>
+</footer>
+
+<script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
+</body>
+</html>
