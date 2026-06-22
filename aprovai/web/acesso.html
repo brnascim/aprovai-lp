@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aprovaí — Acesso ao Motor Anti-ATS</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config={theme:{extend:{
+    colors:{bg:'#0A0D12',surface:'#13171E',surface2:'#1A1F29',line:'rgba(255,255,255,0.08)',ink:'#EEF1F6',muted:'#98A2B2',accent:'#FF7A1A',accent2:'#FFB02E',trust:'#34D399',danger:'#F87171'},
+    fontFamily:{display:['"Space Grotesk"','sans-serif'],body:['Inter','sans-serif']},
+  }}};
+</script>
+<style>
+  html{scroll-behavior:smooth}
+  body{background:#0A0D12;color:#EEF1F6;font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+  .font-display{font-family:"Space Grotesk",sans-serif}
+  .grad-accent{background:linear-gradient(135deg,#FF7A1A,#FFB02E)}
+  .text-accent-grad{background:linear-gradient(135deg,#FF8A2A,#FFC04E);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .card{background:linear-gradient(180deg,#14181F,#11151C);border:1px solid rgba(255,255,255,0.08)}
+  .step-circle{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex-shrink:0;background:linear-gradient(135deg,#FF7A1A,#FFB02E);color:#0A0D12}
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}.reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none}}
+  .tool-btn{background:linear-gradient(135deg,#FF7A1A,#FFB02E);color:#0A0D12;font-weight:700;border-radius:12px;padding:16px 32px;font-size:18px;display:inline-flex;align-items:center;gap:10px;transition:filter .2s,transform .2s;text-decoration:none}
+  .tool-btn:hover{filter:brightness(1.1);transform:translateY(-2px)}
+  .tag{background:rgba(255,122,26,.1);border:1px solid rgba(255,122,26,.25);border-radius:100px;padding:4px 12px;font-size:12px;font-weight:600;color:#FF7A1A;letter-spacing:.04em}
+</style>
+</head>
+<body class="font-body min-h-screen">
+
+<!-- TOP BAR -->
+<div class="border-b border-line">
+  <div class="max-w-4xl mx-auto px-5 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 font-display font-bold text-lg">
+      <span class="inline-flex h-7 w-7 items-center justify-center rounded-lg grad-accent text-bg font-bold text-sm">✓</span>
+      Aprovaí
+    </a>
+    <span class="tag">ÁREA DE MEMBROS</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="max-w-4xl mx-auto px-5 pt-12 pb-6 text-center">
+  <div class="inline-flex h-16 w-16 rounded-2xl items-center justify-center mb-5 grad-accent">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0A0D12" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+  </div>
+  <h1 class="font-display font-bold text-3xl sm:text-4xl mb-3">Motor Anti-ATS</h1>
+  <p class="text-muted text-lg max-w-lg mx-auto">Reescreva seu currículo, carta de apresentação e LinkedIn para passar pela triagem automática — em 2 minutos.</p>
+</section>
+
+<!-- CTA PRINCIPAL -->
+<section class="max-w-4xl mx-auto px-5 py-6 flex justify-center">
+  <a href="https://motorantiats.aprovai.com.br" id="btn-acessar" target="_blank" rel="noopener" class="tool-btn">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+    Acessar o Motor Anti-ATS
+  </a>
+</section>
+
+<!-- COMO USAR -->
+<section class="max-w-4xl mx-auto px-5 py-8">
+  <h2 class="font-display font-bold text-xl mb-6 text-center">Como usar em 3 passos</h2>
+  <div class="grid sm:grid-cols-3 gap-4">
+    <div class="reveal card rounded-2xl p-5">
+      <div class="step-circle mb-4">1</div>
+      <h3 class="font-display font-semibold text-base mb-2">Cole a descrição da vaga</h3>
+      <p class="text-muted text-sm">Copie o texto completo da vaga do LinkedIn, Gupy, ou qualquer outro site de emprego.</p>
+    </div>
+    <div class="reveal card rounded-2xl p-5">
+      <div class="step-circle mb-4">2</div>
+      <h3 class="font-display font-semibold text-base mb-2">Cole seu currículo atual</h3>
+      <p class="text-muted text-sm">Adicione o conteúdo do seu currículo em texto. Não precisa de formatação — só o conteúdo.</p>
+    </div>
+    <div class="reveal card rounded-2xl p-5">
+      <div class="step-circle mb-4">3</div>
+      <h3 class="font-display font-semibold text-base mb-2">Receba a versão otimizada</h3>
+      <p class="text-muted text-sm">O Motor reescreve currículo, carta e perfil LinkedIn com as palavras-chave certas para passar pelo ATS.</p>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE VOCÊ RECEBE -->
+<section class="max-w-4xl mx-auto px-5 py-8">
+  <div class="reveal card rounded-2xl p-6 sm:p-8">
+    <h2 class="font-display font-bold text-xl mb-6">O que o Motor entrega</h2>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <!-- Item -->
+      <div class="flex gap-3">
+        <div class="inline-flex h-8 w-8 shrink-0 rounded-full items-center justify-center" style="background:rgba(52,211,153,.1)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <p class="font-semibold text-sm">Currículo reescrito</p>
+          <p class="text-muted text-xs mt-0.5">Com as palavras-chave exatas da vaga, pontuação ATS máxima.</p>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <div class="inline-flex h-8 w-8 shrink-0 rounded-full items-center justify-center" style="background:rgba(52,211,153,.1)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <p class="font-semibold text-sm">Carta de apresentação</p>
+          <p class="text-muted text-xs mt-0.5">Personalizada para a empresa e cargo, pronta para envio.</p>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <div class="inline-flex h-8 w-8 shrink-0 rounded-full items-center justify-center" style="background:rgba(52,211,153,.1)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <p class="font-semibold text-sm">Resumo do LinkedIn</p>
+          <p class="text-muted text-xs mt-0.5">Seção "Sobre" otimizada para recrutar por palavras-chave.</p>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <div class="inline-flex h-8 w-8 shrink-0 rounded-full items-center justify-center" style="background:rgba(52,211,153,.1)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <p class="font-semibold text-sm">Score de compatibilidade</p>
+          <p class="text-muted text-xs mt-0.5">% de match entre seu perfil e a vaga antes e depois da otimização.</p>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <div class="inline-flex h-8 w-8 shrink-0 rounded-full items-center justify-center" style="background:rgba(52,211,153,.1)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <p class="font-semibold text-sm">Palavras-chave identificadas</p>
+          <p class="text-muted text-xs mt-0.5">Lista das keywords críticas que o ATS vai procurar no seu currículo.</p>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <div class="inline-flex h-8 w-8 shrink-0 rounded-full items-center justify-center" style="background:rgba(52,211,153,.1)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <p class="font-semibold text-sm">Uso ilimitado</p>
+          <p class="text-muted text-xs mt-0.5">Use para quantas vagas quiser. Acesso vitalício incluso.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DICAS RÁPIDAS -->
+<section class="max-w-4xl mx-auto px-5 py-8">
+  <div class="reveal card rounded-2xl p-6" style="border-color:rgba(255,122,26,.15)">
+    <div class="flex gap-3 mb-4">
+      <svg class="text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a7 7 0 0 1 7 7c0 4-3.5 7-7 10C8.5 16 5 13 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2"/></svg>
+      <h3 class="font-display font-semibold text-base">Dicas para melhores resultados</h3>
+    </div>
+    <ul class="space-y-2.5 text-sm text-muted">
+      <li class="flex gap-2"><span class="text-accent font-bold shrink-0">→</span> Cole a vaga completa, incluindo requisitos obrigatórios e desejáveis.</li>
+      <li class="flex gap-2"><span class="text-accent font-bold shrink-0">→</span> Use o texto do seu currículo, não o PDF. Copie e cole o conteúdo em texto puro.</li>
+      <li class="flex gap-2"><span class="text-accent font-bold shrink-0">→</span> Gere uma versão diferente para cada vaga — o ATS analisa a aderência específica.</li>
+      <li class="flex gap-2"><span class="text-accent font-bold shrink-0">→</span> Após receber o currículo otimizado, revise antes de enviar para garantir que todos os dados são corretos.</li>
+      <li class="flex gap-2"><span class="text-accent font-bold shrink-0">→</span> Para o LinkedIn, atualize o campo "Sobre" e as descrições das experiências com as sugestões do Motor.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SUPORTE -->
+<section class="max-w-4xl mx-auto px-5 py-8 pb-16">
+  <div class="reveal card rounded-2xl p-5 flex items-start gap-4">
+    <div class="inline-flex h-10 w-10 shrink-0 rounded-xl items-center justify-center" style="background:rgba(255,122,26,.1)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    </div>
+    <div>
+      <p class="font-semibold text-sm mb-1">Algum problema?</p>
+      <p class="text-muted text-sm">Estamos aqui para ajudar. Entre em contato: <a href="mailto:contato@mentoriaaprovai.com.br" class="text-accent hover:underline">contato@mentoriaaprovai.com.br</a><br>Resposta em até 24 horas úteis.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-line">
+  <div class="max-w-4xl mx-auto px-5 py-6 text-xs text-muted flex flex-col sm:flex-row gap-3 justify-between items-center text-center">
+    <a href="index.html" class="flex items-center gap-1.5 font-display font-semibold text-ink/50 hover:text-ink/80">
+      <span class="inline-flex h-5 w-5 items-center justify-center rounded grad-accent text-bg" style="font-size:8px">✓</span>
+      Aprovaí
+    </a>
+    <p>© <span id="ano"></span> Aprovaí. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('ano').textContent = new Date().getFullYear();
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(reduce || !('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return;}
+    var io = new IntersectionObserver(en=>{en.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.1});
+    els.forEach(e=>io.observe(e));
+  })();
+</script>
+</body>
+</html>
