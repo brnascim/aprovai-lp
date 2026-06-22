@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Motor Anti-ATS — Aprovaí</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: {
+      bg:'#0A0D12', surface:'#13171E', surface2:'#1A1F29',
+      line:'rgba(255,255,255,0.08)', ink:'#EEF1F6', muted:'#98A2B2',
+      accent:'#FF7A1A', accent2:'#FFB02E', trust:'#34D399', danger:'#F87171'
+    },
+    fontFamily: {
+      display:['"Space Grotesk"','sans-serif'],
+      body:['Inter','sans-serif']
+    }
+  }}};
+</script>
+<style>
+  html { scroll-behavior: smooth }
+  body { background:#0A0D12; color:#EEF1F6; font-family:Inter,sans-serif; -webkit-font-smoothing:antialiased }
+
+  .grad-accent { background: linear-gradient(135deg,#FF7A1A,#FFB02E) }
+
+  .card {
+    background: linear-gradient(180deg,#14181F,#11151C);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* Inputs */
+  .field {
+    background:#0E1218; border:1px solid rgba(255,255,255,0.1);
+    color:#EEF1F6; border-radius:12px; padding:14px 16px;
+    width:100%; resize:vertical;
+    font-family:Inter,sans-serif; font-size:14px; line-height:1.6;
+    transition: border-color 0.2s;
+  }
+  .field:focus { outline:none; border-color:rgba(255,122,26,0.5) }
+  .field.is-error { border-color:#F87171 }
+  .field::placeholder { color:#3A4050 }
+
+  /* Output */
+  .out-field {
+    background:#090C11; border:1px solid rgba(255,255,255,0.06);
+    color:#C8D2DF; border-radius:12px; padding:16px;
+    width:100%; min-height:280px; resize:vertical;
+    font-family:Inter,sans-serif; font-size:13px; line-height:1.75;
+  }
+
+  /* Tabs */
+  .tab-btn {
+    padding:7px 14px; font-size:13px; font-weight:500;
+    border-radius:8px; cursor:pointer; color:#98A2B2;
+    transition: all 0.15s; white-space:nowrap; border:none;
+    background:transparent;
+  }
+  .tab-btn:hover { color:#EEF1F6 }
+  .tab-btn.active { background:rgba(255,122,26,0.13); color:#FF7A1A }
+
+  /* Score bars */
+  .bar-track { height:7px; border-radius:4px; background:rgba(255,255,255,0.07); overflow:hidden }
+  .bar-fill { height:100%; border-radius:4px; width:0%; transition:width 1.2s ease }
+
+  /* Keyword tags */
+  .kw {
+    display:inline-block; padding:3px 11px; border-radius:100px;
+    font-size:12px; font-weight:500; margin:3px;
+    background:rgba(255,122,26,0.1); color:#FF7A1A;
+    border:1px solid rgba(255,122,26,0.22);
+  }
+
+  /* Loading steps */
+  .step { display:flex; align-items:center; gap:10px; padding:7px 0; font-size:14px }
+  .step-icon {
+    width:22px; height:22px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; flex-shrink:0; transition: all 0.3s;
+  }
+  .pending .step-icon { background:rgba(255,255,255,0.04); color:#3A4050 }
+  .pending .step-label { color:#3A4050 }
+  .running .step-icon { background:rgba(255,122,26,0.13); color:#FF7A1A }
+  .running .step-label { color:#98A2B2 }
+  .done .step-icon { background:rgba(52,211,153,0.13); color:#34D399 }
+  .done .step-label { color:#34D399 }
+
+  /* Spinner */
+  @keyframes spin { to { transform:rotate(360deg) } }
+  .spinner {
+    width:40px; height:40px;
+    border:3px solid rgba(255,122,26,0.18);
+    border-top-color:#FF7A1A;
+    border-radius:50%;
+    animation: spin 0.75s linear infinite;
+  }
+
+  /* CTA */
+  .cta {
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; padding:14px 28px; border-radius:12px;
+    font-size:16px; font-weight:700; cursor:pointer;
+    border:none; background:linear-gradient(135deg,#FF7A1A,#FFB02E);
+    color:#0A0D12; transition:filter 0.2s, transform 0.15s;
+  }
+  .cta:hover:not(:disabled) { filter:brightness(1.1); transform:translateY(-1px) }
+  .cta:active:not(:disabled) { transform:translateY(0) }
+  .cta:disabled { opacity:0.45; cursor:not-allowed }
+
+  /* Copy */
+  .copy {
+    display:inline-flex; align-items:center; gap:6px;
+    padding:7px 14px; border-radius:8px; font-size:12px; font-weight:500;
+    border:1px solid rgba(255,255,255,0.09); color:#98A2B2;
+    cursor:pointer; background:rgba(255,255,255,0.02);
+    transition: all 0.15s;
+  }
+  .copy:hover { border-color:rgba(255,122,26,0.35); color:#FF7A1A }
+  .copy.ok { border-color:rgba(52,211,153,0.35); color:#34D399 }
+</style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+<!-- HEADER -->
+<header class="border-b" style="border-color:rgba(255,255,255,0.07)">
+  <div class="max-w-4xl mx-auto px-5 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 font-bold text-lg" style="font-family:'Space Grotesk',sans-serif">
+      <span class="inline-flex h-7 w-7 items-center justify-center rounded-lg grad-accent text-bg font-bold text-xs">✓</span>
+      Aprovaí
+    </a>
+    <div class="flex items-center gap-3">
+      <span class="font-semibold text-sm" style="font-family:'Space Grotesk',sans-serif; color:rgba(238,241,246,0.6)">Motor Anti-ATS</span>
+      <span class="text-xs font-bold px-2.5 py-0.5 rounded-full tracking-wide" style="background:rgba(255,122,26,0.12);color:#FF7A1A;border:1px solid rgba(255,122,26,0.22)">BETA</span>
+    </div>
+  </div>
+</header>
+
+<main class="flex-1 max-w-4xl mx-auto w-full px-5 py-8">
+
+  <!-- ═══ STATE: INPUT ═══ -->
+  <div id="state-input">
+
+    <div class="text-center mb-8">
+      <h1 class="font-bold text-2xl sm:text-3xl mb-3" style="font-family:'Space Grotesk',sans-serif">
+        Otimize seu currículo para qualquer vaga
+      </h1>
+      <p class="text-muted max-w-xl mx-auto text-sm leading-relaxed">
+        Cole a descrição completa da vaga e o texto do seu currículo. A IA identifica as palavras-chave críticas, reescreve tudo para passar pelo robô ATS e ainda gera carta de apresentação e resumo do LinkedIn.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4 mb-4">
+
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <label class="font-medium text-sm">Descrição da vaga</label>
+          <span id="cnt-vaga" class="text-xs text-muted">0 caracteres</span>
+        </div>
+        <textarea id="vaga" class="field" rows="13"
+          placeholder="Cole aqui o texto completo da vaga — requisitos, responsabilidades, qualificações..."></textarea>
+        <p id="err-vaga" class="text-danger text-xs mt-1.5 hidden"></p>
+      </div>
+
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <label class="font-medium text-sm">Currículo atual</label>
+          <span id="cnt-curriculo" class="text-xs text-muted">0 caracteres</span>
+        </div>
+        <textarea id="curriculo" class="field" rows="13"
+          placeholder="Cole aqui o texto do seu currículo — experiências, formação, habilidades, conquistas..."></textarea>
+        <p id="err-curriculo" class="text-danger text-xs mt-1.5 hidden"></p>
+      </div>
+
+    </div>
+
+    <div class="card rounded-2xl p-4 mb-6 flex items-start gap-3">
+      <svg class="shrink-0 mt-0.5" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <p class="text-xs text-muted leading-relaxed">
+        <strong class="text-ink/70">Use texto puro</strong> — copie e cole o conteúdo, não o arquivo PDF. Para a vaga, cole a descrição completa do LinkedIn, Gupy, Catho ou outro portal.
+      </p>
+    </div>
+
+    <button onclick="otimizar()" class="cta">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      Otimizar com IA
+    </button>
+
+  </div><!-- /state-input -->
+
+
+  <!-- ═══ STATE: LOADING ═══ -->
+  <div id="state-loading" style="display:none">
+    <div class="flex flex-col items-center justify-center py-14 text-center">
+      <div class="spinner mb-6"></div>
+      <h2 class="font-bold text-xl mb-1.5" style="font-family:'Space Grotesk',sans-serif">Otimizando seu currículo…</h2>
+      <p class="text-muted text-sm mb-8">Tempo estimado: 15–30 segundos</p>
+      <div id="steps" class="w-full max-w-xs text-left space-y-0.5"></div>
+    </div>
+  </div><!-- /state-loading -->
+
+
+  <!-- ═══ STATE: RESULT ═══ -->
+  <div id="state-result" style="display:none">
+
+    <!-- Score card -->
+    <div class="card rounded-2xl p-5 mb-4">
+      <p class="text-xs font-semibold tracking-widest text-muted uppercase mb-4">Score ATS</p>
+      <div class="grid grid-cols-3 gap-3 items-center mb-4">
+
+        <div class="text-center">
+          <p class="text-xs text-muted mb-1">Antes</p>
+          <p id="score-antes" class="font-bold text-3xl" style="font-family:'Space Grotesk',sans-serif; color:#F87171">—</p>
+          <div class="bar-track mt-2">
+            <div id="bar-antes" class="bar-fill" style="background:#F87171"></div>
+          </div>
+        </div>
+
+        <div class="text-center flex flex-col items-center gap-1">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#98A2B2" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          <p id="score-gain" class="font-bold text-sm" style="font-family:'Space Grotesk',sans-serif; color:#34D399"></p>
+        </div>
+
+        <div class="text-center">
+          <p class="text-xs text-muted mb-1">Depois</p>
+          <p id="score-depois" class="font-bold text-3xl" style="font-family:'Space Grotesk',sans-serif; color:#34D399">—</p>
+          <div class="bar-track mt-2">
+            <div id="bar-depois" class="bar-fill" style="background:#34D399"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-3" style="border-top:1px solid rgba(255,255,255,0.06)">
+        <p class="text-xs text-muted mb-2">Palavras-chave identificadas:</p>
+        <div id="keywords"></div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="card rounded-2xl overflow-hidden">
+      <div class="flex gap-1 p-3 overflow-x-auto" style="border-bottom:1px solid rgba(255,255,255,0.06)">
+        <button class="tab-btn active" onclick="showTab('curriculo')" data-tab="curriculo">Currículo</button>
+        <button class="tab-btn" onclick="showTab('carta')" data-tab="carta">Carta de Apresentação</button>
+        <button class="tab-btn" onclick="showTab('linkedin')" data-tab="linkedin">LinkedIn</button>
+        <button class="tab-btn" onclick="showTab('dicas')" data-tab="dicas">Dicas</button>
+      </div>
+
+      <div class="p-4">
+
+        <div id="tab-curriculo">
+          <textarea id="txt-curriculo" class="out-field" readonly></textarea>
+          <div class="flex justify-between items-center mt-2">
+            <span id="char-curriculo" class="text-xs text-muted"></span>
+            <button class="copy" onclick="copiar('txt-curriculo',this)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copiar
+            </button>
+          </div>
+        </div>
+
+        <div id="tab-carta" style="display:none">
+          <textarea id="txt-carta" class="out-field" readonly></textarea>
+          <div class="flex justify-between items-center mt-2">
+            <span id="char-carta" class="text-xs text-muted"></span>
+            <button class="copy" onclick="copiar('txt-carta',this)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copiar
+            </button>
+          </div>
+        </div>
+
+        <div id="tab-linkedin" style="display:none">
+          <textarea id="txt-linkedin" class="out-field" readonly></textarea>
+          <div class="flex justify-between items-center mt-2">
+            <span id="char-linkedin" class="text-xs text-muted"></span>
+            <button class="copy" onclick="copiar('txt-linkedin',this)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copiar
+            </button>
+          </div>
+        </div>
+
+        <div id="tab-dicas" style="display:none">
+          <ul id="list-dicas" class="space-y-3"></ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-6">
+      <button onclick="resetar()" class="flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-3.36"/></svg>
+        Otimizar outra vaga
+      </button>
+    </div>
+
+  </div><!-- /state-result -->
+
+
+  <!-- ═══ STATE: ERROR ═══ -->
+  <div id="state-error" style="display:none">
+    <div class="text-center py-16">
+      <div class="inline-flex h-16 w-16 rounded-2xl items-center justify-center mb-4" style="background:rgba(248,113,113,0.09)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <h2 class="font-bold text-xl mb-2" style="font-family:'Space Grotesk',sans-serif">Algo deu errado</h2>
+      <p id="err-global" class="text-muted text-sm mb-7 max-w-sm mx-auto"></p>
+      <button onclick="setState('input')" class="cta max-w-xs mx-auto">Tentar novamente</button>
+    </div>
+  </div><!-- /state-error -->
+
+</main>
+
+<footer style="border-top:1px solid rgba(255,255,255,0.06)" class="mt-auto">
+  <div class="max-w-4xl mx-auto px-5 py-5 flex flex-col sm:flex-row gap-2 justify-between items-center">
+    <a href="index.html" class="flex items-center gap-1.5 font-semibold text-xs" style="font-family:'Space Grotesk',sans-serif; color:rgba(238,241,246,0.3)">
+      <span class="inline-flex h-4 w-4 items-center justify-center rounded grad-accent text-bg" style="font-size:7px">✓</span>
+      Aprovaí
+    </a>
+    <p class="text-xs" style="color:rgba(152,162,178,0.35)">Motor Anti-ATS · Sempre revise o conteúdo antes de enviar.</p>
+    <a href="mailto:contato@mentoriaaprovai.com.br" class="text-xs" style="color:rgba(152,162,178,0.35)">contato@mentoriaaprovai.com.br</a>
+  </div>
+</footer>
+
+<script>
+const STEPS_DEF = [
+  'Analisando a descrição da vaga',
+  'Identificando palavras-chave críticas',
+  'Calculando score ATS atual',
+  'Reescrevendo currículo com otimizações',
+  'Gerando carta de apresentação',
+  'Criando resumo do LinkedIn',
+];
+
+let timers = [];
+
+function setState(s) {
+  ['input','loading','result','error'].forEach(id => {
+    const el = document.getElementById('state-' + id);
+    if (el) el.style.display = s === id ? '' : 'none';
+  });
+  if (s !== 'loading') stopSteps();
+}
+
+function showErr(id, msg) {
+  const errEl = document.getElementById('err-' + id);
+  const fieldEl = document.getElementById(id);
+  if (errEl) { errEl.textContent = msg; errEl.classList.remove('hidden'); }
+  if (fieldEl) fieldEl.classList.add('is-error');
+}
+
+function clearErrs() {
+  ['vaga','curriculo'].forEach(id => {
+    const errEl = document.getElementById('err-' + id);
+    const fieldEl = document.getElementById(id);
+    if (errEl) errEl.classList.add('hidden');
+    if (fieldEl) fieldEl.classList.remove('is-error');
+  });
+}
+
+function startSteps() {
+  const container = document.getElementById('steps');
+  container.innerHTML = '';
+  STEPS_DEF.forEach((txt, i) => {
+    const d = document.createElement('div');
+    d.id = 's' + i;
+    d.className = 'step pending';
+    d.innerHTML = `<div class="step-icon">·</div><span class="step-label">${txt}…</span>`;
+    container.appendChild(d);
+  });
+  STEPS_DEF.forEach((_, i) => {
+    const t = setTimeout(() => {
+      const el = document.getElementById('s' + i);
+      if (!el) return;
+      el.className = 'step running';
+      el.querySelector('.step-icon').textContent = '⟳';
+      if (i > 0) {
+        const prev = document.getElementById('s' + (i - 1));
+        if (prev) { prev.className = 'step done'; prev.querySelector('.step-icon').textContent = '✓'; }
+      }
+    }, i * 4500);
+    timers.push(t);
+  });
+}
+
+function stopSteps() {
+  timers.forEach(clearTimeout);
+  timers = [];
+}
+
+function finishSteps() {
+  STEPS_DEF.forEach((_, i) => {
+    const el = document.getElementById('s' + i);
+    if (el) { el.className = 'step done'; el.querySelector('.step-icon').textContent = '✓'; }
+  });
+}
+
+async function otimizar() {
+  clearErrs();
+  const vaga = document.getElementById('vaga').value.trim();
+  const curriculo = document.getElementById('curriculo').value.trim();
+
+  if (vaga.length < 50) { showErr('vaga', 'Cole a descrição completa da vaga.'); return; }
+  if (curriculo.length < 100) { showErr('curriculo', 'Cole o conteúdo completo do currículo.'); return; }
+
+  setState('loading');
+  startSteps();
+
+  try {
+    const res = await fetch('/api/otimizar', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ vaga, curriculo }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erro ao processar.');
+
+    finishSteps();
+    await new Promise(r => setTimeout(r, 500));
+    renderResult(data);
+    setState('result');
+
+  } catch (err) {
+    setState('error');
+    document.getElementById('err-global').textContent =
+      err.message || 'Erro inesperado. Tente novamente em instantes.';
+  }
+}
+
+function renderResult(r) {
+  const antes = clamp(r.score_antes || 0);
+  const depois = clamp(r.score_depois || 0);
+
+  document.getElementById('score-antes').textContent = antes + '%';
+  document.getElementById('score-depois').textContent = depois + '%';
+  document.getElementById('score-gain').textContent = '+' + (depois - antes) + '%';
+
+  requestAnimationFrame(() => {
+    document.getElementById('bar-antes').style.width = antes + '%';
+    document.getElementById('bar-depois').style.width = depois + '%';
+  });
+
+  const kw = document.getElementById('keywords');
+  kw.innerHTML = '';
+  (r.palavras_chave || []).forEach(w => {
+    const s = document.createElement('span');
+    s.className = 'kw';
+    s.textContent = w;
+    kw.appendChild(s);
+  });
+
+  setOutput('curriculo', r.curriculo_otimizado || '');
+  setOutput('carta', r.carta_apresentacao || '');
+  setOutput('linkedin', r.resumo_linkedin || '');
+
+  const ul = document.getElementById('list-dicas');
+  ul.innerHTML = '';
+  (r.dicas || []).forEach(d => {
+    const li = document.createElement('li');
+    li.className = 'card rounded-xl p-4 flex items-start gap-3';
+    li.innerHTML = `<span class="font-bold shrink-0" style="color:#FF7A1A">→</span><span class="text-sm leading-relaxed" style="color:#98A2B2">${escapeHtml(d)}</span>`;
+    ul.appendChild(li);
+  });
+
+  showTab('curriculo');
+}
+
+function setOutput(id, text) {
+  const ta = document.getElementById('txt-' + id);
+  const counter = document.getElementById('char-' + id);
+  if (ta) ta.value = text;
+  if (counter) counter.textContent = text.length.toLocaleString('pt-BR') + ' caracteres';
+}
+
+function showTab(tab) {
+  ['curriculo','carta','linkedin','dicas'].forEach(t => {
+    const el = document.getElementById('tab-' + t);
+    if (el) el.style.display = t === tab ? '' : 'none';
+  });
+  document.querySelectorAll('[data-tab]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tab);
+  });
+}
+
+function copiar(id, btn) {
+  const text = document.getElementById(id)?.value || '';
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('ok');
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Copiado!`;
+    setTimeout(() => {
+      btn.classList.remove('ok');
+      btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar`;
+    }, 2000);
+  }).catch(() => {
+    const el = document.getElementById(id);
+    if (el) { el.select(); document.execCommand('copy'); }
+  });
+}
+
+function resetar() {
+  document.getElementById('vaga').value = '';
+  document.getElementById('curriculo').value = '';
+  document.getElementById('cnt-vaga').textContent = '0 caracteres';
+  document.getElementById('cnt-curriculo').textContent = '0 caracteres';
+  clearErrs();
+  setState('input');
+}
+
+function clamp(n) { return Math.max(0, Math.min(100, Math.round(n))); }
+
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Character counters
+['vaga','curriculo'].forEach(id => {
+  document.getElementById(id).addEventListener('input', function() {
+    document.getElementById('cnt-' + id).textContent =
+      this.value.length.toLocaleString('pt-BR') + ' caracteres';
+    if (this.value.length > 0) {
+      this.classList.remove('is-error');
+      const e = document.getElementById('err-' + id);
+      if (e) e.classList.add('hidden');
+    }
+  });
+});
+
+setState('input');
+</script>
+</body>
+</html>
