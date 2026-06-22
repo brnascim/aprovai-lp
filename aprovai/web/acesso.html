@@ -189,6 +189,16 @@
 
 <script>
   document.getElementById('ano').textContent = new Date().getFullYear();
+  (function(){
+    try{localStorage.setItem('aprovai_acesso','1');}catch(e){}
+    var p=new URLSearchParams(window.location.search);
+    var t=p.get('tk');
+    if(t){
+      try{localStorage.setItem('aprovai_tk',t);}catch(e){}
+      var btn=document.getElementById('btn-acessar');
+      if(btn) btn.href='/motor.html?tk='+encodeURIComponent(t);
+    }
+  })();
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   (function(){
     var els = document.querySelectorAll('.reveal');
