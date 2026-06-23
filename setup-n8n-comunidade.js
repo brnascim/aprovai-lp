@@ -45,7 +45,7 @@ const COMMUNITY_EMAIL_HTML = `<!DOCTYPE html>
 <p style="margin:0 0 24px;font-size:15px;color:#98A2B2;line-height:1.6">Sua assinatura foi confirmada. Para acessar o grupo WhatsApp da sua área e receber vagas diariamente, preencha o formulário abaixo em 2 minutos.</p>
 <table cellpadding="0" cellspacing="0" style="margin:0 0 28px">
 <tr><td style="background:linear-gradient(135deg,#FF7A1A,#FFB02E);border-radius:12px">
-<a href="https://n8n.mentoriaaprovai.com.br/form/comunidade-form" style="display:block;padding:16px 32px;font-size:16px;font-weight:700;color:#0A0D12;text-decoration:none">Preencher formulário de acesso &rarr;</a>
+<a href="https://n8n.mentoriaaprovai.com.br/form/comunidade-form-webhook" style="display:block;padding:16px 32px;font-size:16px;font-weight:700;color:#0A0D12;text-decoration:none">Preencher formulário de acesso &rarr;</a>
 </td></tr></table>
 <p style="margin:0 0 12px;font-size:13px;font-weight:600;color:#EEF1F6;text-transform:uppercase;letter-spacing:.06em">O que você vai receber:</p>
 <table cellpadding="0" cellspacing="0" width="100%">
@@ -303,7 +303,7 @@ async function main() {
     console.log('  ✓ Criado. Ativando...');
     await apiRequest('POST', `/api/v1/workflows/${r2.body.id}/activate`, {});
     console.log('  ✓ Ativo. Formulário URL:');
-    console.log(`    https://n8n.mentoriaaprovai.com.br/form/comunidade-form`);
+    console.log(`    https://n8n.mentoriaaprovai.com.br/form/comunidade-form-webhook`);
   } else {
     console.error('  ✗ Erro:', JSON.stringify(r2.body, null, 2));
   }
