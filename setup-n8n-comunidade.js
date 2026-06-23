@@ -16,14 +16,17 @@ const EVO_INSTANCE = 'aprovai-bot';
 
 // Mapeamento área → JID do grupo WhatsApp (preencher após criar grupos no Evolution API)
 const GROUP_JIDS = {
-  'Administrativo':          'PENDENTE@g.us',
-  'Financeiro':              'PENDENTE@g.us',
-  'RH / Gestão de Pessoas':  'PENDENTE@g.us',
-  'Enfermagem / Saúde':      'PENDENTE@g.us',
-  'TI / Tecnologia':         'PENDENTE@g.us',
-  'Vendas / Comercial':      'PENDENTE@g.us',
-  'Logística / Operações':   'PENDENTE@g.us',
-  'Outra área':              'PENDENTE@g.us',
+  'Administrativo':          '120363426990866533@g.us',
+  'Financeiro':              '120363409534930218@g.us',
+  'RH / Gestão de Pessoas':  '120363424812504932@g.us',
+  'Saúde / Hospitalar':      '120363427551579206@g.us',
+  'TI / Tecnologia':         '120363427960561360@g.us',
+  'Vendas / Comercial':      '120363409560634568@g.us',
+  'Logística / Operações':   '120363426729198168@g.us',
+  'Direito / Jurídico':      '120363427740478470@g.us',
+  'Health & Fitness':        '120363411000844940@g.us',
+  'Educação':                '120363411686762974@g.us',
+  'Outra área':              '120363426990866533@g.us',
 };
 
 // ── EMAIL DE ONBOARDING ──────────────────────────────────────────────────────
@@ -159,9 +162,11 @@ const workflowForm = {
             { fieldLabel: 'Área de atuação', fieldType: 'dropdown', requiredField: true,
               fieldOptions: { values: [
                 { option: 'Administrativo' }, { option: 'Financeiro' },
-                { option: 'RH / Gestão de Pessoas' }, { option: 'Enfermagem / Saúde' },
+                { option: 'RH / Gestão de Pessoas' }, { option: 'Saúde / Hospitalar' },
                 { option: 'TI / Tecnologia' }, { option: 'Vendas / Comercial' },
-                { option: 'Logística / Operações' }, { option: 'Outra área' }
+                { option: 'Logística / Operações' }, { option: 'Direito / Jurídico' },
+                { option: 'Health & Fitness' }, { option: 'Educação' },
+                { option: 'Outra área' }
               ]}
             }
           ]

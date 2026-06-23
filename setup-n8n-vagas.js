@@ -20,13 +20,16 @@ const N8N_HOST = 'n8n.mentoriaaprovai.com.br';
 // ── MAPEAMENTO: área → JID do grupo (preencher após Evolution API) ────────────
 // e termo de busca RSS
 const AREAS = [
-  { area: 'Administrativo',         jid: 'PENDENTE@g.us', term: 'assistente+administrativo' },
-  { area: 'Financeiro',             jid: 'PENDENTE@g.us', term: 'analista+financeiro' },
-  { area: 'RH / Gestão de Pessoas', jid: 'PENDENTE@g.us', term: 'analista+rh+recursos+humanos' },
-  { area: 'Enfermagem / Saúde',     jid: 'PENDENTE@g.us', term: 'técnico+enfermagem' },
-  { area: 'TI / Tecnologia',        jid: 'PENDENTE@g.us', term: 'desenvolvedor+programador' },
-  { area: 'Vendas / Comercial',     jid: 'PENDENTE@g.us', term: 'vendedor+representante+comercial' },
-  { area: 'Logística / Operações',  jid: 'PENDENTE@g.us', term: 'logística+operações' },
+  { area: 'Administrativo',         jid: '120363426990866533@g.us', term: 'assistente+administrativo' },
+  { area: 'Financeiro',             jid: '120363409534930218@g.us', term: 'analista+financeiro' },
+  { area: 'RH / Gestão de Pessoas', jid: '120363424812504932@g.us', term: 'analista+rh+recursos+humanos' },
+  { area: 'Saúde / Hospitalar',     jid: '120363427551579206@g.us', term: 'enfermeiro+medico+tecnico+saude+hospitalar' },
+  { area: 'TI / Tecnologia',        jid: '120363427960561360@g.us', term: 'desenvolvedor+programador' },
+  { area: 'Vendas / Comercial',     jid: '120363409560634568@g.us', term: 'vendedor+representante+comercial' },
+  { area: 'Logística / Operações',  jid: '120363426729198168@g.us', term: 'logistica+operacoes+motorista' },
+  { area: 'Direito / Jurídico',     jid: '120363427740478470@g.us', term: 'advogado+juridico+direito' },
+  { area: 'Health & Fitness',       jid: '120363411000844940@g.us', term: 'personal+trainer+educacao+fisica+academia' },
+  { area: 'Educação',               jid: '120363411686762974@g.us', term: 'professor+secretario+escola+docente+educacao' },
 ];
 
 // ── CÓDIGO PRINCIPAL: busca + dedup + dispatch ──────────────────────────────
