@@ -48,8 +48,6 @@
   details[open] .faq-chev{transform:rotate(180deg)}.faq-chev{transition:transform .2s ease}
   a,button{transition:all .2s ease}
   .divider-art{height:1px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.12) 0 2px,transparent 2px 12px)}
-  /* Depoimento placeholder */
-  .dep-placeholder{background:linear-gradient(135deg,#13171E,#1A1F29);border:1px solid rgba(255,255,255,.06);border-radius:14px;aspect-ratio:4/5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
   /* Para quem é / não é */
   .quadrant-yes{background:linear-gradient(135deg,rgba(52,211,153,.06),rgba(52,211,153,.02));border:1px solid rgba(52,211,153,.2);border-radius:16px;padding:1.5rem}
   .quadrant-no{background:linear-gradient(135deg,rgba(248,113,113,.06),rgba(248,113,113,.02));border:1px solid rgba(248,113,113,.2);border-radius:16px;padding:1.5rem}
@@ -276,94 +274,66 @@
   </section>
 
   <!-- ──────────────────────────────────────────────────────────
-       DEPOIMENTOS EM IMAGEM — novo (do Modelo 08)
+       COMO O ROBÔ TE ELIMINA — prova de mecanismo (fatos verificáveis)
   ────────────────────────────────────────────────────────────── -->
   <section class="border-t border-line">
     <div class="max-w-5xl mx-auto px-5 py-16 md:py-20">
-      <p class="reveal text-xs font-semibold tracking-widest text-accent uppercase text-center mb-3">Prova social</p>
-      <h2 class="reveal font-display font-bold text-2xl sm:text-3xl text-center mb-10">Quem usou o Aprovaí voltou a ser chamado</h2>
-      <!-- Grade 3+3 de depoimentos -->
+      <p class="reveal text-xs font-semibold tracking-widest text-accent uppercase text-center mb-3">Por que isso acontece</p>
+      <h2 class="reveal font-display font-bold text-2xl sm:text-3xl text-center mb-3">Não é falta de qualificação. É como o robô lê.</h2>
+      <p class="reveal text-muted text-center max-w-2xl mx-auto mb-10">O ATS (Applicant Tracking System) é o software que filtra currículos antes de qualquer recrutador. Veja o que ele faz com o seu — e o que o Motor corrige.</p>
+      <!-- Grade 3+3 de fatos sobre ATS + o que o Motor faz -->
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 
-        <!-- Depoimento 1 — Camila Ramos -->
-        <div class="reveal card rounded-2xl p-5 flex flex-col gap-4">
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-full shrink-0 flex items-center justify-center font-display font-bold text-sm" style="background:rgba(255,122,26,.15);color:#FF7A1A">CR</div>
-            <div>
-              <p class="font-semibold text-sm">Camila Ramos</p>
-              <p class="text-muted text-xs">Analista de Marketing · SP</p>
-            </div>
-          </div>
-          <div class="flex gap-0.5 text-accent text-xs">★★★★★</div>
-          <p class="text-sm text-ink/90 leading-relaxed flex-1">"Mandei 40 candidaturas em 2 meses e zero retorno. Com o Motor Anti-ATS, recebi <strong>3 chamadas para entrevistas na primeira semana</strong>. O problema era o ATS — não eu."</p>
+        <!-- Fato 1 -->
+        <div class="reveal card rounded-2xl p-5 flex flex-col gap-3">
+          <div class="w-11 h-11 rounded-xl shrink-0 flex items-center justify-center" style="background:rgba(255,122,26,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+          <p class="font-display font-semibold text-base">Lê por palavras-chave</p>
+          <p class="text-sm text-muted leading-relaxed flex-1">O robô compara seu currículo com a descrição da vaga termo a termo. Sem as palavras certas, você é descartado — mesmo qualificado.</p>
+          <p class="text-xs text-trust font-semibold flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> O Motor extrai e insere os termos da vaga</p>
         </div>
 
-        <!-- Depoimento 2 — Rafael Torres -->
-        <div class="reveal card rounded-2xl p-5 flex flex-col gap-4">
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-full shrink-0 flex items-center justify-center font-display font-bold text-sm" style="background:rgba(255,122,26,.15);color:#FF7A1A">RT</div>
-            <div>
-              <p class="font-semibold text-sm">Rafael Torres</p>
-              <p class="text-muted text-xs">Engenheiro de Software · PR</p>
-            </div>
-          </div>
-          <div class="flex gap-0.5 text-accent text-xs">★★★★★</div>
-          <p class="text-sm text-ink/90 leading-relaxed flex-1">"O ATS eliminava meu currículo antes de qualquer humano ver. Depois de reescrever com o Motor, <strong>passei de 0 para 2 entrevistas por semana</strong>. Em 10 dias."</p>
+        <!-- Fato 2 -->
+        <div class="reveal card rounded-2xl p-5 flex flex-col gap-3">
+          <div class="w-11 h-11 rounded-xl shrink-0 flex items-center justify-center" style="background:rgba(255,122,26,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>
+          <p class="font-display font-semibold text-base">Quebra com formatação</p>
+          <p class="text-sm text-muted leading-relaxed flex-1">Tabelas, colunas, ícones e cabeçalhos confundem o parser do ATS — ele lê texto embaralhado e te reprova por "incompletude".</p>
+          <p class="text-xs text-trust font-semibold flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> O Motor entrega no formato que o ATS lê</p>
         </div>
 
-        <!-- Depoimento 3 — Juliana Costa -->
-        <div class="reveal card rounded-2xl p-5 flex flex-col gap-4">
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-full shrink-0 flex items-center justify-center font-display font-bold text-sm" style="background:rgba(255,122,26,.15);color:#FF7A1A">JC</div>
-            <div>
-              <p class="font-semibold text-sm">Juliana Costa</p>
-              <p class="text-muted text-xs">Gerente de Projetos · MG</p>
-            </div>
-          </div>
-          <div class="flex gap-0.5 text-accent text-xs">★★★★★</div>
-          <p class="text-sm text-ink/90 leading-relaxed flex-1">"Tinha 10 anos de experiência e não passava na triagem. O Motor identificou que faltavam as palavras-chave certas. <strong>Em 2 minutos, meu currículo ficou irreconhecível</strong> — no bom sentido."</p>
+        <!-- Fato 3 -->
+        <div class="reveal card rounded-2xl p-5 flex flex-col gap-3">
+          <div class="w-11 h-11 rounded-xl shrink-0 flex items-center justify-center" style="background:rgba(255,122,26,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <p class="font-display font-semibold text-base">Decide em segundos</p>
+          <p class="text-sm text-muted leading-relaxed flex-1">A triagem automática classifica e ranqueia em instantes. Currículos abaixo do corte nunca chegam a um humano.</p>
+          <p class="text-xs text-trust font-semibold flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> O Motor otimiza o score por vaga</p>
         </div>
 
-        <!-- Depoimento 4 — Marcos Oliveira -->
-        <div class="reveal card rounded-2xl p-5 flex flex-col gap-4">
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-full shrink-0 flex items-center justify-center font-display font-bold text-sm" style="background:rgba(255,122,26,.15);color:#FF7A1A">MO</div>
-            <div>
-              <p class="font-semibold text-sm">Marcos Oliveira</p>
-              <p class="text-muted text-xs">Analista Financeiro · RJ</p>
-            </div>
-          </div>
-          <div class="flex gap-0.5 text-accent text-xs">★★★★★</div>
-          <p class="text-sm text-ink/90 leading-relaxed flex-1">"Gastava horas adaptando currículo para cada vaga. Com o Aprovaí, levo <strong>2 minutos e a qualidade ficou muito melhor</strong> do que quando eu fazia manualmente."</p>
+        <!-- Fato 4 -->
+        <div class="reveal card rounded-2xl p-5 flex flex-col gap-3">
+          <div class="w-11 h-11 rounded-xl shrink-0 flex items-center justify-center" style="background:rgba(255,122,26,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+          <p class="font-display font-semibold text-base">Penaliza CV genérico</p>
+          <p class="text-sm text-muted leading-relaxed flex-1">O mesmo currículo para todas as vagas raramente bate o corte. Cada vaga exige termos diferentes — adaptar à mão leva horas.</p>
+          <p class="text-xs text-trust font-semibold flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> O Motor reescreve por vaga em 2 minutos</p>
         </div>
 
-        <!-- Depoimento 5 — Fernanda Lima -->
-        <div class="reveal card rounded-2xl p-5 flex flex-col gap-4">
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-full shrink-0 flex items-center justify-center font-display font-bold text-sm" style="background:rgba(255,122,26,.15);color:#FF7A1A">FL</div>
-            <div>
-              <p class="font-semibold text-sm">Fernanda Lima</p>
-              <p class="text-muted text-xs">Coordenadora de RH · RS</p>
-            </div>
-          </div>
-          <div class="flex gap-0.5 text-accent text-xs">★★★★★</div>
-          <p class="text-sm text-ink/90 leading-relaxed flex-1">"Trabalho em RH e sei como o ATS funciona. O Aprovaí faz o que eu faria manualmente para um candidato — mas em segundos. <strong>Recomendo para qualquer pessoa em recolocação.</strong>"</p>
+        <!-- Fato 5 -->
+        <div class="reveal card rounded-2xl p-5 flex flex-col gap-3">
+          <div class="w-11 h-11 rounded-xl shrink-0 flex items-center justify-center" style="background:rgba(255,122,26,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <p class="font-display font-semibold text-base">Filtra LinkedIn também</p>
+          <p class="text-sm text-muted leading-relaxed flex-1">Recrutadores buscam por palavras-chave no LinkedIn. Um perfil sem os termos certos some dos resultados de busca.</p>
+          <p class="text-xs text-trust font-semibold flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> O Motor otimiza título e resumo do perfil</p>
         </div>
 
-        <!-- Depoimento 6 — Bruno Mendes -->
-        <div class="reveal card rounded-2xl p-5 flex flex-col gap-4">
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-full shrink-0 flex items-center justify-center font-display font-bold text-sm" style="background:rgba(255,122,26,.15);color:#FF7A1A">BM</div>
-            <div>
-              <p class="font-semibold text-sm">Bruno Mendes</p>
-              <p class="text-muted text-xs">Desenvolvedor Full Stack · PE</p>
-            </div>
-          </div>
-          <div class="flex gap-0.5 text-accent text-xs">★★★★★</div>
-          <p class="text-sm text-ink/90 leading-relaxed flex-1">"R$47 me rendeu uma entrevista que virou uma proposta de R$8k/mês. <strong>Melhor ROI da minha vida.</strong> Sério. Não tem lógica não usar isso."</p>
+        <!-- Fato 6 -->
+        <div class="reveal card rounded-2xl p-5 flex flex-col gap-3">
+          <div class="w-11 h-11 rounded-xl shrink-0 flex items-center justify-center" style="background:rgba(255,122,26,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <p class="font-display font-semibold text-base">Ignora carta fraca</p>
+          <p class="text-sm text-muted leading-relaxed flex-1">Quando há carta de apresentação, ela também passa pela triagem. Genérica, não soma — alinhada à vaga, reforça seu score.</p>
+          <p class="text-xs text-trust font-semibold flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> O Motor gera a carta alinhada à vaga</p>
         </div>
 
       </div>
+      <p class="reveal text-center text-xs text-muted/60 mt-8">Como o ATS funciona é documentado publicamente por fornecedores como Gupy, Greenhouse e Jobscan. O Motor Anti-ATS aplica esses critérios ao seu material.</p>
     </div>
   </section>
 
@@ -555,7 +525,7 @@
         <!-- Anchoring de valor total -->
         <div class="p-5 bg-surface2 flex items-center justify-between border-b border-line">
           <span class="text-sm text-muted">Valor total do kit</span>
-          <span class="text-sm"><s class="text-muted">R$481</s> <span class="text-ink font-bold">— Você paga apenas R$47</span></span>
+          <span class="text-sm"><s class="text-muted">R$480</s> <span class="text-ink font-bold">— Você paga apenas R$47</span></span>
         </div>
         <div class="p-6 text-center grad-accent text-bg">
           <p class="text-sm font-semibold uppercase tracking-wide opacity-90">Hoje, pagamento único</p>
@@ -704,7 +674,7 @@
 
 <!-- MOBILE STICKY BAR -->
 <div class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-bg/95 backdrop-blur border-t border-line px-4 py-3 flex items-center justify-between gap-3">
-  <div><p class="text-xs text-muted line-through leading-none">R$1.150</p><p class="font-display font-bold text-xl leading-none mt-0.5">R$47</p></div>
+  <div><p class="text-xs text-muted line-through leading-none">R$480</p><p class="font-display font-bold text-xl leading-none mt-0.5">R$47</p></div>
   <a href="#oferta" class="flex-1 text-center grad-accent text-bg font-bold py-3 rounded-xl cursor-pointer text-sm">Quero passar pelo robô</a>
 </div>
 
@@ -738,12 +708,6 @@
     "price": "47.00",
     "priceCurrency": "BRL",
     "availability": "https://schema.org/InStock"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "127",
-    "bestRating": "5"
   }
 }
 </script>
