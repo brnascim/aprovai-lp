@@ -308,12 +308,12 @@ async function main() {
     console.error('  ✗ Erro:', JSON.stringify(r2.body, null, 2));
   }
 
-  console.log('\n=== Próximos passos ===');
-  console.log('1. Instalar Evolution API no VPS (setup-evolution-api.sh)');
-  console.log('2. Criar grupos WhatsApp por área no Evolution API');
-  console.log('3. Atualizar GROUP_JIDS neste arquivo com os JIDs reais');
-  console.log('4. Adicionar variável EVO_API_KEY nas n8n Variables');
-  console.log('5. Adicionar endpoint stripe-comunidade no Stripe Dashboard\n');
+  console.log('\n=== Status ===');
+  console.log('✓ Evolution API: https://evo.mentoriaaprovai.com.br');
+  console.log('✓ 10 grupos WhatsApp criados com JIDs reais');
+  console.log('✓ EVO_API_KEY configurada no n8n');
+  console.log('✓ Stripe webhook: https://n8n.mentoriaaprovai.com.br/webhook/stripe-comunidade');
+  console.log('✓ Form URL: https://n8n.mentoriaaprovai.com.br/form/comunidade-form-webhook');
 }
 
 main().catch(console.error);

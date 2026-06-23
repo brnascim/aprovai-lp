@@ -4,3 +4,11 @@ node_modules/
 package-lock.json
 .claude/settings.local.json
 .claude/launch.json
+bing-search.js
+gerar-depoimentos.js
+gerar-hero.js
+gerar-og.js
+n8n-workflow-nodes.js
+playwright-nanobana.js
+test-urls.js
+package.json
