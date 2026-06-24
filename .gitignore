@@ -12,3 +12,6 @@ n8n-workflow-nodes.js
 playwright-nanobana.js
 test-urls.js
 package.json
+.env
+VSL-SECRETS.md
+aprovai/web/vsl-assets/*.mp4
