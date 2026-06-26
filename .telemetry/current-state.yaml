@@ -1,0 +1,31 @@
+# Current State: greenfield (no tracking detected)
+# Scanned: 2026-06-26
+# SDK: none
+# Scope: aprovai/web/*.html, aprovai/assistant/**/*.{ts,js}, aprovai/web/api/*.js
+
+events: []
+
+identity:
+  identify_calls: []
+  group_calls: []
+
+patterns:
+  naming_style: n/a
+  centralized: n/a
+  sdk_detected: none
+  tracking_calls_found: 0
+  files_scanned:
+    - aprovai/web/index.html
+    - aprovai/web/motor.html
+    - aprovai/web/obrigado.html
+    - aprovai/web/obrigado-comunidade.html
+    - aprovai/web/upsell.html
+    - aprovai/web/acesso.html
+    - aprovai/web/api/otimizar.js
+    - aprovai/assistant/app/api/generate/route.ts
+  notes: >
+    Nenhum SDK de analytics detectado em dependências (package.json do assistant
+    não contém segment, amplitude, mixpanel, posthog, rudder). Nenhuma chamada
+    track(), identify(), fbq(), gtag() ou dataLayer encontrada nos arquivos de
+    produto. Os matches de "pixel" encontrados pertencem exclusivamente a
+    templates de animação HyperFrames em vsl-assets/ e foram descartados.

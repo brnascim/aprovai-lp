@@ -15,3 +15,11 @@ package.json
 .env
 VSL-SECRETS.md
 aprovai/web/vsl-assets/*.mp4
+aprovai/web/vsl-assets/*.mp3
+aprovai/web/vsl-assets/*.srt
+aprovai/web/vsl-assets/__pycache__/
+aprovai/web/vsl-assets/aprovai-vsl/
+aprovai/web/vsl-assets/*.png
+canvas/*.png
+
+aprovai/web/vsl-assets/.agents/

@@ -1,0 +1,8 @@
+{
+  "text": "Você mandou dezenas de currículos e não recebeu nem um não. A culpa não é sua. Um robô decide em seis segundos se você passa ou é descartado.",
+  "model_id": "eleven_multilingual_v2",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.8
+  }
+}

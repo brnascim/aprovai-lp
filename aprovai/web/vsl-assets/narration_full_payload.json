@@ -1,0 +1,10 @@
+{
+  "text": "Você mandou dezenas de currículos e não recebeu nem um não. A culpa não é sua. Antes de qualquer recrutador ver seu currículo, um robô decide em seis segundos se você continua ou é descartado. Chama-se ATS. Ele lê por palavras-chave. Quebra com tabela e coluna. Se o seu currículo não falar a língua do robô, você é eliminado — mesmo qualificado. O Motor Anti-ATS reescreve seu currículo, carta e LinkedIn na língua que o robô entende. Você cola a vaga, cola seu currículo, e em dois minutos sai a versão que passa. Acesso completo por quarenta e sete reais, uma vez. Com sete dias de garantia: não gostou, devolvemos tudo. Pare de ser descartado pelo robô. Clique e passe pela peneira hoje.",
+  "model_id": "eleven_multilingual_v2",
+  "voice_settings": {
+    "stability": 0.45,
+    "similarity_boost": 0.82,
+    "style": 0.3,
+    "use_speaker_boost": true
+  }
+}

@@ -1,0 +1,13 @@
+file 'C:/Users/ednas/.claude/Aprovai/aprovai-codex/aprovai/web/vsl-assets/slide_01.png'
+duration 7.5
+file 'C:/Users/ednas/.claude/Aprovai/aprovai-codex/aprovai/web/vsl-assets/slide_02.png'
+duration 9.0
+file 'C:/Users/ednas/.claude/Aprovai/aprovai-codex/aprovai/web/vsl-assets/slide_03.png'
+duration 12.0
+file 'C:/Users/ednas/.claude/Aprovai/aprovai-codex/aprovai/web/vsl-assets/slide_04.png'
+duration 14.0
+file 'C:/Users/ednas/.claude/Aprovai/aprovai-codex/aprovai/web/vsl-assets/slide_05.png'
+duration 12.0
+file 'C:/Users/ednas/.claude/Aprovai/aprovai-codex/aprovai/web/vsl-assets/slide_06.png'
+duration 8.0
+file 'C:/Users/ednas/.claude/Aprovai/aprovai-codex/aprovai/web/vsl-assets/slide_06.png'

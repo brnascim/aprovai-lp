@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>VSL Preview v2 — Aprovaí</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #07090D; color: #EEF1F6; font-family: -apple-system, 'Segoe UI', Arial, sans-serif; padding: 32px; }
+  h1 { color: #FF7A1A; font-size: 22px; margin-bottom: 4px; }
+  .subtitle { color: #5A6475; font-size: 13px; margin-bottom: 32px; }
+  .section { margin-bottom: 40px; }
+  .section-label { font-size: 11px; letter-spacing: 3px; color: #FF7A1A; text-transform: uppercase; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,122,26,0.2); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .card { background: #10141C; border-radius: 10px; padding: 16px; border: 1px solid rgba(255,255,255,0.05); }
+  .card h2 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+  .card small { color: #4A5468; font-size: 11px; display: block; margin-bottom: 12px; }
+  video { width: 100%; border-radius: 6px; display: block; }
+  .badge { display: inline-block; background: rgba(255,122,26,0.15); color: #FF7A1A; font-size: 10px; letter-spacing: 1px; padding: 2px 8px; border-radius: 4px; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+  <h1>VSL Preview — Motor Anti-ATS</h1>
+  <p class="subtitle">Voz: LeticIA PT-BR · Avalie os dois estilos e escolha qual sobe para o VPS</p>
+
+  <div class="section">
+    <div class="section-label">Versão 2 — Design Novo</div>
+    <div class="grid">
+      <div class="card">
+        <span class="badge">NOVO</span>
+        <h2>Slides estáticos v2</h2>
+        <small>Hierarquia clara · Tipo grande · Glow nos elementos hero · ~62s</small>
+        <video controls src="vsl-slides-v2.mp4"></video>
+      </div>
+      <div class="card">
+        <span class="badge">NOVO — RENDERIZANDO</span>
+        <h2>Cinético v2 (word-by-word)</h2>
+        <small>Cada palavra sobe individualmente · Orange accents · ~57s</small>
+        <video controls src="vsl-kinetic-leticia-v2.mp4" id="kinetic-v2"></video>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Versão 1 — Para Comparação</div>
+    <div class="grid">
+      <div class="card">
+        <h2>Slides v1</h2>
+        <small>Versão anterior — slides básicos · ~62s</small>
+        <video controls src="vsl-leticia.mp4"></video>
+      </div>
+      <div class="card">
+        <h2>Cinético v1</h2>
+        <small>Versão anterior — fade simples · ~57s</small>
+        <video controls src="vsl-kinetic-leticia.mp4"></video>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Check if kinetic v2 loaded
+    const kv2 = document.getElementById('kinetic-v2');
+    kv2.addEventListener('error', () => {
+      kv2.closest('.card').querySelector('.badge').textContent = 'AGUARDANDO...';
+    });
+    kv2.addEventListener('loadeddata', () => {
+      kv2.closest('.card').querySelector('.badge').textContent = 'NOVO ✓';
+    });
+  </script>
+</body>
+</html>

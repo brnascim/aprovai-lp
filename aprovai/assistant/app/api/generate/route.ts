@@ -3,6 +3,8 @@
 
 export const runtime = "nodejs";
 
+import { trackCvGenerated } from "@/lib/tracking";
+
 const MAX = 8000;
 
 function section(text: string, tag: string): string {
@@ -12,8 +14,10 @@ function section(text: string, tag: string): string {
 }
 
 export async function POST(req: Request) {
+  const _start = Date.now();
   try {
     const { vaga, experiencia, area } = await req.json();
+    const distinctId = req.headers.get("x-ph-distinct-id") || "anonymous";
 
     if (!vaga || !experiencia) {
       return Response.json({ error: "Preencha a vaga e a sua experiência." }, { status: 400 });
@@ -67,12 +71,33 @@ export async function POST(req: Request) {
       .map((b: any) => b.text)
       .join("\n");
 
-    return Response.json({
+    const result = {
       curriculo: section(text, "CURRICULO") || text,
       carta: section(text, "CARTA"),
       linkedin: section(text, "LINKEDIN"),
-    });
+    };
+
+    if (process.env.POSTHOG_API_KEY) {
+      await trackCvGenerated(distinctId, {
+        job_area: area || null,
+        vaga_length_chars: String(vaga).length,
+        experiencia_length_chars: String(experiencia).length,
+        duration_ms: Date.now() - _start,
+        success: true,
+      }).catch(() => {});
+    }
+
+    return Response.json(result);
   } catch (e: any) {
+    if (process.env.POSTHOG_API_KEY) {
+      await trackCvGenerated("anonymous", {
+        vaga_length_chars: 0,
+        experiencia_length_chars: 0,
+        duration_ms: Date.now() - _start,
+        success: false,
+        error_type: "unexpected",
+      }).catch(() => {});
+    }
     return Response.json({ error: "Erro inesperado.", detail: String(e).slice(0, 200) }, { status: 500 });
   }
 }

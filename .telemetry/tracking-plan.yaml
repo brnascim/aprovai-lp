@@ -1,0 +1,231 @@
+meta:
+  product: "Aprovaí"
+  version: 2
+  created: 2026-06-26
+  updated: 2026-06-26
+  implemented: 2026-06-26
+  owner: "ednas"
+  pii_policy: traits_only
+  # email e nome somente em traits via identify() — nunca em propriedades de evento
+  internal_user_policy: "filter_by_email — excluir owner no PostHog via cohort de exclusão"
+  destinations:
+    - posthog    # analytics de produto + funil (free até 1M eventos/mês)
+    - meta_capi  # atribuição de conversão para Meta Ads (server-side via n8n)
+  notes: >
+    B2C single-player. Sem group hierarchy. Eventos client-side via PostHog JS snippet
+    (index.html, motor.html). Eventos server-side (purchase, cv.generated, subscription)
+    via n8n → PostHog Node SDK + Meta CAPI. Meta CAPI recebe apenas purchase.completed
+    com hashed email para atribuição.
+
+entities:
+  user:
+    id_property: user_id
+    id_format: >
+      Pré-compra: anonymous_id gerado pelo PostHog JS (cookie).
+      Pós-compra: stripe_customer_id como user_id no identify() — n8n faz o alias
+      anonymous_id → stripe_customer_id no webhook de purchase.completed.
+    traits:
+      - name: email
+        type: string
+        pii: true
+        required: false
+        update_pattern: set_on_purchase
+        notes: "da webhook Stripe. Hashed (SHA256) antes de enviar ao Meta CAPI."
+      - name: plan
+        type: string
+        enum: [entry, upsell, subscription]
+        required: false
+        update_pattern: on_change
+        notes: "atualizado a cada purchase.completed e subscription.started"
+      - name: purchased_at
+        type: datetime
+        required: false
+        update_pattern: set_once
+      - name: first_generate_at
+        type: datetime
+        required: false
+        update_pattern: set_once
+        notes: "marcador de ativação — quando o comprador usou o produto pela 1ª vez"
+      - name: generate_count
+        type: integer
+        required: false
+        update_pattern: increment_on_event
+        notes: "incrementado a cada cv.generated com success=true"
+      - name: utm_source
+        type: string
+        required: false
+        update_pattern: set_on_first_visit
+      - name: utm_medium
+        type: string
+        required: false
+        update_pattern: set_on_first_visit
+      - name: utm_campaign
+        type: string
+        required: false
+        update_pattern: set_on_first_visit
+
+groups: []
+# B2C single-player — sem group hierarchy. Nível de tracking: usuário.
+
+events:
+
+  # ── Lifecycle ──────────────────────────────────────────────────────────────
+
+  - name: lp.viewed
+    category: lifecycle
+    layer: client-side
+    file: aprovai/web/index.html
+    trigger: DOMContentLoaded
+    description: >
+      Usuário carrega a landing page. Ponto de entrada do funil. Captura UTMs
+      para atribuição de campanha.
+    properties:
+      - name: utm_source
+        type: string
+        required: false
+      - name: utm_medium
+        type: string
+        required: false
+      - name: utm_campaign
+        type: string
+        required: false
+      - name: utm_content
+        type: string
+        required: false
+      - name: referrer
+        type: string
+        required: false
+    expected_frequency: high
+
+  - name: checkout.started
+    category: lifecycle
+    layer: client-side
+    file: aprovai/web/index.html
+    trigger: click em qualquer CTA de compra → redirect para Stripe
+    description: >
+      Usuário clicou num CTA e foi redirecionado ao checkout Stripe. Mede
+      intenção de compra e drop entre LP e checkout.
+    properties:
+      - name: cta_location
+        type: string
+        enum: [hero, pricing, sticky_bar, bottom, faq]
+        required: true
+    expected_frequency: medium
+
+  - name: motor.accessed
+    category: lifecycle
+    layer: client-side
+    file: aprovai/web/motor.html
+    trigger: DOMContentLoaded
+    description: >
+      Comprador abre o Motor Anti-ATS. Marcador de ativação — confirma que o
+      comprador chegou ao produto após a entrega do link pelo n8n.
+    properties:
+      - name: is_first_access
+        type: boolean
+        required: true
+        notes: "true se generate_count == 0 no momento do acesso"
+    expected_frequency: low
+
+  # ── Core Value ─────────────────────────────────────────────────────────────
+
+  - name: cv.generated
+    category: core_value
+    layer: server-side
+    file: aprovai/assistant/app/api/generate/route.ts
+    trigger: resposta bem-sucedida ou com erro da rota POST /api/generate
+    description: >
+      Usuário solicitou geração de currículo+carta+LinkedIn. Ação de valor
+      primária — se este evento cair a zero, o produto falhou.
+    properties:
+      - name: job_area
+        type: string
+        required: false
+        notes: "campo 'area' do body da requisição; null se não informado"
+      - name: vaga_length_chars
+        type: integer
+        required: true
+      - name: experiencia_length_chars
+        type: integer
+        required: true
+      - name: duration_ms
+        type: integer
+        required: true
+      - name: success
+        type: boolean
+        required: true
+      - name: error_type
+        type: string
+        enum: [validation, api_error, timeout, unexpected]
+        required: false
+        notes: "presente apenas quando success=false"
+    expected_frequency: medium
+
+  # ── Billing ────────────────────────────────────────────────────────────────
+
+  - name: purchase.completed
+    category: billing
+    layer: server-side
+    trigger: >
+      Stripe webhook checkout.session.completed → n8n → PostHog Node SDK
+      + Meta CAPI (com email hashed SHA256)
+    description: >
+      Compra one-time confirmada. Cobre entrada (R$47), bump (R$27), upsell
+      (R$97) e downsell (R$27) — diferenciados por product_type.
+    properties:
+      - name: product_type
+        type: string
+        enum: [entry, bump, upsell, downsell]
+        required: true
+      - name: amount_brl
+        type: number
+        required: true
+      - name: payment_method
+        type: string
+        enum: [credit_card, pix, boleto]
+        required: false
+      - name: stripe_session_id
+        type: string
+        required: true
+    expected_frequency: low
+    meta_capi: true
+    notes: >
+      Este é o evento mais crítico para o Meta CAPI. Enviar imediatamente após
+      o webhook do Stripe, com email hashed e event_id = stripe_session_id
+      para deduplicação com o pixel client-side (se adicionado depois).
+
+  - name: subscription.started
+    category: billing
+    layer: server-side
+    trigger: Stripe webhook customer.subscription.created → n8n → PostHog
+    description: Assinatura de continuidade R$19,90/mês ativada.
+    properties:
+      - name: amount_brl
+        type: number
+        required: true
+      - name: stripe_subscription_id
+        type: string
+        required: true
+    expected_frequency: low
+
+  - name: subscription.cancelled
+    category: billing
+    layer: server-side
+    trigger: Stripe webhook customer.subscription.deleted → n8n → PostHog
+    description: >
+      Assinatura cancelada. Sinal de churn — base para análise de retenção
+      e coortes de cancelamento.
+    properties:
+      - name: reason
+        type: string
+        enum: [user_cancelled, payment_failed, admin]
+        required: false
+        notes: "inferido do campo cancellation_details do Stripe"
+      - name: months_active
+        type: integer
+        required: false
+        notes: "calculado pelo n8n: meses entre subscription.started e cancelled"
+      - name: stripe_subscription_id
+        type: string
+        required: true
+    expected_frequency: low

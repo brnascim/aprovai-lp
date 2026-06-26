@@ -135,6 +135,22 @@
     document.documentElement.classList.add('gated');
 })();
 </script>
+<!-- Analytics: PostHog — chave pública, segura no frontend -->
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init me ws ".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_REPLACE_WITH_YOUR_KEY', {
+    api_host: 'https://us.i.posthog.com',
+    defaults: '2026-01-30',
+    autocapture: false,
+    capture_pageview: false,
+    persistence: 'localStorage+cookie',
+    loaded: function(ph) {
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        ph.opt_out_capturing();
+      }
+    }
+  });
+</script>
 </head>
 <body class="min-h-screen flex flex-col">
 
@@ -441,6 +457,7 @@ async function otimizar() {
 
   setState('loading');
   startSteps();
+  const _phStart = Date.now();
 
   try {
     const res = await fetch('/api/otimizar', {
@@ -457,10 +474,27 @@ async function otimizar() {
     renderResult(data);
     setState('result');
 
+    if (window.posthog) posthog.capture('cv.generated', {
+      vaga_length_chars: vaga.length,
+      experiencia_length_chars: curriculo.length,
+      duration_ms: Date.now() - _phStart,
+      success: true,
+      error_type: null,
+      $set_once: { first_generate_at: new Date().toISOString() },
+    });
+
   } catch (err) {
     setState('error');
     document.getElementById('err-global').textContent =
       err.message || 'Erro inesperado. Tente novamente em instantes.';
+
+    if (window.posthog) posthog.capture('cv.generated', {
+      vaga_length_chars: vaga.length,
+      experiencia_length_chars: curriculo.length,
+      duration_ms: Date.now() - _phStart,
+      success: false,
+      error_type: 'api_error',
+    });
   }
 }
 
@@ -563,6 +597,13 @@ function escapeHtml(s) {
 });
 
 setState('input');
+
+/* motor.accessed */
+(function() {
+  var isFirst = !localStorage.getItem('ph_motor_v');
+  if (isFirst) try { localStorage.setItem('ph_motor_v', '1'); } catch(e) {}
+  if (window.posthog) posthog.capture('motor.accessed', { is_first_access: isFirst });
+})();
 </script>
 </body>
 </html>
