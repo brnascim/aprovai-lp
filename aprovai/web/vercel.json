@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/otimizar.js": {
+      "runtime": "edge"
+    }
+  }
+}
