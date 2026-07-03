@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Aprovaí — Passe pelo robô que descarta seu currículo em 6 segundos</title>
-<meta name="description" content="O Aprovaí reescreve seu currículo, carta e LinkedIn para passar pela triagem automática (ATS) e chegar ao recrutador. Em 2 minutos, para cada vaga." />
-<meta property="og:title" content="Aprovaí — Passe pelo robô ATS em 2 minutos | R$47" />
-<meta property="og:description" content="Seu currículo otimizado para passar no ATS e chegar ao recrutador. Em 2 minutos, para cada vaga." />
+<title>Aprovaí — Adapte seu currículo à triagem automática | R$47</title>
+<meta name="description" content="O Aprovaí reorganiza currículo, carta e LinkedIn para a triagem automática e para leitura humana, vaga a vaga." />
+<meta property="og:title" content="Aprovaí — Currículo mais alinhado à vaga | R$47" />
+<meta property="og:description" content="Ferramenta para reorganizar currículo, carta e LinkedIn com foco na triagem automática e na leitura humana." />
 <meta property="og:type" content="website" /><meta property="og:locale" content="pt_BR" />
 <meta property="og:image" content="https://mentoriaaprovai.com.br/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://www.mentoriaaprovai.com.br/" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Aprovaí — Passe pelo robô que descarta seu currículo em 6 segundos" />
-<meta name="twitter:description" content="Seu currículo otimizado para passar no ATS e chegar ao recrutador. Em 2 minutos, para cada vaga." />
+<meta name="twitter:title" content="Aprovaí — Currículo mais alinhado à vaga | R$47" />
+<meta name="twitter:description" content="Ferramenta para reorganizar currículo, carta e LinkedIn com foco na triagem automática e na leitura humana." />
 <meta name="twitter:image" content="https://mentoriaaprovai.com.br/og-image.png" />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://www.mentoriaaprovai.com.br/" />
@@ -54,19 +54,23 @@
 </style>
 <!-- Analytics: PostHog — chave pública, segura no frontend -->
 <script>
-  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init me ws ".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-  posthog.init('phc_REPLACE_WITH_YOUR_KEY', {
-    api_host: 'https://us.i.posthog.com',
-    defaults: '2026-01-30',
-    autocapture: false,
-    capture_pageview: false,
-    persistence: 'localStorage+cookie',
-    loaded: function(ph) {
-      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        ph.opt_out_capturing();
+  (function() {
+    var POSTHOG_KEY = '';
+    if (!POSTHOG_KEY) return;
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init me ws ".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init(POSTHOG_KEY, {
+      api_host: 'https://us.i.posthog.com',
+      defaults: '2026-01-30',
+      autocapture: false,
+      capture_pageview: false,
+      persistence: 'localStorage+cookie',
+      loaded: function(ph) {
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          ph.opt_out_capturing();
+        }
       }
-    }
-  });
+    });
+  })();
 </script>
 </head>
 <body class="font-body pb-24 md:pb-0">
@@ -89,19 +93,19 @@
        HERO com arte generativa "A Triagem"
   ────────────────────────────────────────────────────────────── -->
   <section class="relative overflow-hidden" style="min-height:clamp(560px,92vh,860px)">
-    <!-- Trocar hero.jpg por uma foto de profissional real (retratos, escritório, laptop) -->
+    <!-- Hero principal da oferta -->
     <img id="hero-photo" src="hero.jpg" alt="Profissional usando o Motor Anti-ATS Aprovaí no computador">
     <div class="hero-scrim"></div><div class="hero-vign"></div>
 
     <div class="relative z-10 max-w-6xl mx-auto px-5 flex items-center" style="min-height:clamp(560px,92vh,860px)">
       <div class="max-w-xl py-20">
-        <p class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-accent uppercase mb-5"><span class="h-1.5 w-1.5 rounded-full bg-accent animate-pulse"></span> O robô que decide seu futuro</p>
-        <h1 class="font-display font-bold text-4xl sm:text-5xl leading-[1.05] mb-5">Não é você. É o <span class="text-accent-grad">robô que descarta seu currículo</span> em 6 segundos.</h1>
-        <p class="text-muted text-lg leading-relaxed mb-7">Você manda dezenas de candidaturas e some no silêncio. O motivo tem nome: <strong class="text-ink">ATS</strong> — a triagem automática que barra 9 em cada 10 currículos antes de um humano ler. O <strong class="text-ink">Aprovaí</strong> reescreve seu currículo, carta e LinkedIn para atravessar essa peneira. Em 2 minutos, para cada vaga.</p>
-        <a href="#oferta" class="inline-flex items-center grad-accent text-bg font-bold px-7 py-4 rounded-xl text-lg hover:brightness-110 glow cursor-pointer mb-3">Quero passar pelo robô — R$47</a>
-        <p class="text-xs text-accent2 mb-5 flex items-center gap-1.5"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg> Preço de lançamento: R$47. Sobe para R$97 em breve.</p>
+        <p class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-accent uppercase mb-5"><span class="h-1.5 w-1.5 rounded-full bg-accent animate-pulse"></span> A triagem vem antes do recrutador</p>
+        <h1 class="font-display font-bold text-4xl sm:text-5xl leading-[1.05] mb-5">Não é só seu currículo. É o <span class="text-accent-grad">filtro automático que decide quem segue</span>.</h1>
+        <p class="text-muted text-lg leading-relaxed mb-7">Você manda dezenas de candidaturas e some no silêncio. Em muitas vagas, isso começa no <strong class="text-ink">ATS</strong> — a triagem automática que lê seu material antes de qualquer humano. O <strong class="text-ink">Aprovaí</strong> reescreve seu currículo, carta e LinkedIn para conversar melhor com essa etapa. Em poucos minutos, para cada vaga.</p>
+        <a href="#oferta" class="inline-flex items-center grad-accent text-bg font-bold px-7 py-4 rounded-xl text-lg hover:brightness-110 glow cursor-pointer mb-3">Quero testar o Motor — R$47</a>
+        <p class="text-xs text-accent2 mb-5 flex items-center gap-1.5"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg> Pagamento único de R$47. Sem assinatura.</p>
         <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
-          <li class="flex items-center gap-1.5"><svg class="text-trust" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Acesso imediato</li>
+          <li class="flex items-center gap-1.5"><svg class="text-trust" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Acesso por e-mail</li>
           <li class="flex items-center gap-1.5"><svg class="text-trust" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Garantia de 7 dias</li>
           <li class="flex items-center gap-1.5"><svg class="text-trust" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> PIX e cartão</li>
         </ul>
@@ -111,9 +115,9 @@
     <!-- stat strip -->
     <div class="relative z-10 border-t border-line bg-bg/40 backdrop-blur-sm">
       <div class="max-w-6xl mx-auto px-5 py-5 grid grid-cols-3 gap-4 text-center">
-        <div><p class="font-display font-bold text-2xl sm:text-3xl text-accent2"><span class="countup" data-to="6">0</span>s</p><p class="text-xs text-muted mt-1">o robô decide</p></div>
-        <div class="border-x border-line"><p class="font-display font-bold text-2xl sm:text-3xl text-accent2"><span class="countup" data-to="90">0</span>%</p><p class="text-xs text-muted mt-1">das vagas usam ATS <span class="text-muted/50 text-[10px]">(fonte: Jobscan)</span></p></div>
-        <div><p class="font-display font-bold text-2xl sm:text-3xl text-accent2"><span class="countup" data-to="2">0</span>min</p><p class="text-xs text-muted mt-1">por candidatura</p></div>
+        <div><p class="font-display font-bold text-lg sm:text-2xl text-accent2">ATS primeiro</p><p class="text-xs text-muted mt-1">a triagem automática lê antes do recrutador</p></div>
+        <div class="border-x border-line"><p class="font-display font-bold text-lg sm:text-2xl text-accent2">Vaga a vaga</p><p class="text-xs text-muted mt-1">as palavras-chave mudam conforme a descrição</p></div>
+        <div><p class="font-display font-bold text-lg sm:text-2xl text-accent2">Em minutos</p><p class="text-xs text-muted mt-1">você sai com uma nova versão pronta para revisar</p></div>
       </div>
     </div>
   </section>
@@ -148,7 +152,7 @@
     <div class="max-w-4xl mx-auto px-5 py-16 md:py-20 text-center">
       <p class="reveal text-xs font-semibold tracking-widest text-accent uppercase mb-3">Mecanismo exclusivo</p>
       <h2 class="reveal font-display font-bold text-3xl sm:text-4xl mb-5">Conheça o <span class="text-accent-grad">Motor Anti-ATS</span></h2>
-      <p class="reveal text-muted text-lg leading-relaxed max-w-2xl mx-auto">O Aprovaí faz a engenharia reversa do robô. Você cola a vaga e a sua experiência — ele identifica as palavras-chave que aquela triagem procura e reescreve currículo, carta e LinkedIn para serem lidos e aprovados. <strong class="text-ink">Robô primeiro. Recrutador depois.</strong></p>
+      <p class="reveal text-muted text-lg leading-relaxed max-w-2xl mx-auto">O Aprovaí faz a engenharia reversa do robô. Você cola a vaga e a sua experiência — ele identifica as palavras-chave que aquela triagem procura e reescreve currículo, carta e LinkedIn para ficarem mais claros para o ATS e mais próximos da vaga. <strong class="text-ink">Robô primeiro. Recrutador depois.</strong></p>
     </div>
   </section>
 
@@ -193,11 +197,11 @@
   ────────────────────────────────────────────────────────────── -->
   <section class="border-t border-line bg-surface/40">
     <div class="max-w-5xl mx-auto px-5 py-16 md:py-20">
-      <h2 class="reveal font-display font-bold text-2xl sm:text-3xl text-center mb-12">Em 2 minutos, 3 passos</h2>
+      <h2 class="reveal font-display font-bold text-2xl sm:text-3xl text-center mb-12">3 passos para começar</h2>
       <div class="grid md:grid-cols-3 gap-6">
         <div class="reveal card rounded-2xl p-6"><div class="h-12 w-12 rounded-xl grad-accent text-bg flex items-center justify-center mb-4"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></div><h3 class="font-display font-semibold text-lg mb-2">Cole a vaga e sua experiência</h3><p class="text-muted text-sm">Sem formulário gigante. Dois textos e pronto.</p></div>
         <div class="reveal card rounded-2xl p-6"><div class="h-12 w-12 rounded-xl grad-accent text-bg flex items-center justify-center mb-4"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1m0-12.8l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3.2"/></svg></div><h3 class="font-display font-semibold text-lg mb-2">O Motor reescreve tudo</h3><p class="text-muted text-sm">Currículo, carta e LinkedIn otimizados pro ATS daquela vaga.</p></div>
-        <div class="reveal card rounded-2xl p-6"><div class="h-12 w-12 rounded-xl grad-accent text-bg flex items-center justify-center mb-4"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div><h3 class="font-display font-semibold text-lg mb-2">Baixe e candidate-se</h3><p class="text-muted text-sm">Pronto pra enviar. Repita pra cada vaga em segundos.</p></div>
+        <div class="reveal card rounded-2xl p-6"><div class="h-12 w-12 rounded-xl grad-accent text-bg flex items-center justify-center mb-4"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div><h3 class="font-display font-semibold text-lg mb-2">Baixe e candidate-se</h3><p class="text-muted text-sm">Revise a versão gerada e repita o processo sempre que quiser.</p></div>
       </div>
     </div>
   </section>
@@ -329,7 +333,7 @@
           <div class="w-11 h-11 rounded-xl shrink-0 flex items-center justify-center" style="background:rgba(255,122,26,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
           <p class="font-display font-semibold text-base">Penaliza CV genérico</p>
           <p class="text-sm text-muted leading-relaxed flex-1">O mesmo currículo para todas as vagas raramente bate o corte. Cada vaga exige termos diferentes — adaptar à mão leva horas.</p>
-          <p class="text-xs text-trust font-semibold flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> O Motor reescreve por vaga em 2 minutos</p>
+          <p class="text-xs text-trust font-semibold flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> O Motor reescreve por vaga em poucos minutos</p>
         </div>
 
         <!-- Fato 5 -->
@@ -428,22 +432,22 @@
   ────────────────────────────────────────────────────────────── -->
   <section id="oferta" class="border-t border-line bg-surface/40 scroll-mt-16">
     <div class="max-w-3xl mx-auto px-5 py-16 md:py-20">
-      <p class="reveal text-xs font-semibold tracking-widest text-accent uppercase text-center mb-3">Oferta de lançamento</p>
-      <h2 class="reveal font-display font-bold text-2xl sm:text-3xl text-center mb-3">Tudo que você leva hoje</h2>
-      <p class="reveal text-muted text-center mb-10">Acesso completo ao assistente + 10 bônus de entrega imediata.</p>
+      <p class="reveal text-xs font-semibold tracking-widest text-accent uppercase text-center mb-3">Oferta atual</p>
+      <h2 class="reveal font-display font-bold text-2xl sm:text-3xl text-center mb-3">O que está incluído</h2>
+      <p class="reveal text-muted text-center mb-10">Acesso ao Motor Anti-ATS + materiais de apoio descritos nesta oferta.</p>
       <div class="reveal card rounded-2xl overflow-hidden">
         <!-- Stack de bônus detalhado -->
         <div class="p-5 border-b border-line">
-          <p class="text-xs font-semibold tracking-widest text-accent uppercase mb-4">O que você leva hoje</p>
+          <p class="text-xs font-semibold tracking-widest text-accent uppercase mb-4">O que está incluído</p>
           <ul class="space-y-3">
             <li class="flex items-start gap-3">
               <span class="text-trust font-bold shrink-0 mt-0.5">✓</span>
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between gap-2 flex-wrap">
                   <span class="font-semibold text-sm">Motor Anti-ATS — Acesso completo à ferramenta</span>
-                  <span class="text-muted line-through text-sm shrink-0">R$97</span>
+                  <span class="text-muted text-xs shrink-0 uppercase tracking-wide">Incluído</span>
                 </div>
-                <p class="text-muted text-xs mt-0.5">Reescreve currículo, carta e LinkedIn para a triagem automática de qualquer vaga em 2 minutos.</p>
+                <p class="text-muted text-xs mt-0.5">Reescreve currículo, carta e LinkedIn para a triagem automática de qualquer vaga em poucos minutos.</p>
               </div>
             </li>
             <li class="flex items-start gap-3">
@@ -451,7 +455,7 @@
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between gap-2 flex-wrap">
                   <span class="font-semibold text-sm">Currículo ATS-First — Biblioteca de palavras-chave por área</span>
-                  <span class="text-muted line-through text-sm shrink-0">R$47</span>
+                  <span class="text-muted text-xs shrink-0 uppercase tracking-wide">Incluído</span>
                 </div>
                 <p class="text-muted text-xs mt-0.5">Banco curado por área (TI, saúde, vendas, adm, logística e mais) para turbinar o output do Motor.</p>
               </div>
@@ -461,7 +465,7 @@
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between gap-2 flex-wrap">
                   <span class="font-semibold text-sm">Carta de Apresentação ATS — 30 modelos prontos</span>
-                  <span class="text-muted line-through text-sm shrink-0">R$37</span>
+                  <span class="text-muted text-xs shrink-0 uppercase tracking-wide">Incluído</span>
                 </div>
                 <p class="text-muted text-xs mt-0.5">Para transição de área, gap no currículo e primeiro emprego — todos otimizados para triagem automática.</p>
               </div>
@@ -471,7 +475,7 @@
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between gap-2 flex-wrap">
                   <span class="font-semibold text-sm">Kit LinkedIn que aparece nas buscas de recrutadores</span>
-                  <span class="text-muted line-through text-sm shrink-0">R$57</span>
+                  <span class="text-muted text-xs shrink-0 uppercase tracking-wide">Incluído</span>
                 </div>
                 <p class="text-muted text-xs mt-0.5">Headline, seção Sobre e 20 hooks prontos para aparecer nas buscas orgânicas do LinkedIn Recruiter.</p>
               </div>
@@ -481,7 +485,7 @@
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between gap-2 flex-wrap">
                   <span class="font-semibold text-sm">80 Respostas para Entrevista</span>
-                  <span class="text-muted line-through text-sm shrink-0">R$67</span>
+                  <span class="text-muted text-xs shrink-0 uppercase tracking-wide">Incluído</span>
                 </div>
                 <p class="text-muted text-xs mt-0.5">As 80 perguntas mais temidas com resposta-modelo e variação por senioridade (júnior, pleno, sênior).</p>
               </div>
@@ -491,7 +495,7 @@
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between gap-2 flex-wrap">
                   <span class="font-semibold text-sm">Script de Negociação Salarial — salário, VR, VT e plano</span>
-                  <span class="text-muted line-through text-sm shrink-0">R$47</span>
+                  <span class="text-muted text-xs shrink-0 uppercase tracking-wide">Incluído</span>
                 </div>
                 <p class="text-muted text-xs mt-0.5">Linha por linha para não deixar dinheiro na mesa na oferta de emprego.</p>
               </div>
@@ -501,7 +505,7 @@
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between gap-2 flex-wrap">
                   <span class="font-semibold text-sm">Pack de E-mails de Follow-up</span>
-                  <span class="text-muted line-through text-sm shrink-0">R$27</span>
+                  <span class="text-muted text-xs shrink-0 uppercase tracking-wide">Incluído</span>
                 </div>
                 <p class="text-muted text-xs mt-0.5">Mensagens de acompanhamento que destravam o recrutador sem parecer insistente.</p>
               </div>
@@ -511,9 +515,9 @@
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between gap-2 flex-wrap">
                   <span class="font-semibold text-sm">Script de Vagas Ocultas</span>
-                  <span class="text-muted line-through text-sm shrink-0">R$37</span>
+                  <span class="text-muted text-xs shrink-0 uppercase tracking-wide">Incluído</span>
                 </div>
-                <p class="text-muted text-xs mt-0.5">Abordagem direta a gestores para vagas não anunciadas — o mercado invisível que representa 40% das contratações.</p>
+                <p class="text-muted text-xs mt-0.5">Abordagem direta a gestores para vagas não anunciadas, com mensagens prontas para contato profissional.</p>
               </div>
             </li>
             <li class="flex items-start gap-3">
@@ -521,7 +525,7 @@
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between gap-2 flex-wrap">
                   <span class="font-semibold text-sm">Detector de Gaps no Currículo</span>
-                  <span class="text-muted line-through text-sm shrink-0">R$27</span>
+                  <span class="text-muted text-xs shrink-0 uppercase tracking-wide">Incluído</span>
                 </div>
                 <p class="text-muted text-xs mt-0.5">Os 12 erros que derrubam candidaturas antes do ATS ver seu nome — checklist de auditoria.</p>
               </div>
@@ -531,23 +535,22 @@
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between gap-2 flex-wrap">
                   <span class="font-semibold text-sm">Guia de Transição de Carreira + Versão Primeiro Emprego</span>
-                  <span class="text-muted line-through text-sm shrink-0">R$37</span>
+                  <span class="text-muted text-xs shrink-0 uppercase tracking-wide">Incluído</span>
                 </div>
                 <p class="text-muted text-xs mt-0.5">Como traduzir experiência de outra área sem ser descartado na triagem, com versão adaptada para quem ainda não tem experiência formal.</p>
               </div>
             </li>
           </ul>
         </div>
-        <!-- Anchoring de valor total -->
         <div class="p-5 bg-surface2 flex items-center justify-between border-b border-line">
-          <span class="text-sm text-muted">Valor total do kit</span>
-          <span class="text-sm"><s class="text-muted">R$480</s> <span class="text-ink font-bold">— Você paga apenas R$47</span></span>
+          <span class="text-sm text-muted">Pagamento único</span>
+          <span class="text-sm"><span class="text-ink font-bold">R$47 pelo acesso e pelos materiais descritos na oferta</span></span>
         </div>
         <div class="p-6 text-center grad-accent text-bg">
-          <p class="text-sm font-semibold uppercase tracking-wide opacity-90">Hoje, pagamento único</p>
+          <p class="text-sm font-semibold uppercase tracking-wide opacity-90">Pagamento único</p>
           <p class="font-display font-bold text-6xl my-2">R$47</p>
-          <p class="text-xs opacity-80 mb-4">Preço de lançamento — sobe após os primeiros resultados publicados</p>
-          <a href="#checkout" data-checkout data-cta-location="pricing" class="inline-flex items-center bg-bg text-ink font-bold px-8 py-4 rounded-xl hover:brightness-125 cursor-pointer text-base">Quero passar pelo robô — R$47</a>
+          <p class="text-xs opacity-80 mb-4">Pagamento único. Sem assinatura.</p>
+          <a href="#checkout" data-checkout data-cta-location="pricing" class="inline-flex items-center bg-bg text-ink font-bold px-8 py-4 rounded-xl hover:brightness-125 cursor-pointer text-base">Quero testar o Motor — R$47</a>
           <p class="text-xs mt-3 opacity-80">No checkout você pode adicionar o Pacote Entrevista por +R$27 (opcional).</p>
           <!-- Badge de garantia -->
           <div class="mt-4 inline-flex items-center gap-2 bg-bg/20 border border-bg/30 rounded-full px-4 py-2 text-sm font-semibold">
@@ -558,7 +561,7 @@
       </div>
       <div class="reveal flex flex-wrap items-center justify-center gap-5 mt-6 text-sm text-muted">
         <span class="flex items-center gap-1.5"><svg class="text-trust" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Compra segura</span>
-        <span class="flex items-center gap-1.5"><svg class="text-trust" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Acesso imediato</span>
+        <span class="flex items-center gap-1.5"><svg class="text-trust" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Acesso por e-mail</span>
         <span class="flex items-center gap-1.5"><svg class="text-trust" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> 7 dias de garantia</span>
         <span class="flex items-center gap-1.5"><svg class="text-trust" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> PIX e cartão</span>
       </div>
@@ -576,18 +579,18 @@
         <div class="flex flex-col sm:flex-row gap-6 items-center sm:items-start mb-8">
           <!-- Selo SVG 7 dias -->
           <div class="shrink-0 mx-auto sm:mx-0">
-            <svg width="110" height="110" viewBox="0 0 110 110" aria-label="Selo garantia 7 dias sem risco">
+            <svg width="110" height="110" viewBox="0 0 110 110" aria-label="Selo garantia 7 dias">
               <defs><path id="gp7" d="M55,55 m-40,0 a40,40 0 1,1 80,0 a40,40 0 1,1 -80,0"/></defs>
               <circle cx="55" cy="55" r="52" fill="none" stroke="#34D399" stroke-width="1.5" opacity=".3"/>
               <circle cx="55" cy="55" r="44" fill="none" stroke="#34D399" stroke-width="2"/>
-              <text font-family="Space Grotesk, sans-serif" font-size="8" font-weight="600" fill="#34D399" letter-spacing="2.5"><textPath href="#gp7" startOffset="0%">RISCO ZERO · GARANTIA TOTAL · RISCO ZERO · </textPath></text>
+              <text font-family="Space Grotesk, sans-serif" font-size="8" font-weight="600" fill="#34D399" letter-spacing="2.5"><textPath href="#gp7" startOffset="0%">GARANTIA 7 DIAS · CDC · GARANTIA 7 DIAS · </textPath></text>
               <text x="55" y="50" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="28" font-weight="700" fill="#34D399">7</text>
               <text x="55" y="66" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#34D399" letter-spacing="3">DIAS</text>
             </svg>
           </div>
           <div>
-            <h2 class="font-serif text-2xl sm:text-3xl mb-2 text-ink">O risco é completamente meu.</h2>
-            <p class="text-muted leading-relaxed">Experimente por 7 dias. Se não gostar por qualquer motivo — ou por nenhum — é só pedir. Sem perguntas, sem formulário, sem espera.</p>
+            <h2 class="font-serif text-2xl sm:text-3xl mb-2 text-ink">Você tem 7 dias para avaliar com calma.</h2>
+            <p class="text-muted leading-relaxed">Se decidir cancelar dentro do prazo legal de 7 dias, basta pedir pelos canais oficiais. Sem justificativa obrigatória.</p>
           </div>
         </div>
         <!-- 3 pilares de confiança -->
@@ -597,21 +600,21 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
               <span class="font-display font-semibold text-trust text-sm">Garantia Incondicional</span>
             </div>
-            <p class="text-xs text-muted leading-relaxed"><strong class="text-ink">7 dias</strong> para testar com zero risco. Pediu reembolso, devolvemos 100% — sem precisar justificar nada.</p>
+            <p class="text-xs text-muted leading-relaxed"><strong class="text-ink">7 dias corridos</strong> para pedir reembolso integral, conforme a Política de Reembolso.</p>
           </div>
           <div class="rounded-xl p-4" style="background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.2)">
             <div class="flex items-center gap-2 mb-2">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
               <span class="font-display font-semibold text-trust text-sm">Nossa promessa</span>
             </div>
-            <p class="text-xs text-muted leading-relaxed">O Motor foi construído para <strong class="text-ink">entregar resultados reais</strong>. Se não sentir diferença, o reembolso está lá — sem burocracia.</p>
+            <p class="text-xs text-muted leading-relaxed">O Motor foi construído para entregar uma versão mais alinhada à vaga. Se achar que não faz sentido para você, o reembolso está lá — sem burocracia.</p>
           </div>
           <div class="rounded-xl p-4" style="background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.2)">
             <div class="flex items-center gap-2 mb-2">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span class="font-display font-semibold text-trust text-sm">Bônus Permanentes</span>
+              <span class="font-display font-semibold text-trust text-sm">Processo simples</span>
             </div>
-            <p class="text-xs text-muted leading-relaxed">Mesmo que peça reembolso, os <strong class="text-ink">10 bônus ficam com você</strong>. Sem devolução de material.</p>
+            <p class="text-xs text-muted leading-relaxed">Se precisar pedir reembolso dentro do prazo, o pedido é feito pelo e-mail oficial e tratado conforme a política publicada.</p>
           </div>
         </div>
       </div>
@@ -631,7 +634,7 @@
         </div>
         <div class="reveal card rounded-xl p-6 text-center">
           <div class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-trust/10 text-trust mb-3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-          <p class="font-semibold mb-1">Acesso na hora</p><p class="text-muted text-sm">O link chega no e-mail após o pagamento.</p>
+          <p class="font-semibold mb-1">Acesso por e-mail</p><p class="text-muted text-sm">O link é enviado após a confirmação do pagamento.</p>
         </div>
         <div class="reveal card rounded-xl p-6 text-center">
           <div class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-trust/10 text-trust mb-3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
@@ -659,10 +662,10 @@
         <details class="reveal card rounded-xl p-5"><summary class="flex items-center justify-between font-semibold">Funciona pra minha área?<svg class="faq-chev text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary><p class="text-muted text-sm mt-3">Sim. O Motor se adapta às palavras-chave da vaga que você colar — em qualquer área.</p></details>
         <details class="reveal card rounded-xl p-5"><summary class="flex items-center justify-between font-semibold">Preciso saber de IA ou tecnologia?<svg class="faq-chev text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary><p class="text-muted text-sm mt-3">Não. Você cola dois textos e a ferramenta faz o resto.</p></details>
         <details class="reveal card rounded-xl p-5"><summary class="flex items-center justify-between font-semibold">É mensalidade?<svg class="faq-chev text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary><p class="text-muted text-sm mt-3">Não. R$47 é pagamento único. A Comunidade de Recolocação (R$19,90/mês) é opcional — você decide após a compra, sem obrigação.</p></details>
-        <details class="reveal card rounded-xl p-5"><summary class="flex items-center justify-between font-semibold">Como eu recebo?<svg class="faq-chev text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary><p class="text-muted text-sm mt-3">Acesso imediato por e-mail assim que o pagamento for confirmado.</p></details>
-        <details class="reveal card rounded-xl p-5"><summary class="flex items-center justify-between font-semibold">E se não funcionar pra mim?<svg class="faq-chev text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary><p class="text-muted text-sm mt-3">Garantia de 7 dias: incondicional. Pediu reembolso, devolvo 100%.</p></details>
+        <details class="reveal card rounded-xl p-5"><summary class="flex items-center justify-between font-semibold">Como eu recebo?<svg class="faq-chev text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary><p class="text-muted text-sm mt-3">Você recebe o acesso por e-mail após a confirmação do pagamento.</p></details>
+        <details class="reveal card rounded-xl p-5"><summary class="flex items-center justify-between font-semibold">E se não funcionar pra mim?<svg class="faq-chev text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary><p class="text-muted text-sm mt-3">Você pode pedir reembolso em até 7 dias corridos, conforme a Política de Reembolso.</p></details>
         <details class="reveal card rounded-xl p-5"><summary class="flex items-center justify-between font-semibold">É só um modelo de Word?<svg class="faq-chev text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary><p class="text-muted text-sm mt-3">Não. É uma ferramenta que reescreve sob medida pra cada vaga — não um template genérico.</p></details>
-        <details class="reveal card rounded-xl p-5"><summary class="flex items-center justify-between font-semibold">Tem acesso vitalício?<svg class="faq-chev text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary><p class="text-muted text-sm mt-3">Sim. Pagamento único = acesso permanente à versão atual + atualizações por 12 meses. Após isso, só paga se quiser continuar recebendo as atualizações.</p></details>
+        <details class="reveal card rounded-xl p-5"><summary class="flex items-center justify-between font-semibold">Qual acesso está incluído?<svg class="faq-chev text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary><p class="text-muted text-sm mt-3">A compra libera a versão do produto descrita na oferta vigente e os bônus informados no checkout.</p></details>
       </div>
     </div>
   </section>
@@ -675,8 +678,8 @@
       <h2 class="reveal font-display font-bold text-3xl sm:text-4xl mb-5">O robô não vai mudar.<br><span class="text-accent-grad">Seu currículo pode mudar agora.</span></h2>
       <p class="reveal text-muted text-lg mb-8 max-w-xl mx-auto">Pare de ser barrado na triagem. Comece a chegar na mesa do recrutador.</p>
       <a href="#checkout" data-checkout data-cta-location="bottom" class="reveal inline-flex items-center grad-accent text-bg font-bold px-8 py-4 rounded-xl text-lg hover:brightness-110 glow cursor-pointer">Garantir meu acesso — R$47</a>
-      <p class="reveal text-sm text-muted mt-4">Acesso imediato · Garantia de 7 dias · PIX e cartão</p>
-      <div class="reveal card rounded-2xl p-6 mt-10 text-left"><p class="font-serif text-lg text-ink/90 leading-relaxed"><strong class="text-accent">P.S.</strong> Toda vaga que você manda no formato errado é uma porta que o robô fecha antes de qualquer pessoa te ver. R$47 hoje, com 7 dias de garantia, é o menor risco que você vai correr na sua busca por emprego. O preço de lançamento sobe assim que os primeiros resultados forem publicados.</p></div>
+      <p class="reveal text-sm text-muted mt-4">Acesso por e-mail · Garantia de 7 dias · PIX e cartão</p>
+      <div class="reveal card rounded-2xl p-6 mt-10 text-left"><p class="font-serif text-lg text-ink/90 leading-relaxed"><strong class="text-accent">P.S.</strong> Cada vaga pede uma leitura diferente do seu material. Se você quer revisar currículo, carta e LinkedIn com foco na triagem automática, o Aprovaí entrega esse primeiro passo por R$47, com 7 dias de garantia.</p></div>
     </div>
   </section>
 </main>
@@ -691,7 +694,7 @@
 <!-- MOBILE STICKY BAR -->
 <div class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-bg/95 backdrop-blur border-t border-line px-4 py-3 flex items-center justify-between gap-3">
   <div><p class="text-xs text-muted line-through leading-none">R$480</p><p class="font-display font-bold text-xl leading-none mt-0.5">R$47</p></div>
-  <a href="#oferta" class="flex-1 text-center grad-accent text-bg font-bold py-3 rounded-xl cursor-pointer text-sm">Quero passar pelo robô</a>
+  <a href="#oferta" class="flex-1 text-center grad-accent text-bg font-bold py-3 rounded-xl cursor-pointer text-sm">Quero testar o Motor</a>
 </div>
 
 <script>
@@ -738,7 +741,7 @@
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Motor Anti-ATS — Aprovaí",
-  "description": "Ferramenta que reescreve currículos, cartas de apresentação e LinkedIn para passar na triagem automática (ATS) e chegar ao recrutador humano.",
+  "description": "Ferramenta digital que reorganiza currículos, cartas de apresentação e LinkedIn para a triagem automática e para leitura humana.",
   "url": "https://www.mentoriaaprovai.com.br/",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web",
@@ -798,7 +801,7 @@
       "name": "Como eu recebo?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Acesso imediato por e-mail assim que o pagamento for confirmado."
+        "text": "Você recebe o acesso por e-mail após a confirmação do pagamento."
       }
     },
     {
@@ -806,7 +809,7 @@
       "name": "E se não funcionar pra mim?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Garantia de 7 dias: incondicional. Pediu reembolso, devolvo 100%."
+        "text": "Você pode pedir reembolso em até 7 dias corridos, conforme a Política de Reembolso."
       }
     },
     {
@@ -819,10 +822,10 @@
     },
     {
       "@type": "Question",
-      "name": "Tem acesso vitalício?",
+      "name": "Qual acesso está incluído?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sim. Pagamento único = acesso permanente à versão atual + atualizações por 12 meses. Após isso, só paga se quiser continuar recebendo as atualizações."
+        "text": "A compra libera a versão do produto descrita na oferta vigente e os bônus informados no checkout."
       }
     }
   ]
