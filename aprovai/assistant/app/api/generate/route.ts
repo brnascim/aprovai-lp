@@ -3,6 +3,7 @@
 
 export const runtime = "nodejs";
 
+import { createHmac, timingSafeEqual } from "node:crypto";
 import { trackCvGenerated } from "@/lib/tracking";
 
 const MAX = 8000;
@@ -13,11 +14,51 @@ function section(text: string, tag: string): string {
   return m ? m[1].trim() : "";
 }
 
+// Gate de acesso server-side (mesmo esquema HMAC do endpoint web/api/otimizar.js).
+// Fail-closed: sem ACCESS_TOKEN_SECRET, nega — salvo ALLOW_UNVERIFIED_ACCESS=true (dev).
+function verifyAccessToken(token: string): boolean {
+  const secret = process.env.ACCESS_TOKEN_SECRET;
+  if (!secret) return process.env.ALLOW_UNVERIFIED_ACCESS === "true";
+  if (!token || token.indexOf(".") === -1) return false;
+  const [payloadB64, sigB64] = token.split(".");
+  if (!payloadB64 || !sigB64) return false;
+  try {
+    const expected = createHmac("sha256", secret)
+      .update(payloadB64)
+      .digest("base64url");
+    const a = Buffer.from(expected);
+    const b = Buffer.from(sigB64);
+    if (a.length !== b.length || !timingSafeEqual(a, b)) return false;
+    const payload = JSON.parse(Buffer.from(payloadB64, "base64url").toString("utf8"));
+    if (payload && typeof payload.exp === "number" && Math.floor(Date.now() / 1000) > payload.exp) {
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function extractToken(req: Request, body: { token?: unknown }): string {
+  const auth = req.headers.get("authorization") || "";
+  if (auth.toLowerCase().startsWith("bearer ")) return auth.slice(7).trim();
+  if (body && typeof body.token === "string") return body.token.trim();
+  return "";
+}
+
 export async function POST(req: Request) {
   const _start = Date.now();
   try {
-    const { vaga, experiencia, area } = await req.json();
+    const body = await req.json();
+    const { vaga, experiencia, area } = body;
     const distinctId = req.headers.get("x-ph-distinct-id") || "anonymous";
+
+    if (!verifyAccessToken(extractToken(req, body))) {
+      return Response.json(
+        { error: "Acesso não autorizado. Verifique o link de acesso enviado por e-mail." },
+        { status: 401 },
+      );
+    }
 
     if (!vaga || !experiencia) {
       return Response.json({ error: "Preencha a vaga e a sua experiência." }, { status: 400 });
