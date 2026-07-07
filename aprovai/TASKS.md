@@ -13,9 +13,10 @@
 - [x] Rota `/api/generate` com prompt honesto (sem inventar dados/promessa de emprego). Chave só no servidor.
 - [x] Estimativa de aderência às palavras-chave da vaga (rotulada como estimativa).
 - [ ] `npm install && npm run dev` para validar; preencher `ANTHROPIC_API_KEY`.
-- [ ] Rate-limit por IP/sessão.
-- [ ] Gate de acesso por token pós-pagamento (integra com Tarefa 2).
+- [x] Rate-limit por IP/sessão. (endpoint `web/api/otimizar.js` — Upstash se configurado, senão best-effort; ver `docs/07`.)
+- [x] Gate de acesso por token pós-pagamento (HMAC server-side em `web/api/otimizar.js` e `assistant/.../generate/route.ts`; falta emitir o token no n8n — Tarefa 2). Ver `docs/07-token-acesso-e-endpoint.md`.
 - [ ] Telemetria de custo (tokens) + limite por usuário.
+- [ ] Setar `ACCESS_TOKEN_SECRET` (Vercel + n8n) e, recomendado, provisionar Upstash Redis.
 
 ## TAREFA 2 — Pagamento + entrega automática
 - [ ] Checkout Mercado Pago/Stripe (entrada R$47, bump R$27, upsell R$97).

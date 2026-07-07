@@ -135,21 +135,25 @@
     document.documentElement.classList.add('gated');
 })();
 </script>
-<!-- Analytics: PostHog — chave pública, segura no frontend -->
+<!-- Analytics: PostHog — chave pública, segura no frontend. Defina POSTHOG_KEY para ativar. -->
 <script>
-  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init me ws ".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-  posthog.init('phc_REPLACE_WITH_YOUR_KEY', {
-    api_host: 'https://us.i.posthog.com',
-    defaults: '2026-01-30',
-    autocapture: false,
-    capture_pageview: false,
-    persistence: 'localStorage+cookie',
-    loaded: function(ph) {
-      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        ph.opt_out_capturing();
+  (function() {
+    var POSTHOG_KEY = ''; // preencher com a chave real (phc_...) para ativar o tracking
+    if (!POSTHOG_KEY) return;
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init me ws ".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init(POSTHOG_KEY, {
+      api_host: 'https://us.i.posthog.com',
+      defaults: '2026-01-30',
+      autocapture: false,
+      capture_pageview: false,
+      persistence: 'localStorage+cookie',
+      loaded: function(ph) {
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          ph.opt_out_capturing();
+        }
       }
-    }
-  });
+    });
+  })();
 </script>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -252,7 +256,8 @@
 
     <!-- Score card -->
     <div class="card rounded-2xl p-5 mb-4">
-      <p class="text-xs font-semibold tracking-widest text-muted uppercase mb-4">Score ATS</p>
+      <p class="text-xs font-semibold tracking-widest text-muted uppercase mb-1">Aderência às palavras-chave</p>
+      <p class="text-[11px] text-muted/70 mb-4">Estimativa da IA sobre a cobertura das palavras-chave da vaga — não é um score oficial de nenhum ATS.</p>
       <div class="grid grid-cols-3 gap-3 items-center mb-4">
 
         <div class="text-center">
@@ -460,10 +465,15 @@ async function otimizar() {
   const _phStart = Date.now();
 
   try {
+    let _tk = '';
+    try { _tk = localStorage.getItem('aprovai_tk') || ''; } catch (e) {}
     const res = await fetch('/api/otimizar', {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ vaga, curriculo }),
+      headers: Object.assign(
+        { 'content-type': 'application/json' },
+        _tk ? { authorization: 'Bearer ' + _tk } : {},
+      ),
+      body: JSON.stringify({ vaga, curriculo, token: _tk }),
     });
 
     const data = await res.json();
