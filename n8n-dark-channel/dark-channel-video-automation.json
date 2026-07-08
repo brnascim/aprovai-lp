@@ -1,0 +1,461 @@
+{
+  "name": "Canal Dark - Produção Automatizada de Vídeos",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Canal Dark — Produção Automatizada\n\nFluxo completo:\n1. Agendador dispara diariamente\n2. Busca a próxima ideia (Google Sheets)\n3. GPT gera o roteiro de narração\n4. GPT divide em cenas + prompts de imagem\n5. Gera 1 imagem por cena (DALL·E 3)\n6. Monta o payload do JSON2Video (voz + imagens + legendas)\n7. Renderiza e faz polling do status\n8. Gera título/descrição/tags\n9. Baixa o MP4 e publica no YouTube\n10. Atualiza a planilha\n\n⚙️ Configure as credenciais e os IDs marcados como PLACEHOLDER.",
+        "height": 460,
+        "width": 380,
+        "color": 6
+      },
+      "id": "sticky-intro",
+      "name": "Leia-me",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-360, 120]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "id": "sched-trigger",
+      "name": "Agendador (Diário)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [-120, 300]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "PLACEHOLDER_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Ideias",
+          "mode": "name"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "status",
+              "lookupValue": "pendente"
+            }
+          ]
+        },
+        "options": {
+          "returnFirstMatch": true
+        }
+      },
+      "id": "gsheet-read",
+      "name": "Buscar Próxima Ideia",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [120, 300],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "PLACEHOLDER_GSHEETS_CRED",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-4o\",\n  \"temperature\": 0.9,\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Você é roteirista de um canal dark de YouTube especializado em histórias de terror e suspense. Escreva um roteiro de NARRAÇÃO em português do Brasil, com um gancho forte nos primeiros 5 segundos, linguagem imersiva e tom sombrio. Retorne SOMENTE o texto a ser narrado, sem marcações de cena, sem títulos, sem instruções. Alvo: cerca de 600 palavras.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Tema do vídeo: {{ $json.topic }}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "openai-script",
+      "name": "Gerar Roteiro (GPT)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [360, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "PLACEHOLDER_OPENAI_CRED",
+          "name": "OpenAI (Header Auth)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-4o\",\n  \"temperature\": 0.7,\n  \"response_format\": { \"type\": \"json_object\" },\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Divida o roteiro recebido em cenas curtas (6 a 12 cenas). Para CADA cena retorne: 'texto' (o trecho exato da narração daquela cena, em pt-BR) e 'prompt_imagem' (um prompt em INGLÊS, cinematográfico e sombrio, para gerar uma imagem 16:9 daquela cena). Responda em JSON no formato: {\\\"cenas\\\":[{\\\"texto\\\":\\\"...\\\",\\\"prompt_imagem\\\":\\\"...\\\"}]}\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": {{ JSON.stringify($json.choices[0].message.content) }}\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "openai-scenes",
+      "name": "Gerar Cenas + Prompts",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [600, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "PLACEHOLDER_OPENAI_CRED",
+          "name": "OpenAI (Header Auth)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Converte a resposta JSON do GPT em 1 item por cena\nconst raw = $input.first().json.choices[0].message.content;\nconst data = JSON.parse(raw);\nreturn (data.cenas || []).map((c, i) => ({\n  json: {\n    index: i,\n    texto: c.texto,\n    prompt_imagem: c.prompt_imagem\n  }\n}));"
+      },
+      "id": "code-split",
+      "name": "Separar Cenas",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [840, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/images/generations",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"dall-e-3\",\n  \"prompt\": {{ JSON.stringify($json.prompt_imagem + \", dark cinematic, moody lighting, high detail, 16:9\") }},\n  \"size\": \"1792x1024\",\n  \"quality\": \"standard\",\n  \"n\": 1\n}",
+        "options": {}
+      },
+      "id": "openai-image",
+      "name": "Gerar Imagem por Cena",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1080, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "PLACEHOLDER_OPENAI_CRED",
+          "name": "OpenAI (Header Auth)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1",
+              "name": "index",
+              "value": "={{ $('Separar Cenas').item.json.index }}",
+              "type": "number"
+            },
+            {
+              "id": "a2",
+              "name": "texto",
+              "value": "={{ $('Separar Cenas').item.json.texto }}",
+              "type": "string"
+            },
+            {
+              "id": "a3",
+              "name": "image_url",
+              "value": "={{ $json.data[0].url }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "set-scene",
+      "name": "Montar Cena",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1320, 300]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "cenas",
+        "options": {}
+      },
+      "id": "aggregate",
+      "name": "Juntar Cenas",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [1560, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Monta o payload de vídeo do JSON2Video\n// Cada cena = 1 imagem + 1 narração (voz). Legendas geradas automaticamente.\nconst cenas = ($input.first().json.cenas || []).sort((a, b) => a.index - b.index);\n\nconst scenes = cenas.map((c) => ({\n  comment: `Cena ${c.index}`,\n  elements: [\n    {\n      type: 'image',\n      src: c.image_url,\n      duration: -1,\n      pan: 'right',\n      zoom: 1\n    },\n    {\n      type: 'voice',\n      text: c.texto,\n      voice: 'pt-BR-AntonioNeural',\n      model: 'azure'\n    }\n  ]\n}));\n\nconst movie = {\n  resolution: 'full-hd',\n  quality: 'high',\n  scenes,\n  elements: [\n    {\n      type: 'subtitles',\n      language: 'pt',\n      settings: {\n        style: 'classic',\n        'font-family': 'Oswald',\n        'font-size': 42,\n        position: 'bottom-center',\n        'word-color': '#FFD400',\n        'line-color': '#FFFFFF',\n        'outline-color': '#000000',\n        'outline-width': 4,\n        'max-words-per-line': 4\n      }\n    }\n  ]\n};\n\nreturn [{ json: { movie } }];"
+      },
+      "id": "code-payload",
+      "name": "Montar Payload JSON2Video",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1800, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.json2video.com/v2/movies",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "PLACEHOLDER_JSON2VIDEO_API_KEY"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.movie) }}",
+        "options": {}
+      },
+      "id": "j2v-render",
+      "name": "Renderizar (JSON2Video)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2040, 300]
+    },
+    {
+      "parameters": {
+        "amount": 45
+      },
+      "id": "wait",
+      "name": "Aguardar Render",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [2280, 300],
+      "webhookId": "j2v-poll-wait"
+    },
+    {
+      "parameters": {
+        "url": "https://api.json2video.com/v2/movies",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "PLACEHOLDER_JSON2VIDEO_API_KEY"
+            }
+          ]
+        },
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "project",
+              "value": "={{ $('Renderizar (JSON2Video)').item.json.project }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "j2v-status",
+      "name": "Checar Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2520, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.movie.status }}",
+              "rightValue": "done",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-done",
+      "name": "Render Concluído?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [2760, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-4o\",\n  \"temperature\": 0.8,\n  \"response_format\": { \"type\": \"json_object\" },\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Você é especialista em SEO de YouTube para canais dark de terror. Gere metadados otimizados para CTR. Responda em JSON: {\\\"title\\\":\\\"(até 70 caracteres, com curiosidade/suspense)\\\",\\\"description\\\":\\\"(2-3 parágrafos + call to action de inscrição)\\\",\\\"tags\\\":[\\\"tag1\\\",\\\"tag2\\\"]}\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Tema: {{ $('Buscar Próxima Ideia').item.json.topic }}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "openai-meta",
+      "name": "Gerar Metadados (SEO)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [3000, 200],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "PLACEHOLDER_OPENAI_CRED",
+          "name": "OpenAI (Header Auth)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Checar Status').item.json.movie.url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "data"
+            }
+          }
+        }
+      },
+      "id": "download-video",
+      "name": "Baixar MP4",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [3240, 200]
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "upload",
+        "title": "={{ JSON.parse($('Gerar Metadados (SEO)').item.json.choices[0].message.content).title }}",
+        "categoryId": "24",
+        "binaryProperty": "data",
+        "options": {
+          "description": "={{ JSON.parse($('Gerar Metadados (SEO)').item.json.choices[0].message.content).description }}",
+          "privacyStatus": "private",
+          "tags": "={{ JSON.parse($('Gerar Metadados (SEO)').item.json.choices[0].message.content).tags.join(',') }}"
+        }
+      },
+      "id": "youtube-upload",
+      "name": "Publicar no YouTube",
+      "type": "n8n-nodes-base.youTube",
+      "typeVersion": 1,
+      "position": [3480, 200],
+      "credentials": {
+        "youTubeOAuth2Api": {
+          "id": "PLACEHOLDER_YOUTUBE_CRED",
+          "name": "YouTube account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "PLACEHOLDER_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Ideias",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Buscar Próxima Ideia').item.json.id }}",
+            "status": "publicado",
+            "youtube_id": "={{ $json.id }}"
+          },
+          "matchingColumns": ["id"]
+        },
+        "options": {}
+      },
+      "id": "gsheet-update",
+      "name": "Atualizar Planilha",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [3720, 200],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "PLACEHOLDER_GSHEETS_CRED",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Agendador (Diário)": {
+      "main": [[{ "node": "Buscar Próxima Ideia", "type": "main", "index": 0 }]]
+    },
+    "Buscar Próxima Ideia": {
+      "main": [[{ "node": "Gerar Roteiro (GPT)", "type": "main", "index": 0 }]]
+    },
+    "Gerar Roteiro (GPT)": {
+      "main": [[{ "node": "Gerar Cenas + Prompts", "type": "main", "index": 0 }]]
+    },
+    "Gerar Cenas + Prompts": {
+      "main": [[{ "node": "Separar Cenas", "type": "main", "index": 0 }]]
+    },
+    "Separar Cenas": {
+      "main": [[{ "node": "Gerar Imagem por Cena", "type": "main", "index": 0 }]]
+    },
+    "Gerar Imagem por Cena": {
+      "main": [[{ "node": "Montar Cena", "type": "main", "index": 0 }]]
+    },
+    "Montar Cena": {
+      "main": [[{ "node": "Juntar Cenas", "type": "main", "index": 0 }]]
+    },
+    "Juntar Cenas": {
+      "main": [[{ "node": "Montar Payload JSON2Video", "type": "main", "index": 0 }]]
+    },
+    "Montar Payload JSON2Video": {
+      "main": [[{ "node": "Renderizar (JSON2Video)", "type": "main", "index": 0 }]]
+    },
+    "Renderizar (JSON2Video)": {
+      "main": [[{ "node": "Aguardar Render", "type": "main", "index": 0 }]]
+    },
+    "Aguardar Render": {
+      "main": [[{ "node": "Checar Status", "type": "main", "index": 0 }]]
+    },
+    "Checar Status": {
+      "main": [[{ "node": "Render Concluído?", "type": "main", "index": 0 }]]
+    },
+    "Render Concluído?": {
+      "main": [
+        [{ "node": "Gerar Metadados (SEO)", "type": "main", "index": 0 }],
+        [{ "node": "Aguardar Render", "type": "main", "index": 0 }]
+      ]
+    },
+    "Gerar Metadados (SEO)": {
+      "main": [[{ "node": "Baixar MP4", "type": "main", "index": 0 }]]
+    },
+    "Baixar MP4": {
+      "main": [[{ "node": "Publicar no YouTube", "type": "main", "index": 0 }]]
+    },
+    "Publicar no YouTube": {
+      "main": [[{ "node": "Atualizar Planilha", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": ["canal-dark", "automacao-video"]
+}
