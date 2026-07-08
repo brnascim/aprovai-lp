@@ -1,110 +1,75 @@
-# Canal Dark — Produção Automatizada de Vídeos (n8n)
+# YT - Veo3 — Canal Dark de Shorts (n8n + MoviAPI)
 
-Workflow do **n8n** que produz vídeos de canal dark (faceless) de ponta a ponta:
-gera roteiro, imagens, narração com legendas, monta o vídeo e publica no YouTube —
-tudo a partir de uma fila de ideias em uma planilha.
+Reconstrução do workflow **"YT - Veo3"** do vídeo tutorial. Produz **YouTube Shorts**
+de canal dark (faceless) de forma automática usando a **MoviAPI** (geração de vídeo
+com **Google Veo3**), refina o título com um agente **OpenAI** e publica direto no
+YouTube via **API de upload resumível**.
 
-> ⚠️ **Nota de origem:** não consegui acessar o vídeo do YouTube
-> (`f-4s0-pGnn4`) neste ambiente — o YouTube bloqueia acesso automatizado (HTTP 403).
-> Por isso, este fluxo **não é uma cópia byte-a-byte** do vídeo, e sim uma
-> reconstrução fiel da arquitetura mais comum usada nesses tutoriais de canal dark.
-> Se você colar aqui a **transcrição**, a **descrição** ou um **print dos nós** do
-> vídeo, eu ajusto para bater exatamente com o original.
+> Este JSON foi reconstruído a partir dos frames do vídeo enviado. Onde a URL/parâmetro
+> exato da MoviAPI não aparecia na tela, usei o formato mais provável — **confirme os
+> endpoints na documentação atual da MoviAPI** antes de rodar em produção.
 
 ---
 
-## Arquitetura do fluxo
+## Arquitetura real (do vídeo)
 
 ```
-Agendador (diário)
-   → Buscar próxima ideia (Google Sheets)
-   → Gerar roteiro (GPT-4o)
-   → Gerar cenas + prompts de imagem (GPT-4o, JSON)
-   → Separar cenas (Code, 1 item por cena)
-   → Gerar imagem por cena (DALL·E 3)  ── roda por item
-   → Montar cena / Juntar cenas (Aggregate)
-   → Montar payload JSON2Video (Code)
-   → Renderizar (JSON2Video)
-   → Aguardar / Checar status ⇄ (loop até "done")
-   → Gerar metadados SEO (GPT-4o)
-   → Baixar MP4
-   → Publicar no YouTube (privado por padrão)
-   → Atualizar planilha (status = publicado)
+[Manual Trigger]  ┐
+                  ├─→ Credenciais (Set: moviapi_key, email)
+[Schedule Trigger]┘
+        → MOVIAPI        (POST  — inicia a geração do Short com template "veo3short")
+        → Wait1          (aguarda a renderização do Veo3)
+        → MOVIAPI1       (GET   — status "done" + url do MP4 + title + script)
+        → Titulo         (Agente OpenAI — reescreve o título no estilo "Zack D. Films")
+        ── grupo "Sobe Youtube" ──
+        → CriaURL        (POST googleapis /upload/youtube/v3/videos?uploadType=resumable)
+        → Download Video1(GET  — baixa o MP4 da MoviAPI como binário)
+        → FinalizaUpload (PUT  — envia o binário para a URL resumível do YouTube)
 ```
 
-## Ferramentas escolhidas (e por quê)
+**Insight central:** a MoviAPI com o template `veo3short` já devolve o **vídeo pronto +
+roteiro + título**. O n8n só orquestra: dispara, espera, melhora o título e sobe no
+YouTube. É por isso que o fluxo é curto.
 
-| Etapa | Ferramenta padrão | Alternativas fáceis |
-|-------|-------------------|---------------------|
-| Fila de ideias | Google Sheets | Airtable, Notion, ou um nó *Set* fixo |
-| Roteiro/cenas/SEO | OpenAI GPT-4o | Anthropic Claude, Google Gemini |
-| Imagens | OpenAI DALL·E 3 | Replicate (Flux), Leonardo, Midjourney |
-| Voz + legendas + montagem | **JSON2Video** | Creatomate, Shotstack, FFmpeg self-hosted |
-| Voz (TTS) | Azure (`pt-BR-AntonioNeural`) via JSON2Video | ElevenLabs (troque `model` e `voice`) |
-| Publicação | YouTube (nó nativo) | Só salvar no Drive para aprovação manual |
+## Ferramentas usadas
 
-> **Por que JSON2Video?** Ele faz TTS, sincroniza imagens com a narração e gera as
-> legendas em um único render — é o padrão nos tutoriais de canal dark. Se preferir
-> **ElevenLabs**, no nó *Montar Payload JSON2Video* troque o elemento de voz por:
-> ```js
-> { type: 'voice', text: c.texto, voice: 'SEU_VOICE_ID', model: 'elevenlabs' }
-> ```
+| Papel | Ferramenta |
+|-------|-----------|
+| Geração do vídeo (Veo3) + roteiro + título | **MoviAPI** (`v1.moviapi.com`, template `veo3short`) |
+| Refino do título (estilo viral) | **OpenAI** (Agent + `gpt-4o-mini`) |
+| Publicação | **YouTube Data API v3** (upload resumível via HTTP) |
+| Pesquisa de nicho / espionar receita de canais | **NexLev Analytics** (mostrado no vídeo, fora do fluxo) |
 
----
+## Como importar e configurar
 
-## Como importar
+1. n8n → **Import from File** → `dark-channel-video-automation.json`.
+2. No nó **Credenciais**, cole sua `moviapi_key` e seu e-mail.
+3. Crie/ligue a credencial **OpenAI** no nó `OpenAI Chat Model5`.
+4. Crie/ligue a credencial **YouTube OAuth2** (Google Cloud → YouTube Data API v3) no nó `CriaURL`.
+5. Rode 1x pelo **Manual Trigger** para testar; depois ative o **Schedule Trigger**.
 
-1. No n8n: **Workflows → ⋯ → Import from File** e selecione
-   `dark-channel-video-automation.json`.
-2. Preencha os `PLACEHOLDER_*` (veja abaixo).
-3. Rode uma vez manualmente (**Execute Workflow**) antes de ativar o agendador.
+### Placeholders a substituir
+- `PLACEHOLDER_MOVIAPI_KEY` — sua chave da MoviAPI (nó Credenciais)
+- `PLACEHOLDER_OPENAI_CRED` — credencial OpenAI
+- `PLACEHOLDER_YOUTUBE_CRED` — credencial YouTube OAuth2
 
-## Credenciais necessárias
-
-Crie estas credenciais no n8n e ligue nos respectivos nós:
-
-| Credencial (n8n) | Onde obter | Placeholder no JSON |
-|------------------|-----------|---------------------|
-| **OpenAI (Header Auth)** — Header `Authorization` = `Bearer sk-...` | platform.openai.com | `PLACEHOLDER_OPENAI_CRED` |
-| **Google Sheets OAuth2** | Google Cloud Console | `PLACEHOLDER_GSHEETS_CRED` |
-| **YouTube OAuth2** | Google Cloud Console (YouTube Data API v3) | `PLACEHOLDER_YOUTUBE_CRED` |
-| **JSON2Video API key** — header `x-api-key` | json2video.com | `PLACEHOLDER_JSON2VIDEO_API_KEY` (colada direto nos nós HTTP) |
-| **Google Sheet ID** | URL da sua planilha | `PLACEHOLDER_SHEET_ID` |
-
-> 💡 Para a chave do JSON2Video, o ideal é criar uma credencial **Header Auth** no n8n
-> em vez de colar a chave em texto puro nos nós HTTP. Deixei em texto só para o fluxo
-> ficar legível na importação.
-
-## Planilha de ideias (aba `Ideias`)
-
-O fluxo espera uma planilha com pelo menos estas colunas:
-
-| id | topic | status | youtube_id |
-|----|-------|--------|-----------|
-| 1  | A casa que aparecia só à meia-noite | pendente | |
-| 2  | O elevador que descia para o 13º andar | pendente | |
-
-- O nó **Buscar Próxima Ideia** pega a primeira linha com `status = pendente`.
-- Ao final, **Atualizar Planilha** marca `status = publicado` e grava o `youtube_id`.
+### Detalhes que valem conferir
+- **Endpoint MoviAPI:** usei `POST /api/v1/video` e `GET /api/v1/video/{id}`. Ajuste ao
+  path real da sua conta MoviAPI (no vídeo aparecia `v1.moviapi.com/...` e body
+  `template=veo3short`, `language=en`).
+- **`CriaURL`** precisa retornar o header `location` (por isso `fullResponse: true`).
+  Esse header é a URL usada pelo `FinalizaUpload`.
+- **`FinalizaUpload`** envia `Content-Type: video/mp4` e o binário no campo `data`.
+- **Privacidade:** o vídeo publica como `public`. Troque para `private` enquanto testa.
 
 ---
 
-## Ajustes recomendados
+## ⚠️ Observações honestas (leia antes de escalar)
 
-- **Aprovação manual antes de postar:** desconecte *Publicar no YouTube* e deixe o
-  vídeo só ser baixado / salvo, ou coloque um nó de notificação (Telegram/E-mail)
-  com o link do MP4 antes do upload. O `privacyStatus` já vem como `private`.
-- **Frequência:** ajuste o nó *Agendador* (hoje: todo dia às 9h).
-- **Duração/nº de cenas:** no prompt do nó *Gerar Cenas + Prompts* (hoje: 6–12 cenas).
-- **Idioma/voz:** troque `pt-BR-AntonioNeural` por outra voz suportada.
-- **Custo por vídeo (aprox.):** GPT-4o (roteiro+cenas+SEO) + N imagens DALL·E 3 +
-  1 render JSON2Video. Comece com poucas cenas para calibrar.
-
-## Limitações conhecidas
-
-- Os `typeVersion` dos nós seguem versões recentes do n8n; se o seu n8n for mais
-  antigo, alguns nós podem pedir reconfiguração leve ao importar.
-- O nó *Baixar MP4* espera que a URL do render esteja em `movie.url` (formato atual
-  da API do JSON2Video v2). Confirme no retorno de *Checar Status*.
-- O loop de polling usa espera fixa de 45s por rodada. Aumente se seus vídeos forem
-  longos.
+- **Políticas do YouTube:** conteúdo 100% gerado por IA, repetitivo e em massa pode
+  cair em *"conteúdo inautêntico/spam"* (regra reforçada em 2025). Varie ângulo,
+  roteiro e ritmo; não suba 20 vídeos idênticos por dia.
+- **Custo:** cada Short = 1 render Veo3 (MoviAPI) + 1 chamada OpenAI. Veo3 não é barato;
+  calcule o custo por vídeo antes de programar dezenas por dia.
+- **Monetização de Shorts:** o RPM de Shorts é baixo. O jogo real é volume + usar os
+  Shorts como funil para vídeos longos, produtos ou outra oferta (veja a mentoria).
