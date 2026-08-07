@@ -1,0 +1,31 @@
+{
+  "tema": "grafite",
+  "formato": "4:5",
+  "marca": "@seuperfil",
+  "carrosseis": [
+    {
+      "nome": "folha-em-1-dia",
+      "slides": [
+        { "tipo": "capa", "selo": "PARA CONTABILIDADE", "titulo": "4 dias fechando folha é opcional", "subtitulo": "Escritório com até 5 pessoas" },
+        { "tipo": "texto", "titulo": "Não é volume", "corpo": "É retrabalho: o mesmo dado conferido três vezes." },
+        { "tipo": "numero", "numero": "12h", "corpo": "por mês só reconferindo o que já estava certo" },
+        { "tipo": "texto", "titulo": "Trocar de sistema não resolve", "corpo": "O problema está na ordem das etapas." },
+        { "tipo": "lista", "titulo": "O método das 3 colunas", "itens": ["Entrada", "Conferência única", "Fechamento"] },
+        { "tipo": "citacao", "corpo": "Mesmo sistema, mesma equipe. Fechou às 11h20.", "autor": "case real — com autorização" },
+        { "tipo": "cta", "titulo": "O processo completo está no link", "subtitulo": "Toque em Saiba mais" }
+      ]
+    },
+    {
+      "nome": "3-erros-de-precificacao",
+      "slides": [
+        { "tipo": "capa", "titulo": "3 erros que fazem você trabalhar de graça", "subtitulo": "Para quem vende bolo pelo WhatsApp" },
+        { "tipo": "texto", "titulo": "Erro 1: contar só o ingrediente", "corpo": "Gás, energia e embalagem também saem do seu bolso." },
+        { "tipo": "texto", "titulo": "Erro 2: não cobrar sua hora", "corpo": "Três horas de trabalho não podem valer zero." },
+        { "tipo": "texto", "titulo": "Erro 3: copiar o preço da vizinha", "corpo": "O custo dela não é o seu." },
+        { "tipo": "numero", "numero": "R$ 137", "corpo": "foi o preço certo de um bolo que era vendido a R$ 80" },
+        { "tipo": "lista", "titulo": "A conta que resolve", "itens": ["Custo direto", "Custo indireto", "Sua hora", "Margem"] },
+        { "tipo": "cta", "titulo": "Baixe a calculadora no link", "subtitulo": "Toque em Saiba mais" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "ideia": "Nutricionista clínico recém-formado lota a agenda em 60 dias sem depender de indicação",
+    "lente": "sub-nicho",
+    "dor": 5,
+    "poder_de_compra": 4,
+    "capacidade_de_entrega": 5,
+    "alcancabilidade": 4,
+    "diferenciacao": 4,
+    "velocidade": 3
+  },
+  {
+    "ideia": "Escritório de contabilidade fecha a folha em metade do tempo com planilha + 5 vídeos",
+    "lente": "ferramenta",
+    "dor": 4,
+    "poder_de_compra": 5,
+    "capacidade_de_entrega": 4,
+    "alcancabilidade": 4,
+    "diferenciacao": 3,
+    "velocidade": 5
+  },
+  {
+    "ideia": "Confeiteira de bolo caseiro precifica sem trabalhar de graça, em 1 semana",
+    "lente": "gargalo",
+    "dor": 5,
+    "poder_de_compra": 2,
+    "capacidade_de_entrega": 4,
+    "alcancabilidade": 5,
+    "diferenciacao": 3,
+    "velocidade": 5
+  }
+]
