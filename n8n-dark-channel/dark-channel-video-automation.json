@@ -1,18 +1,18 @@
 {
-  "name": "YT - Veo3 (Canal Dark Shorts - MoviAPI)",
+  "name": "Canal Dividas - Shorts Automaticos (Content Engine proprio)",
   "nodes": [
     {
       "parameters": {
-        "content": "## YT - Veo3 — Shorts automáticos (canal dark)\n\nReconstrução do fluxo do vídeo tutorial.\n\n**Como funciona:**\n1. MoviAPI (template `veo3short`) gera o Short com Veo3 — já devolve VÍDEO + ROTEIRO + TÍTULO prontos.\n2. Um Agente OpenAI reescreve o título no estilo viral (ex.: Zack D. Films).\n3. Upload direto no YouTube via API resumível (3 passos: CriaURL → Download → FinalizaUpload).\n\n⚙️ Preencha os PLACEHOLDER e ligue as credenciais (MoviAPI, OpenAI, YouTube OAuth2).",
-        "height": 300,
-        "width": 420,
+        "content": "## Canal Dívidas — Shorts automáticos (motor próprio)\n\nSubstitui a MoviAPI/Veo3 por um motor 100% gratuito (Pexels/Pixabay + Edge-TTS + FFmpeg) rodando na sua VPS Hostinger — veja `content-engine/README.md`.\n\n**Como funciona:**\n1. Gera roteiro (OpenAI, tema fixo do nicho dívidas)\n2. Quebra em cenas (texto PT-BR + busca EM inglês pra stock footage)\n3. POST no Content Engine local → monta o vídeo\n4. Título viral (Agente OpenAI)\n5. Upload resumível no YouTube (CriaURL → busca binário → FinalizaUpload)\n\n⚙️ Preencha os PLACEHOLDER e ligue as credenciais (OpenAI, YouTube OAuth2). O Content Engine deve estar rodando em CONTENT_ENGINE_URL.",
+        "height": 340,
+        "width": 440,
         "color": 3
       },
       "id": "sticky-intro",
       "name": "Leia-me",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
-      "position": [-140, -60]
+      "position": [-160, -100]
     },
     {
       "parameters": {},
@@ -20,7 +20,7 @@
       "name": "When clicking 'Execute workflow'",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
-      "position": [-140, 300]
+      "position": [-160, 300]
     },
     {
       "parameters": {
@@ -37,110 +37,102 @@
       "name": "Schedule Trigger",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
-      "position": [-140, 460]
+      "position": [-160, 460]
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "c1",
-              "name": "moviapi_key",
-              "value": "PLACEHOLDER_MOVIAPI_KEY",
-              "type": "string"
-            },
-            {
-              "id": "c2",
-              "name": "email",
-              "value": "seu-email@gmail.com",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
+        "jsCode": "const temas = [\n  'como negociar dívida no Serasa sem pagar tudo de uma vez',\n  'o erro que faz sua dívida nunca diminuir',\n  'o que fazer quando a dívida foi vendida pra uma empresa de recuperação de crédito',\n  'como saber se uma dívida já prescreveu',\n  'por que pagar o mínimo do cartão te mantém preso pra sempre',\n  'como negociar direto com o banco antes de virar Serasa',\n  'o golpe mais comum de quem promete limpar seu nome rápido'\n];\nconst tema = temas[Math.floor(Math.random() * temas.length)];\nreturn [{ json: { tema, content_engine_url: 'http://localhost:8787', voz: 'pt-BR-AntonioNeural' } }];"
       },
-      "id": "credenciais",
-      "name": "Credenciais",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [120, 380]
+      "id": "escolher-tema",
+      "name": "Escolher Tema",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [100, 380]
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://v1.moviapi.com/api/v1/video",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Authorization",
-              "value": "=Bearer {{ $('Credenciais').item.json.moviapi_key }}"
-            }
-          ]
-        },
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "template",
-              "value": "veo3short"
-            },
-            {
-              "name": "language",
-              "value": "en"
-            }
-          ]
-        },
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-4o-mini\",\n  \"temperature\": 0.9,\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Você é roteirista de um canal dark de YouTube Shorts sobre dívidas e recuperação financeira no Brasil. Escreva um roteiro de NARRAÇÃO em português do Brasil, gancho forte nos primeiros 3 segundos, tom direto e empático (nunca debochado de quem está endividado). Retorne SOMENTE o texto a ser narrado, entre 110 e 150 palavras, sem marcações de cena.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Tema do vídeo: {{ $json.tema }}\"\n    }\n  ]\n}",
         "options": {}
       },
-      "id": "moviapi-start",
-      "name": "MOVIAPI",
+      "id": "gerar-roteiro",
+      "name": "Gerar Roteiro",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [360, 380]
+      "position": [340, 380],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "PLACEHOLDER_OPENAI_CRED",
+          "name": "OpenAI (Header Auth)"
+        }
+      }
     },
     {
       "parameters": {
-        "amount": 120
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-4o-mini\",\n  \"temperature\": 0.6,\n  \"response_format\": { \"type\": \"json_object\" },\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Divida o roteiro em 5 a 7 cenas curtas. Para CADA cena retorne 'texto' (o trecho exato da narração em pt-BR, cobrindo o roteiro inteiro sem cortar nem repetir palavras) e 'busca' (2-3 palavras-chave em INGLÊS pra buscar vídeo de banco de imagens: dinheiro, contrato, calculadora, boletos, pessoa preocupada, banco, etc). Responda em JSON: {\\\"cenas\\\":[{\\\"texto\\\":\\\"...\\\",\\\"busca\\\":\\\"...\\\"}]}\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": {{ JSON.stringify($json.choices[0].message.content) }}\n    }\n  ]\n}",
+        "options": {}
       },
-      "id": "wait1",
-      "name": "Wait1",
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
+      "id": "gerar-cenas",
+      "name": "Gerar Cenas",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [580, 380],
-      "webhookId": "veo3-wait"
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "PLACEHOLDER_OPENAI_CRED",
+          "name": "OpenAI (Header Auth)"
+        }
+      }
     },
     {
       "parameters": {
-        "url": "=https://v1.moviapi.com/api/v1/video/{{ $('MOVIAPI').item.json.id }}",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Authorization",
-              "value": "=Bearer {{ $('Credenciais').item.json.moviapi_key }}"
-            }
-          ]
-        },
-        "options": {}
+        "jsCode": "const cenas = JSON.parse($json.choices[0].message.content).cenas;\nreturn [{\n  json: {\n    voz: $('Escolher Tema').item.json.voz,\n    content_engine_url: $('Escolher Tema').item.json.content_engine_url,\n    cenas\n  }\n}];"
       },
-      "id": "moviapi-status",
-      "name": "MOVIAPI1",
+      "id": "montar-payload",
+      "name": "Montar Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [820, 380]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.content_engine_url }}/generate",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"voz\": {{ JSON.stringify($json.voz) }},\n  \"cenas\": {{ JSON.stringify($json.cenas) }}\n}",
+        "options": {
+          "timeout": 600000
+        }
+      },
+      "id": "gerar-video",
+      "name": "Gerar Vídeo (Content Engine)",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [800, 380]
+      "position": [1060, 380]
     },
     {
       "parameters": {
         "promptType": "define",
-        "text": "=You are a YouTube SEO and content creation expert.\n\nCreate a YouTube Shorts title in the exact style of Zack D. Films: short, curiosity-driven, no clickbait lies, optional emoji. Return ONLY the title.\n\nScript:\n{{ $json.script }}",
+        "text": "=You are a YouTube SEO and content creation expert.\n\nCreate a YouTube Shorts title in the exact style of Zack D. Films: short, curiosity-driven, no clickbait lies, optional emoji. Return ONLY the title.\n\nScript:\n{{ $('Gerar Roteiro').item.json.choices[0].message.content }}",
         "options": {}
       },
       "id": "titulo",
       "name": "Titulo",
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.7,
-      "position": [1040, 380]
+      "position": [1300, 380]
     },
     {
       "parameters": {
@@ -155,7 +147,7 @@
       "name": "OpenAI Chat Model5",
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
-      "position": [1040, 560],
+      "position": [1300, 560],
       "credentials": {
         "openAiApi": {
           "id": "PLACEHOLDER_OPENAI_CRED",
@@ -165,16 +157,16 @@
     },
     {
       "parameters": {
-        "content": "### Sobe Youtube\nUpload resumível em 3 passos:\nCriaURL (inicia) → Download Video1 (baixa MP4) → FinalizaUpload (PUT do binário).",
+        "content": "### Sobe Youtube\nUpload resumível em 3 passos:\nCriaURL (inicia) → Buscar Vídeo Gerado (GET no Content Engine pelo job_id) → FinalizaUpload (PUT do binário).",
         "height": 320,
-        "width": 720,
+        "width": 740,
         "color": 2
       },
       "id": "sticky-upload",
       "name": "Sobe Youtube",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
-      "position": [1300, 240]
+      "position": [1560, 240]
     },
     {
       "parameters": {
@@ -193,7 +185,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"snippet\": {\n    \"title\": {{ JSON.stringify($('Titulo').item.json.output) }},\n    \"description\": {{ JSON.stringify($('MOVIAPI1').item.json.script) }},\n    \"categoryId\": \"27\"\n  },\n  \"status\": {\n    \"privacyStatus\": \"public\",\n    \"selfDeclaredMadeForKids\": false\n  }\n}",
+        "jsonBody": "={\n  \"snippet\": {\n    \"title\": {{ JSON.stringify($('Titulo').item.json.output) }},\n    \"description\": {{ JSON.stringify($('Gerar Roteiro').item.json.choices[0].message.content) }},\n    \"categoryId\": \"27\"\n  },\n  \"status\": {\n    \"privacyStatus\": \"private\",\n    \"selfDeclaredMadeForKids\": false\n  }\n}",
         "options": {
           "response": {
             "response": {
@@ -206,7 +198,7 @@
       "name": "CriaURL",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1360, 400],
+      "position": [1620, 400],
       "credentials": {
         "youTubeOAuth2Api": {
           "id": "PLACEHOLDER_YOUTUBE_CRED",
@@ -216,7 +208,7 @@
     },
     {
       "parameters": {
-        "url": "={{ $('MOVIAPI1').item.json.url }}",
+        "url": "={{ $('Escolher Tema').item.json.content_engine_url }}/videos/{{ $('Gerar Vídeo (Content Engine)').item.json.job_id }}",
         "options": {
           "response": {
             "response": {
@@ -226,11 +218,11 @@
           }
         }
       },
-      "id": "download-video",
-      "name": "Download Video1",
+      "id": "buscar-video-gerado",
+      "name": "Buscar Vídeo Gerado",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1600, 400]
+      "position": [1860, 400]
     },
     {
       "parameters": {
@@ -254,26 +246,29 @@
       "name": "FinalizaUpload",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1840, 400]
+      "position": [2100, 400]
     }
   ],
   "connections": {
     "When clicking 'Execute workflow'": {
-      "main": [[{ "node": "Credenciais", "type": "main", "index": 0 }]]
+      "main": [[{ "node": "Escolher Tema", "type": "main", "index": 0 }]]
     },
     "Schedule Trigger": {
-      "main": [[{ "node": "Credenciais", "type": "main", "index": 0 }]]
+      "main": [[{ "node": "Escolher Tema", "type": "main", "index": 0 }]]
     },
-    "Credenciais": {
-      "main": [[{ "node": "MOVIAPI", "type": "main", "index": 0 }]]
+    "Escolher Tema": {
+      "main": [[{ "node": "Gerar Roteiro", "type": "main", "index": 0 }]]
     },
-    "MOVIAPI": {
-      "main": [[{ "node": "Wait1", "type": "main", "index": 0 }]]
+    "Gerar Roteiro": {
+      "main": [[{ "node": "Gerar Cenas", "type": "main", "index": 0 }]]
     },
-    "Wait1": {
-      "main": [[{ "node": "MOVIAPI1", "type": "main", "index": 0 }]]
+    "Gerar Cenas": {
+      "main": [[{ "node": "Montar Payload", "type": "main", "index": 0 }]]
     },
-    "MOVIAPI1": {
+    "Montar Payload": {
+      "main": [[{ "node": "Gerar Vídeo (Content Engine)", "type": "main", "index": 0 }]]
+    },
+    "Gerar Vídeo (Content Engine)": {
       "main": [[{ "node": "Titulo", "type": "main", "index": 0 }]]
     },
     "OpenAI Chat Model5": {
@@ -283,9 +278,9 @@
       "main": [[{ "node": "CriaURL", "type": "main", "index": 0 }]]
     },
     "CriaURL": {
-      "main": [[{ "node": "Download Video1", "type": "main", "index": 0 }]]
+      "main": [[{ "node": "Buscar Vídeo Gerado", "type": "main", "index": 0 }]]
     },
-    "Download Video1": {
+    "Buscar Vídeo Gerado": {
       "main": [[{ "node": "FinalizaUpload", "type": "main", "index": 0 }]]
     }
   },
@@ -297,5 +292,5 @@
   "meta": {
     "templateCredsSetupCompleted": false
   },
-  "tags": ["canal-dark", "veo3", "moviapi", "shorts"]
+  "tags": ["canal-dark", "dividas", "content-engine", "shorts", "zero-custo"]
 }
