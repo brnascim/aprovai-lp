@@ -36,30 +36,36 @@ roteiro geralmente compensa o centavo.
 
 ```bash
 # 1. Dependências do sistema
-apt update && apt install -y python3 python3-pip ffmpeg
+apt update && apt install -y python3 python3-pip python3-venv ffmpeg git
 
-# 2. Código
+# 2. Código (clona o repo direto do GitHub)
 cd /opt
-git clone <seu-fork-ou-copie-esta-pasta> content-engine
-cd content-engine
+git clone -b claude/n8n-video-production-nk56hl https://github.com/brnascim/aprovai-lp.git
+cd aprovai-lp/n8n-dark-channel/content-engine
 
-# 3. Dependências Python
-pip install -r requirements.txt
+# 3. Ambiente virtual + dependências Python
+#    (obrigatório em Debian/Ubuntu recentes — "pip install" direto no sistema
+#    falha com "externally-managed-environment")
+python3 -m venv venv
+venv/bin/pip install -r requirements.txt
 
 # 4. Variáveis de ambiente
 cp .env.example .env
-# edite .env e cole PEXELS_API_KEY e PIXABAY_API_KEY
+# edite .env e cole PEXELS_API_KEY (PIXABAY_API_KEY pode ficar em branco — é opcional,
+# o sistema cai automaticamente pra Pexels-only ou fundo sólido se faltar)
+nano .env
 
 # 5. Suba o serviço (teste manual)
-export $(cat .env | xargs)
-python3 -m uvicorn app:app --host 0.0.0.0 --port 8787
+set -a; source .env; set +a
+venv/bin/python -m uvicorn app:app --host 0.0.0.0 --port 8787
 ```
 
-Teste rápido:
+Teste rápido (em outro terminal SSH, com o comando acima ainda rodando):
 ```bash
 curl http://localhost:8787/health
 # {"status":"ok"}
 ```
+Encerre o teste manual com `Ctrl+C` antes de seguir pro systemd.
 
 ### Rodando permanentemente (systemd)
 
@@ -71,9 +77,9 @@ Description=Content Engine
 After=network.target
 
 [Service]
-WorkingDirectory=/opt/content-engine
-EnvironmentFile=/opt/content-engine/.env
-ExecStart=/usr/bin/python3 -m uvicorn app:app --host 127.0.0.1 --port 8787
+WorkingDirectory=/opt/aprovai-lp/n8n-dark-channel/content-engine
+EnvironmentFile=/opt/aprovai-lp/n8n-dark-channel/content-engine/.env
+ExecStart=/opt/aprovai-lp/n8n-dark-channel/content-engine/venv/bin/python -m uvicorn app:app --host 0.0.0.0 --port 8787
 Restart=always
 
 [Install]
@@ -83,11 +89,24 @@ WantedBy=multi-user.target
 ```bash
 systemctl daemon-reload
 systemctl enable --now content-engine
+systemctl status content-engine   # confirme "active (running)"
+curl http://localhost:8787/health
 ```
 
-Mantenha `--host 127.0.0.1` (não exponha pra internet) — o n8n roda na mesma VPS e
-acessa via `localhost:8787`. Se n8n estiver em outro container/Docker, use a rede
-interna do Docker em vez de `127.0.0.1`.
+### ⚠️ Se o n8n rodar em Docker (gotcha comum)
+
+`localhost` dentro de um container Docker **não é** o host da VPS — é o próprio
+container. Se o n8n estiver containerizado e o content-engine rodando direto na VPS
+(fora do Docker, como acima), descubra o IP do gateway Docker e use-o no lugar de
+`localhost` no nó **Escolher Tema** do workflow:
+
+```bash
+# dentro do container do n8n (ou via docker exec):
+ip route | grep default   # ex: "default via 172.17.0.1" → esse é o gateway
+```
+Use `http://172.17.0.1:8787` (ou o IP que aparecer) no campo `content_engine_url`.
+Se o n8n rodar fora de Docker (instalação nativa/PM2), `http://localhost:8787`
+funciona normalmente e nada precisa mudar.
 
 ## API
 
