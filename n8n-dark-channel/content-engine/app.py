@@ -1,6 +1,6 @@
 import os
 import uuid
-from typing import List
+from typing import List, Optional
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
@@ -19,6 +19,7 @@ class Cena(BaseModel):
 
 class GerarRequest(BaseModel):
     voz: str = "pt-BR-AntonioNeural"
+    voz_provider: Optional[str] = None
     cenas: List[Cena]
 
 
@@ -47,7 +48,7 @@ def generate(req: GerarRequest):
 
     for i, cena in enumerate(req.cenas):
         audio_path = os.path.join(job_dir, f"scene{i}.mp3")
-        narration.synthesize(cena.texto, req.voz, audio_path)
+        narration.synthesize(cena.texto, req.voz, audio_path, provider=req.voz_provider)
         duration = assemble.probe_duration(audio_path)
 
         raw_path = os.path.join(job_dir, f"raw{i}.mp4")

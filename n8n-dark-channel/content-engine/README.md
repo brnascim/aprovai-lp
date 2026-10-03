@@ -131,6 +131,29 @@ Retorna o binário do MP4 final (1080x1920, legenda queimada).
 qualidade de voz que a Azure Neural usada por ferramentas pagas, só que grátis.
 Liste todas com `edge-tts --list-voices | grep pt-BR`.
 
+## Voz paga (ElevenLabs) — opcional
+
+Por padrão o sistema usa Edge-TTS (grátis). Se quiser uma voz com qualidade
+mais parecida com a do vídeo de referência, dá pra trocar pra ElevenLabs:
+
+1. Crie conta em https://elevenlabs.io (tem plano grátis limitado, e planos
+   pagos a partir de ~US$5/mês)
+2. Pegue sua API key em https://elevenlabs.io/app/settings/api-keys
+3. Escolha uma voz na biblioteca (Voice Library) e copie o **Voice ID** dela
+   (não é o nome, é um código tipo `21m00Tcm4TlvDq8ikWAM`)
+4. Na VPS, edite `.env` e preencha:
+   ```
+   ELEVENLABS_API_KEY=sua_chave_aqui
+   ```
+5. Reinicie o serviço: `systemctl restart content-engine`
+6. No n8n, no nó **"Escolher Tema"**, troque o valor de `voz` pelo Voice ID
+   copiado no passo 3, e adicione `voz_provider: 'elevenlabs'` no objeto
+   retornado
+
+Se `ELEVENLABS_API_KEY` estiver vazio, o sistema cai automaticamente pro
+Edge-TTS gratuito — não precisa remover nada pra voltar atrás, só apagar a
+chave do `.env` e reiniciar o serviço.
+
 ## Troubleshooting
 
 ### Erro `WSServerHandshakeError: 403` no narration.synthesize
