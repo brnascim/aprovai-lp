@@ -36,7 +36,9 @@ roteiro geralmente compensa o centavo.
 
 ```bash
 # 1. Dependências do sistema
-apt update && apt install -y python3 python3-pip python3-venv ffmpeg git
+#    fontconfig + fonts-dejavu-core: necessários pra legenda estilo karaokê
+#    (o FFmpeg usa libass, que precisa de fontconfig pra achar a fonte em negrito)
+apt update && apt install -y python3 python3-pip python3-venv ffmpeg git fontconfig fonts-dejavu-core
 
 # 2. Código (clona o repo direto do GitHub)
 cd /opt
@@ -114,16 +116,28 @@ funciona normalmente e nada precisa mudar.
 ```json
 {
   "voz": "pt-BR-AntonioNeural",
+  "voz_provider": "edge",
+  "thumbnail_texto": "ELE PAROU DE PAGAR A DÍVIDA",
   "cenas": [
     { "texto": "Você está afogado em dívidas...", "busca": "worried person bills" }
   ]
 }
 ```
-Retorna `{"job_id": "...", "status": "done", "duration": 45.2}` (processamento é
-síncrono — a chamada só responde quando o vídeo termina).
+`voz_provider` e `thumbnail_texto` são opcionais. Sem `voz_provider`, o sistema
+usa ElevenLabs automaticamente se `ELEVENLABS_API_KEY` estiver preenchida, senão
+cai no Edge-TTS. Sem `thumbnail_texto`, nenhuma thumbnail é gerada (o YouTube
+escolhe um frame automático).
+
+Retorna `{"job_id": "...", "status": "done", "duration": 45.2, "has_thumbnail": true}`
+(processamento é síncrono — a chamada só responde quando o vídeo termina).
 
 ### `GET /videos/{job_id}`
-Retorna o binário do MP4 final (1080x1920, legenda queimada).
+Retorna o binário do MP4 final (1080x1920), com legenda estilo karaokê
+queimada — uma palavra por vez, sincronizada com a narração.
+
+### `GET /thumbnails/{job_id}`
+Retorna o binário do JPG da thumbnail (só existe se `thumbnail_texto` foi
+enviado no `/generate`).
 
 ## Vozes Edge-TTS em português
 

@@ -54,11 +54,18 @@ def concat_scenes(scene_paths, out_path):
     return out_path
 
 
-def burn_subtitles(video_path, srt_path, out_path):
-    style = "FontName=Arial,FontSize=14,PrimaryColour=&H00D4FF,OutlineColour=&H000000,Outline=2,Bold=1,Alignment=2,MarginV=80"
+def burn_subtitles_ass(video_path, ass_path, out_path):
     subprocess.run([
         "ffmpeg", "-y", "-i", video_path,
-        "-vf", f"subtitles={srt_path}:force_style='{style}'",
+        "-vf", f"ass={ass_path}",
         "-c:a", "copy", out_path,
+    ], check=True, capture_output=True)
+    return out_path
+
+
+def extract_frame(video_path, out_path, timestamp=1.0):
+    subprocess.run([
+        "ffmpeg", "-y", "-ss", str(timestamp), "-i", video_path,
+        "-frames:v", "1", out_path,
     ], check=True, capture_output=True)
     return out_path

@@ -6,7 +6,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
-from pipeline import stock, narration, assemble, srt
+from pipeline import stock, narration, assemble, karaoke, thumbnail
 
 app = FastAPI(title="Content Engine")
 WORKDIR = os.environ.get("CONTENT_ENGINE_WORKDIR", "/tmp/content-engine")
@@ -20,6 +20,7 @@ class Cena(BaseModel):
 class GerarRequest(BaseModel):
     voz: str = "pt-BR-AntonioNeural"
     voz_provider: Optional[str] = None
+    thumbnail_texto: Optional[str] = None
     cenas: List[Cena]
 
 
@@ -36,6 +37,14 @@ def get_video(job_id: str):
     return FileResponse(path, media_type="video/mp4", filename="video.mp4")
 
 
+@app.get("/thumbnails/{job_id}")
+def get_thumbnail(job_id: str):
+    path = os.path.join(WORKDIR, job_id, "thumb.jpg")
+    if not os.path.isfile(path):
+        raise HTTPException(status_code=404, detail="thumbnail not found")
+    return FileResponse(path, media_type="image/jpeg", filename="thumbnail.jpg")
+
+
 @app.post("/generate")
 def generate(req: GerarRequest):
     job_id = uuid.uuid4().hex
@@ -43,12 +52,12 @@ def generate(req: GerarRequest):
     os.makedirs(job_dir, exist_ok=True)
 
     scene_clips = []
-    timeline = []
+    word_timeline = []
     t = 0.0
 
     for i, cena in enumerate(req.cenas):
         audio_path = os.path.join(job_dir, f"scene{i}.mp3")
-        narration.synthesize(cena.texto, req.voz, audio_path, provider=req.voz_provider)
+        words = narration.synthesize(cena.texto, req.voz, audio_path, provider=req.voz_provider)
         duration = assemble.probe_duration(audio_path)
 
         raw_path = os.path.join(job_dir, f"raw{i}.mp4")
@@ -65,16 +74,27 @@ def generate(req: GerarRequest):
         assemble.mux_scene(visual_path, audio_path, scene_path)
         scene_clips.append(scene_path)
 
-        timeline.append((t, t + duration, cena.texto))
+        for word in words:
+            word_timeline.append({
+                "text": word["text"],
+                "start": t + word["start"],
+                "end": t + word["end"],
+            })
         t += duration
 
     concat_path = os.path.join(job_dir, "concat.mp4")
     assemble.concat_scenes(scene_clips, concat_path)
 
-    srt_path = os.path.join(job_dir, "captions.srt")
-    srt.write_srt(timeline, srt_path)
+    ass_path = os.path.join(job_dir, "captions.ass")
+    karaoke.build_ass(word_timeline, ass_path)
 
     final_path = os.path.join(job_dir, "final.mp4")
-    assemble.burn_subtitles(concat_path, srt_path, final_path)
+    assemble.burn_subtitles_ass(concat_path, ass_path, final_path)
 
-    return {"job_id": job_id, "status": "done", "duration": t}
+    has_thumbnail = False
+    if req.thumbnail_texto:
+        thumb_path = os.path.join(job_dir, "thumb.jpg")
+        thumbnail.generate(final_path, req.thumbnail_texto, thumb_path)
+        has_thumbnail = True
+
+    return {"job_id": job_id, "status": "done", "duration": t, "has_thumbnail": has_thumbnail}
