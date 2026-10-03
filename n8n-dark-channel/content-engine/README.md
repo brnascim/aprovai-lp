@@ -131,6 +131,24 @@ Retorna o binário do MP4 final (1080x1920, legenda queimada).
 qualidade de voz que a Azure Neural usada por ferramentas pagas, só que grátis.
 Liste todas com `edge-tts --list-voices | grep pt-BR`.
 
+## Troubleshooting
+
+### Erro `WSServerHandshakeError: 403` no narration.synthesize
+
+A Microsoft muda periodicamente o esquema de autenticação não-oficial da voz do
+Edge, e isso quebra versões antigas da lib `edge-tts` com erro 403 ao tentar
+gerar áudio. É um problema conhecido do projeto (não é bug seu nem nosso).
+Corrija atualizando a lib:
+
+```bash
+cd /opt/aprovai-lp/n8n-dark-channel/content-engine
+venv/bin/pip install --upgrade edge-tts
+systemctl restart content-engine
+```
+
+Se voltar a acontecer no futuro, repita o mesmo comando — normalmente uma
+versão nova da lib já corrige em poucos dias.
+
 ## Limitações honestas
 
 - CPU-only: cada Short leva ~30–90s pra renderizar (aceitável pra 3–5 vídeos/dia).
